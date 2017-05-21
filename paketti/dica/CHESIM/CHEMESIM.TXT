@@ -1,0 +1,134 @@
+
+                        E S I M 1 & others (c)
+                        ----------------------
+
+ 0  Viralliset k„ytt”ehdot
+    ----------------------
+
+  0.0  Vastuu
+
+       K„yt„t koko roskaa omalla vastuullasi. Me emme ota vastuuta mist„„n.
+       3Dican 0.0-osio p„tee my”s esimerkkiohjelmiin.
+
+  0.1  Sorsien k„ytt” (muuhun kuin oppimistarkoituksiin)
+
+       #define oppimistarkoitus !__cut_n_paste() && !__rip_n_roll()
+
+       Jos k„yt„t sorsia, min„ (Chem/Hubris), Ilkka (Ica/Hubris) ja Tapio
+       (Bull/Hubris) saamme tunnustuksen ty”st„mme.
+
+       Ohjelman, joka n„it„ (vektori- tai VESA-) rutiineja k„ytt„„, pit„„
+       olla ilmainen. Kaupallinen hy”dynt„minen kielletty.
+
+       #define ilmainen __pd() | __freeware() | __demo()
+       #define kaupallinen !ilmainen | __money_involved()
+
+       3Dicasta voipi lukea kohdan 0.0.2.
+
+  0.2  Levitys
+
+       N„it„ sorsia levitet„„n vain ja ainoastaan 3Dica:n yhteydess„,
+       *alkuper„isess„* muodossaan! 3Dican levityksest„ voi lukea tarkemmin
+       kyseisen dokumentin alkupuolelta, osiosta 0.0.3. If the terms given
+       in that particular document are accepted, the distribution of 3Dica
+       to the far reaches of the galaxy is extremely recommended.
+
+ 1  Virallinen koodi
+    ----------------
+
+  1.0  Lukeminen
+
+       Koodin lukemiseen tarvitaan v„ltt„v„ englannin taito, 3Dican v„ltt„v„
+       ulkoa osaaminen, c:n v„ltt„v„ hallinta ja reippaasti tervett„ j„rke„.
+
+  1.1  Syvin olemus
+
+       Koodia ei ole optimoitu (pois semmoinen minusta ;) vaan tarkoitus on
+       osoittaa the allmightyness of 3Dica.
+
+       Systeemiss„ ei ole mink„„nlaisia k„ytt”ohjeita johtuen siit„ selv„st„
+       faktasta, ett„ enginen tarkoitus on olla k„yt„nn”n esimerkki 3dica:n
+       asioista. Eli EI "t„ss„ sinulle 3d-engine", VAAN "do-it-yourself".
+
+       VESA-rutiinit ovat bullin k„sialaa. Lis„sin tosin niihin pari asiaa,
+       joten jos bugeja l”ytyy, ne ovat todenn„k”isesti minun aiheuttamiani.
+
+       HMP:n koodi on useiden l„hteiden mukaan aivan j„rkytt„v„„. Asiasta
+       voi tietenkin olla montaa mielt„, mutta en min„ vastaankaan kehtaa
+       v„itt„„. Enivei, olen yritt„nyt hieman parantaa tapojani t„ss„
+       systeemiss„. (Harvinaisen s„„litt„v„ yritys etten sanoisi, mutta
+       koittakaa nyt kest„„.)
+
+  1.2  Sis„lt”
+
+       Mukana tulevat seuraavat ohjelmat:
+         esim1.c     Koko "enginen" esittely.
+         zbuffer.c   13h-purkka zbufferista.
+
+       ja seuraavat .h -tiedostot:
+         0x10f.h     VESA - kamaa.
+         bstructs.h  Perusstruktuurit.
+         camera.h    Kameran k„sittely.
+         ialot.h     Paljon djgpp:n kirjastoja :)
+         lib13h.h    Zbufferille 13h-rutiinit.
+         light.h     Perusvalolle perusk„sittelyrutiinit.
+         loadasc.h   3Dstudion .ASC-tiedostojen laturi.
+         matrix.h    Matriisin k„sittely.
+         objects.h   Objektien k„sittely.
+         pcx.h       PCX-laturi.
+         polyg13h.h  Zbuffer-flat-13h-polygon.
+         polygon.h   24-bit VESA flat-, gouraud-, texture-, persp.texture-,
+                     phongish- ja gouraudtexturefillerit.
+         scene.h     Scenen piirt„misen funkkarit.
+         texture.h   Texturemappien laturi.
+         vesa.c      VESA-rutiinit.
+         vesa.h      VESA-rutiinit.
+
+       Esim1.c:n pit„isi tukea kaikkia 24-bittisi„ tiloja. However, lis„sin
+       sen multimode-tuen siihen aika vauhdilla. T„m„ ilmeisesti aiheuttaa
+       sen, ett„ koko roska kaatuu 800x600x24b-tilassa. 320x200, 640x480,
+       ja 1024x768 toimivat kuitenkin testilaitteistolla.
+
+ 2  Virallinen yhteydenotto
+    -----------------------
+
+  2.0  Kenelle?
+
+       Kyselyt ja kommentit 3D-ongelmista voi l„hett„„ Icalle, samoin my”s
+       muut 3Dicaan liittyv„t ehdotukset. Kommentit ja kyselyt t„st„ nimen-
+       omaisesta vektorienginekoodista minulle (Chem). Mielt„ vaivaavat
+       asiat *t„st„ nimenomaisesta* VESA-koodista voi ohjata Bullille.
+
+       Vinkit 3D-ohjelmoinnista ainakin minulle (Chem) (v„litt”m„sti, t„m„
+       on m„„r„ys, ei suositus :)
+
+  2.1  E-mail
+
+       Bull : tapio.vuorinen@mbnet.fi
+       Chem : kaj.bjorklund@mbnet.fi
+       Ica  : ipelkone@cc.hut.fi
+
+ 3  Viralliset l„rveiset
+    --------------------
+
+  3.0  Hy”tyhemmot
+
+       Ica :)
+       RoDeX
+       TexMex
+       Wog
+       Jarkko S„kkinen
+       Pekka Nurminen
+
+       muut joiden nimet eiv„t kallonsis„isest„ kakhestani suostu
+       ulostautumaan.
+
+  3.1  Viattomat uhrit
+
+       Hubris members
+       tAAt members
+       Jokke, vilkaiskaa kaikki laaman tuttia (laama*.zip).
+       Zen(ith?)
+       kaikki loput tutut :D
+
+EOF

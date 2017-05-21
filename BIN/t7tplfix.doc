@@ -1,0 +1,263 @@
+
+T7TplFix
+========
+
+
+Summary
+-------
+
+Bugfix Patch for Turbo/Borland Pascal "Run Time Error 200"
+bug in the delay initialisation that occurs on fast PC's
+(Pentium II with approx. 233 MHz and above).
+
+Patch program for run time library files (TURBO.TPL and TPP.TPL)
+of Turbo Pascal and Borland Pascal versions 7.0 and 7.01.
+
+
+License
+-------
+
+This program is free to use but comes without warranty of any kind,
+use it on your own risk. Please send me an e-mail if you used this
+as motivation to spend time in helping others again.
+Donations are of course welcome.
+
+
+Use
+---
+
+1. Make a backup copy of your files TURBO.TPL and optionally TPP.TPL
+
+2. Run the patch program T7TplFix in the directory that contains the
+   original run time library file TURBO.TPL and/or TPP.TPP
+   of Turbo Pascal 7.0 or 7.01.
+
+3. Recompile your programs to include the new Run Time Library in them.
+
+Notes:
+- Turbo Pascal and Borland Pascal version 7.01 report themselves
+  as version 7.0, but the time of all files is 07:01
+- the file TPP.TPL is only included in Borland Pascal, not Turbo Pascal
+- the difference between Borland Pascal and Turbo Pascal is that
+  Borland Pascal can compile for protected mode and windows and
+  includes additional things, for example the source of the
+  run time library, the assembler, the profiler and an external debugger.
+
+
+Advantages
+----------
+
+Advantages of this patch program
+
+- ONLY the single modifications described below is applied,
+  all other contents of the Run Time Library remain completely unchanged.
+  Most other patch programs for this problem do lot's of undocumented
+  changes to the SYSTEM.TPU. Maybe that's just a strange effect of
+  recompilation, but I'm not sure about that because changing only
+  CRT does not require any thanges in SYSTEM and the number of changes
+  seems to be far bigger than can be explained just by new date stamps.
+
+- Patches also version 7.01 unlike the original TPL distributed by c't,
+  that was based on 7.0 only. That old version has several bugs that are
+  reintroduced by using that patched TPL.
+
+- Does not require the run time library source that is only available
+  if you have purchased the more expensive Borland Pascal
+  instead of the smaller Turbo Pascal.
+
+
+Details
+-------
+
+The delay count variable is changed from 16 to 32 bits.
+This prevents it from overrunning on fast PC's.
+
+The patch being applied is the one as distributed by German c't magazine.
+The differences are listed in the included file CRT.DIF
+
+
+FAQ
+---
+
+Frequently asked questions (and answers).
+Please read these *before* asking me any questions!
+
+
+- Where can I find more informations?
+
+  See the web pages on
+  http://www.brain.uni-freiburg.de/~klaus/pascal/runerr200/
+
+
+- Is an official fix for this bug available from Borland / Inprise?
+
+  Unfortunately not! If you think they should provide one,
+  please send an email to customer-service@inprise.com
+  and tell them so.
+
+
+- Is a fix available for compiled programs of which I don't have source?
+
+  Yes if that program does not require precise timing,
+  otherwise probably not.
+  See the web page mentioned at question 'more informations'.
+
+
+- Why do you not simply distribute the patched file CRT.TPU or TURBO.TPL ?
+
+  It is copyrighted, distributing that file may be illegal.
+  I asked Inprise for permission but they sent an inappropriate
+  canned reply without having read my mail. I tried again and
+  didn't get any reply at all.
+
+
+- The patch program does not list any of the patches as applicable
+
+  Either none of the files TURBO.TPL, TURBO.TPP, CRT.TPU, and CRT.TPP
+  is in the current directory or they are not original (they may
+  already be patched or they contain other changes).
+  Make sure that you run the program in the same directory where
+  the file TURBO.TPL (and optionally TURBO.TPP) is stored.
+  If that doesn't help, restore the file(s) from your original disks.
+  If you have applied custom changes to the Run Time Library, then
+  read the section about custom changes below.
+
+
+- The patch program lists only part of the patches as applicable
+
+  This is normal.
+  If you have Turbo Pascal, then usually only one of the two
+  Run Time Library patches for real mode (file TURBO.TPL) can be applied.
+  If you have Borland Pascal, then additionally one of the two
+  Run Time Library patches for protected mode (file TPP.TPL).
+  The files CRT.TPU and CRT.TPP are normally hidden inside the
+  Run Time Library. These two patches are only included separately
+  for special purposes. Most users won't need them.
+
+
+- Is a patch also required for Run Time Library for Windows ?
+
+  I didn't ever compile for Sindows, but as far as I have seen
+  there's no CRT unit for Windows, so there's also nothing to patch.
+
+
+- How can I find out if I have Turbo Pascal version 7.0 or 7.01
+
+  Look at the time stamp of the files in your Turbo Pascal directory
+  or on the original disks.
+  If the time is 07:00, then you have version 7.0
+  If it's 07:01, then you have version 7.01.
+
+
+- What is the difference between Turbo Pascal 7.0 and 7.01
+
+  Version 7.01 contains several bug fixes.
+
+
+- Should I try to obtain version 7.01 if I only have 7.0
+
+  Definitely yes, contact Borland but note that many people there
+  don't know about a version 7.01. I have been told that it's possible
+  to request replacement disks. They automatically contain the latest
+  version. However this has been reported to be expensive outside the US.
+
+
+- What exactly does this program change in the run time library?
+
+  See the section Details above and check the included file CRT.DIF
+
+
+- How comes that an overrun results in a "Division by Zero" error ?
+
+  Borland didn't distinguish between these two errors in that case.
+
+
+- What does the delay initialization do, how does the delay procedure work?
+
+  PC's have a hardware timer that ticks 1193180 times per second.
+  This is divided in hardware by 65536 to get the Bios timer ticks.
+
+  The delay initialization waits for a timer tick, then runs in a tiny loop
+  until the next timer tick and counts how often it can loop during
+  that time. These timer ticks occur about 18.2 times per second,
+  i.e. one about every 55 milliseconds. The initialization then divides
+  the number of loops per tick by 55 to get the number of loops per
+  millisecond.
+
+  The delay procedure multiplies the number of loops per millisecond
+  found in the initialization with the number of requested milliseconds
+  for the delay. Then it runs the loop that number of times.
+
+
+- Why does the new code multiply with 1193 where the original
+  divides by 55?
+
+  It does not only multiply with 1193, it additionally then dumps the lowest
+  order word of the result of that multiplication, so it effectively
+  also divides by 65536. Both combined results effectively in a division
+  by 54.934. This is done because 55 is not exactly the correct number.
+  54.934 is also still not exact, but nearer the real thing (about 54.925).
+
+
+- What has happened to the additional patch that disables interrupts
+  during delay initialisation to make the timing more reliable?
+
+  This was included in an earlier version of this patch program,
+  but I decided to remove it for compatibility reasons. This would
+  disable all interrupts each time a program starts that includes
+  that code. This could for example cause data loss if a serial
+  transmission is running at that time. I was never told about
+  this actually happening, but it may happen, so I removed it.
+
+
+- Is the source of the patch program available so I can tell
+  myself what exactly it changes?
+
+  I can send you the source if you really want, but it won't tell
+  you much because it's a general purpose patch program that reads
+  a data file to know what exactly to patch and how. All information
+  is in the data file. To see what this does simply compare your
+  TURBO.TPL before and after patching.
+
+
+- How comes that I find a big number of changes in my TURBO.TPL
+  after applying the patch?
+
+  Take into account that several bytes are *inserted*, so the rest of
+  the contents is moved to make space inbetween. For a thorough
+  comparison, extract the TPU files from the TPL and compare them
+  separately. You will find all files except CRT.TPU being completely
+  unchanged. Now look at CRT.TPU. Ignore the changed link and debug
+  informations at the beginning and the end of the file and look for
+  changed and a few inserted bytes in two places (delay initialization
+  and delay call) about in the middle. Behind that you'll find all other
+  bytes moved and only few more single bytes changed, probably because
+  they contain jump addresses and those have changed due to the move.
+
+
+- My copy of TURBO.TPL does contain custom changes and I want to keep them
+
+  If your changes are not in the CRT unit, then use TPUMOVER to extract
+  CRT.TPU from your TURBO.TPL (and optionally CRT.TPP from TPP.TPL) and
+  let the program patch them. Then move them back into the Run Time
+  Library files. If your changes are in the CRT unit, you must either
+  apply the Runtime Error 200 patch manually in addition to your patches,
+  or reinstall the original CRT unit, let the program patch it and then
+  apply your changes again.
+
+
+Revision History
+
+1.0
+  first release
+
+2.0
+  chg: easier to use
+  add: patch crt.tpu
+  add: patch turbo.tpl and tpp.tpl of version 7.0
+
+2.01
+  fix: strings, windos and winapi were erased from tpp.tpl
+
+
+- end -

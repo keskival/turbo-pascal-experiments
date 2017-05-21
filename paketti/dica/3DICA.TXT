@@ -1,0 +1,4172 @@
+[ruikutusmoodi on]
+ATTENTION! PLEASE READ THE LICENSE AGREEMENT BEFORE EVEN GLANCING AT
+THE ACTUAL TEXT! BY USING THIS TUTORIAL IN ANY WAY (EVEN AS WC PAPER)
+YOU AUTOMATICALLY AGREE ON EVERY SINGLE TERM IN THE LICENSE AGREEMENT!
+[ruikutusmoodi off]
+
+[selitysmoodi on]
+Ja sitten vakavampiin aiheisiin: t„ss„ versiossa olen muuttanut tekstin
+rakennetta meleekosen rankasti ja j„tt„nyt pois kaikenlaista turhaksi
+katsomaani. Nyt on sana vapaa: pleeze kommentoikaa aktiivisesti uutta
+kappalejakoa ja sis„llyst„ -- jotain takaisin, jotain selvemm„ksi?
+Samoin olisi mukava kuulla uusia aiheideoita ihan yksinkertaisista
+perusasioista tai mist„ vain 3d:hen liittyen. Kirjoitan mink„ osaan,
+ja vaikka en osaisi, yrit„n ottaa selv„„ ajan riitt„ess„. Viel„ toi-
+von, ett„ otatte kantaa t„h„n asiaan: olen ajatellut alkaa kirjoittaa
+dokumenttia html-pohjaisena. N„in sit„ olisi mukavampi lukea prin-
+tattuna, ja toisaalta linkit helpottaisivat online-lukemista. Teksti
+konvertoitaisiin luonnollisesti my”s dos-versioksi, tosin tyyli k„r-
+sisi t„ll”in varmasti.
+[selitysmoodi off]
+
+
+
+      3DICA.TXT v2.19b (C) Ica /Hubris 1996,1997
+      ---------
+
+        - 4172 lines of pure sh...er, 3d coding power!
+
+
+
+
+Sis„llys
+--------
+
+   * = Aiheesta mukana C-esimerkkiohjelma
+
+   0             Yleist„ l”pin„„
+
+     0.0           LICENSE AGREEMENT
+      0.0.1         DISCLAIMER
+      0.0.2         LIMITED WARRANTY
+      0.0.3         Seriously
+     0.1           Kuka on Ica?
+     0.2           Kuka ihmeen erkki se toinen n”rtti on?
+     0.3           3dica carewarea -- mit„ se tarkoittaa?
+     0.4           Kenelle t„m„ dokumentti on suunnattu?
+     0.5           Mist„ saan dokumentin uusimman version?
+     0.6           Kiitokset avusta
+     0.7           What's new?
+     0.8           Tulossa
+     0.9           Gr33tZ
+     0.10          3d-termist”„ yms.
+     0.11          Frequently Asked Questions
+     0.12          Thanks for support
+     0.13          L„hdeteoksia & -dokumentteja
+
+
+   1             Vektori- ja matriisialgebraa
+
+     1.1           Vektorit
+      1.1.1         Yleist„
+      1.1.2         Vektorin yht„l”
+      1.1.3         Vektorin pituus *
+      1.1.4         Vektorien yhteenlasku
+      1.1.5         Skalaaritulo *
+      1.1.6         Vektoriprojektio
+      1.1.7         Vektoritulo *
+      1.1.8         Skalaarikolmitulo
+     1.2           Matriisit
+      1.2.1         Yleist„
+      1.2.2         Matriisien laskutoimitukset
+       1.2.2.1       Yhteenlasku
+       1.2.2.2       Kertominen skalaarilla *
+       1.2.2.3       Kertolasku *
+        1.2.2.3.1     Erikoistapaus: vektorin ja matriisin tulo *
+       1.2.2.4       Transponointi
+
+
+   2             3D-geometriaa
+
+     2.1           2D- ja 3D-maailman yhteys *
+     2.2           Matriisitekniikka -- johdanto
+     2.3           Objektimatriisin py”ritt„minen *
+     2.4           Kamera *
+      2.4.1         Kameramatriisin generointi vektorin avulla
+     2.5           Pisteen transformointi objektimatriisilla *
+     2.6           Hierarkiset transformaatiot
+
+
+   3             Erilaisia polygonifillej„
+
+     3.1           Flat-kolmio *
+      3.1.1         Fixed point *
+     3.2           Gouraud-kolmio *
+     3.3           Texture-kolmio *
+      3.3.1         Perspektiivikorjauksen periaate *
+      3.3.2         Texturen fittaus objektiin *
+     3.4           Texture + varjostus *
+     3.5           Convex-polygonien tekniikka
+
+   4             Sorttaustapoja
+
+     4.1           Z-sorttaus *
+     4.2           Z-buffer *
+     4.3           BSP-puu
+      4.3.1         The main idea
+      4.3.2         Tarvittavat kaavat
+      4.3.3         Vinkkej„
+     4.4           S-buffer
+
+
+   5             Varjostustapoja
+
+     5.1           Flat-sheidaus
+      5.1.1         Z-Flat
+      5.1.2         Lambert Flat *
+     5.2           Gouraud-sheidaus
+      5.2.1         Z-Gouraud
+      5.2.2         "Oikea" Gouraud *
+     5.3           Phong-sheidaus
+      5.3.1         Phong Illumination *
+      5.3.2         Environment-mappaus *
+      5.3.3         Aito Phong *
+     5.4           Ican ikioma tekniikka
+     5.5           Valonl„hteiden k„sittelyst„
+      5.5.1         Vapaasti liikkuvat valonl„hteet
+      5.5.2         Spotlitet
+      5.5.3         Valon himmeneminen
+
+
+   6             Hidden face removal
+
+      6.1          Backface culling *
+      6.2          View cone *
+       6.2.1        Polygonien 3d-klippaus
+      6.3          Portalit
+
+
+   7             Muuta mukavaa
+
+      7.1          Frameskip
+      7.2          Assemby-optimointia
+      7.3          Paletinkvantisointi
+       7.3.1        Mit„ se oikeastaan on?
+       7.3.2        Abstrakti l„hestymistapa
+       7.3.3        Teknisempi l„hestymistapa
+
+
+
+
+0 Yleist„ l”pin„„
+-----------------
+
+
+ 0.0 LICENSE AGREEMENT
+
+   0.0.1 DISCLAIMER
+
+     3DICA PROGRAMMING TUTORIAL IS SUPPLIED AS-IS. THE AUTHOR
+     DISCLAIMS ALL WARRANTIES, EXPRESSED OR IMPLIED, INCLUDING,
+     WITHOUT LIMITATION, THE WARRANTIES OF MERCHANTABILITY AND
+     OF FITNESS FOR ANY PURPOSE. THE AUTHOR ASSUMES NO LIABILITY
+     FOR DAMAGE TO ANY LIVING / DEAD CREATURE OR EQUIPMENT,
+     DIRECT OR CONSEQUENTIAL, WHICH MAY RESULT FROM THE USE OF
+     THE 3DICA PROGRAMMING TUTORIAL.
+
+   0.0.2 LIMITED WARRANTY
+
+     SATISFACTION GUARANTEE. If you are dissatisfied with this
+     product you downloaded from some F..ine BBS or the Internet,
+     you may delete it at any time up to 30 days after download
+     and you will get your hard disk space, occupied by the
+     product, back. The space will be based on the space that
+     was occupied during the installation, with the cost of some
+     bad sectors, viruses and neat hidden files excluded. You
+     must contact the author before deleting the product; I want
+     to have a good laugh (you are having one right now, I hope 8-)
+
+   (Pohjana k„ytetty Action Supercrossin readme.txt:t„)
+
+   0.0.3 Seriously
+
+     3DICA-ohjelmointiopas on FREEWAREA. T„m„ tarkoittaa, ett„
+     sit„ saa vapaasti k„ytt„„ ja levitt„„ MUUTTAMATTOMANA
+     edelleen niin paljon kuin sielu siet„„ (mbnetin sielu on
+     kuulemma siet„nyt jo vajaan tuhannen kappaleen levitt„-
+     misen).
+     Levitt„misest„ ei saa peri„ maksua ilman tekij„n kirjal-
+     lista suostumusta.
+     Oppaan saa sis„llytt„„ kaupallisille cd-romeille vain
+     tekij„n suostumuksella ja mahdollisilla erityisehdoilla.
+     Tekij„ ei vastaa esimerkkiohjelmien aiheuttamista ongel-
+     mista tai vahingoista, k„ytt„j„t toimivat omalla vastuul-
+     laan. Tarkoituksella bugeja yms. ei toki ole koodiin
+     p„„stetty, mutta jos kovalevysi kosahtaa, harmi. Shit
+     happens.
+
+
+ 0.1 Kuka on Ica?
+
+   Olen oikealta nimelt„ni Ilkka Pelkonen, 19-vuotias c-,
+   (pascal-) ja assembler-ohjelmoija. Asustelen Nurmij„rvell„
+   30 kilometrin p„„ss„ Helsingist„ pohjoiseen ("Nurmij„rvi,
+   kotiseutu, t„„ll„ el„n -- enk„ tasan t„nne m„t„nem„„n j„„!"
+   -- Nurmij„rvi-laulu ;) Harrastan 3d-ohjelmointia, muutamia
+   kivoja pelej„ (Paybacktime2, Steel Panthers, C&C, Warcraft 2),
+   3dican kirjoittamista, h”lkk„„mist„ ja kaikenlaista muuta
+   mukavaa.
+     Opiskelen Teknillisess„ Korkeakoulussa Otaniemess„ tieto-
+   tekniikkaa ensimm„ist„ vuotta. Mestan suuntautumisvaihtoehto
+   nimelt„ Tietojenk„sittelyoppi tuntuu mielenkiintoiselta,
+   samoin Digitaalinen media, mutta sas' nyt n„hr„ mit„ sit„
+   rupeaa leip„ty”kseen tekem„„n...
+     Armeijan palvelukseen astun muistaakseni 14.7.1998, paikkana
+   Hyryl„ ja Helsingin IT-rykmentti, erikoisteht„v„ matemaatti-
+   sesti suuntautuneille miehille 8-)
+     Kuulun gruuppiin nimelt„ Hubris, entinen Dozer. Watch out,
+   vuoden lopulla on tulossa jonkinlainen demoviritelm„. Nimikin
+   moisella jo on: Rain. Niin muuten, jos olet asiasi osaava
+   graafikko / muusikko, ilmoittaudu (tapio.vuorinen@mbnet.fi).
+     Yhteyden minuun saa parhaiten e-mailaamalla osoitteeseen
+   ipelkone@cc.hut.fi, eli kommentit t„st„ tekstist„ (ja miksei
+   jostain muustakin =) sinne.
+   Virheet saa, ei vaan PITŽŽ, ilmoittaa :)
+
+
+ 0.2 Kuka ihmeen erkki se toinen n”rtti on?
+
+   [sori vaan kaj, piti hiukan sensuroida teksti„si :]
+   Olen oikealta nimelt„ni Kaj Mikael Bj”rklund, 18-vuotias
+   c-, pascal- ja assembler-ohjelmoija. Asustelen Helsingiss„,
+   Roihuvuoressa tarkemmin. Kiva paikka. Harrastan p„„asiassa
+   tietokoneohjelmointia (mahtoi olla yll„tys), mutta olen
+   pyrkinyt pit„m„„n itse„ni fyysisestikin kunnossa puntti-
+   salin avustuksella.
+     K„yn koulua Vuosaaren lukiossa viimeist„ vuotta, jonka
+   j„lkeen tavoitteena olisi suunnistaa Teknilliseen [haahhaha,
+   ei sill„ ole mit„„n mahiksia 9.7:n matikan ka:lla ;)  -ica].
+   Armeijan palvelukseen astun muistaakseni 4.1.99, paikkana
+   Isosaari.
+     Olen pist„nyt levitykseen pari playeria, joita kukaan ei
+   (ymm„rrett„v„sti) k„yt„, ja tehnyt kavereideni kanssa pelin
+   "Rocket Chase" (jota jotkut jopa pelaavat). Kuulun gruuppiin
+   nimelt„ Hubris. Watch out, parin kolmen vuosikymmenen p„„st„
+   meilt„ on tulossa jonkinlainen demoviritelm„.
+     Yhteyden minun saa parhaiten e-mailaamalla osoitteeseen
+   kaj.bjorklund@mbnet.fi. Etenkin kauniimman sukupuolen
+   edustajia kehotetaan ottamaan v„litt”m„sti yhteytt„ ;)
+   [ymm„rr„n smileyn. ..no ei, kaj on oikeen komee uros ;D -ica]
+
+
+ 0.3 3dica carewarea -- mit„ se tarkoittaa?
+
+   Jos olet huomannut, miten paljon tekemist„ t„m„n dokumentin
+   kirjoittamisessa on ollut ja mietit miten voisit korvata vai-
+   vann„k”ni, otan vastaan kannustusmieless„ vapaavalintaisen
+   kokoisia rahalahjoituksia. V„hint„„n 20FIM l„hett„neet saavat
+   hyv„n mielen lis„ksi greetit ja jonkin oman kommenttinsa jul-
+   kaistuksi seuraavissa versioissa. Pid„t„n itsell„ni oikeuden
+   olla julkaisematta sairaita, (liian) loukkaavia tai muuten
+   mauttomia juttuja.
+   Mainittakoon viel„, ett„ kaikista lahjoituksista kolmasosa
+   p„„tyy Kaj Bj”rklundille, joka on versiosta 2.1 l„htien toi-
+   minut kantavana voimana kolmella tavalla: oikolukemalla aina
+   uuden version, kirjoittamalla itsekin selostuksia eri aiheis-
+   ta, ja esitt„m„ll„ silloin t„ll”in uskomattoman typeri„ ky-
+   symyksi„ ;D
+   Niin, ja verojen maksua ep„ilev„t tiet„k””t, ett„ jos rekis-
+   ter”intej„ tulee niin paljon, ett„ niist„ maksetut verot
+   ylitt„isiv„t kirjauskustannukset verotoimistossa, ne makse-
+   taan (kirjoittamishetkell„ ilmoittamisessa ei ole mit„„n
+   j„rke„ tulojen ollessa tasan 150FIM).
+
+   T„ss„ osoite, johon voitte l„hett„„ lompakkonne / isk„n
+   lompakon / sen sis„ll”n:
+
+     Ilkka Pelkonen
+     Kynnysm„entie 10
+     01860 Perttula.
+
+   Tilillekin voi maksaa PSP 800027-30577532, jolloin viitteeksi
+   teksti "3DICA", rekister”ij„n nimi (jos ei sama kuin maksajan),
+   sek„ mahdollinen 3dican yhteydess„ julkaistavaksi haluttava
+   kommentti.
+
+
+ 0.4 Kenelle t„m„ dokumentti on tarkoitettu?
+
+   Kohderyhm„ksi suunnittelin alunperin itse n. 14-17-vuotiaat,
+   joille on jo opetettu trigonometrian ja geometrian perusk„-
+   sitteet, mutta vektorit tai matriisit ovat t„ytt„ hepreaa.
+   Ohjelmointikokemusta oletan olevan ainakin sen verran, ett„
+   lukija osaa k„ytt„„ taulukoita -- *ja**omaa**j„rke„„n*! Ei
+   ohjelmointia -- edes 3d-ohjelmointia ;) -- opita p„iv„ss„ tai
+   viikossa, eik„ h„t„ilyst„ ole kuin haittaa. Paras tapa on edet„
+   j„rjestelm„llisesti efekti kerrallaan.
+     Lukemallahan se selvi„„ ett„ onko t„st„ tekstist„ jotain
+   hy”ty„ :)
+
+
+ 0.5 Mist„ saan dokumentin uusimman version?
+
+   3dican dos-version virallinen levityspaikka l”ytyy www:st„
+   Hubriksen kotisivuilta, http://www.hut.fi/~ipelkone/hubris/.
+   Uusin versio l”ytyy aina my”s Jere Sanisalon kotisivuilta
+   osoitteessa http://www.sicom.fi/~cooldude/. MBnetiin uusin
+   versio tulee viimeist„„n kolmen viikon p„„st„ julkaisusta,
+   useimmiten jo viikon sis„ll„.
+
+   Dokumentista on olemassa my”s helppolukuisempi html-versio
+   mist„ kunnia lankeaa Jonni Lehtirannalle. Ko. versio l”ytyy
+   osoitteesta http://www.nimad.fi/sudet/members/valokas/, joten
+   kaikki heti sinne ;) En ole kyll„ varma, mik„ versio tuolta
+   l”ytyypi. 2.3-versiosta l„htien 3dican painottuu html-ver-
+   sioon (eli kirjoitan ensin html:ksi, sitten konvertoija
+   k„„nt„„ sen dossille).
+
+
+ 0.6 Kiitokset avusta
+
+   Listaan t„ss„ henkil”t jotka ovat jotenkin joko auttaneet
+   minua oman engineni kehittelyss„ tai sitten kirjoittaneet
+   itse 3dicaan jonkin kappaleen. Nimen alla listaus asioista,
+   joissa henkil”t ovat auttaneet. *Kiitos* teille.
+
+
+     Kaj Bj”rklund (Chem/Hubris)
+       Kaj on 3dican virallinen oikolukija. Lis„ksi h„nen k„si-
+       alaansa ovat lineaarinen interpolointi, phong illuminat-
+       ing, frameskip, c (ja pascal) -esimerkkisorsat, texture-
+       mappauksen optimointisysteemit, asm-kurssin parantelu,
+       gouraud, mip-mappaus, convex-polyt sek„ oikea phong.
+       Kaj voidaan katsoa kuuluvaksi 3dican vakituiseen kehitys-
+       'tiimiin', ja h„n saakin kolmasosan sen 'tuotosta' :)
+
+     Henri Tuhkanen (Rodex/Static)
+       Asm-kurssi, texturemappauksen optimointivinkkej„.
+
+     Jere Sanisalo
+       Portalit. Jeren kotisivuilta l”ytyy aina 3dican uusin
+       versio, jos hut.fi sattuu olemaan down.
+
+     Timo Saarinen
+       Perspektiivikorjaus.
+
+     Sampsa Lehtonen
+       Paletinkvantisointi.
+
+     Jukka Liimatta (Wog/Orange)
+       Bilineaarinen filtter”inti.
+
+     Tapio Vuorinen (Bull/Hubris)
+       Z-buffer.
+
+     Ilkka Pelkonen (Ica/Hubris)
+       Kaikki loput. :)
+
+
+ 0.7 What's new?
+
+   Uutta versiossa 1.1:
+     Olen johtanut 3d:n konvertoimisen 2d:hen ja 3d-py”ritykset
+     alusta l„htien. Mukaan on tullut my”s muutama uusi osio,
+     jotka l”ytyv„t sis„llysluettelosta (ja luonnollisesti teks-
+     tist„kin :D
+       Lis„ksi huomasin muutamia puutteita ja ep„selvyyksi„, jotka
+     olivat p„„sseet livahtamaan mukaan. N„it„ ei en„„ pit„isi
+     esiinty„.
+       Viel„ valitettiin kuvien ep„selvyydest„ ja siit„, ett„ pseudo-
+     3d-engine oli "optimoitu" eik„ helposti tajuttava "t„ydellinen"
+     engine. N„it„kin haittoja olen yritt„nyt korjata.
+     Ai niin, muutin my”s nimen v„h„n persoonallisempaan suuntaan :)
+
+   Uutta versiossa 2.0:
+     - Polygoninpiirron selityst„ on hiukan parannettu, ja
+       klippausrutiineista l”ytynyt bugi korjattu.
+     - Kappalejakoa on muutettu j„rkev„mm„ksi dokumentin
+       kasvamisen my”t„.
+     - Vektorit on selostettu *viel„kin* paremmin :)
+     - Mukana ovat nyt my”s gouraud, texturemappaus, pari fake-
+       phongia, Z-buffer, BSP-puu, ...
+     - Matriisilaskennassa tarvittavia laskutoimituksia on lis„tty
+       matriisitulolla ja vektorin ja matriisin tulolla.
+     - Liitin t„h„n versioon env-mappaukseen sopivan bittikartan
+       mukaan pcx-muodossa.
+
+   Uutta versiossa 2.1:
+     - Kaj Bj”rklund on tullut mukaan kehitysty”h”n. Flat-poly-
+       gonien, interpolaation ja phong illuminating -efektin
+       selvent„minen sek„ frameskip ovat h„nen k„sialaansa.
+     - Vektorin ja matriisin tulossa oli ajatusvirhe, joka on
+       korjattu.
+     - Matriisipy”ritykset ovat nyt mukana kokonaisuudessaan.
+     - Innostuin S-Bufferista, opettelin sen ja lis„sin saman
+       tien osion my”s t„h„n tutoriaaliin :)
+     - Lukijoiden pyynn”ist„ useita vanhan tekstin kohtia on
+       selvennetty.
+     - Vektoriteht„vien ratkaisut ovat mukana useiden lukijoiden
+       pyynn”st„. Nyt ei niiss„ pit„isi olla ep„selvyyksi„ :I
+     - 3d-sanasto, joka tosin on lapsenkengiss„„n.
+     - Kaj meni ja v„„nsi TP7:lla dokumenttiin nipun esimerkki-
+       ohjelmia, jotka l”ytyv„t paketista 3DI_SRC.ZIP. Mukana
+       3D Studion .ASC-loaderi (ja esimerkki-ASC), .PCX-loaderi
+       texturemappausta varten (ja esimerkki-PCX), sek„ Lambert
+       Flatin, Z- ja oikean gouraudin, env-mappauksen ja texture-
+       mappauksen esimerkkiohjelmat. T„ss„ vaiheessa viel„ melko
+       dokumentoimatonta mutta silti kohtalaisen selv„„ pascal
+       -koodia.
+     - Voltaire /OTM:n kehitt„m„n Phong-toteutusmuodon idea on
+       selostettu. Oikeaa phongia ei ole viel„k„„n.
+
+   Uutta versiossa 2.1a (ei p„„ssyt koskaan levitykseen :)
+     - Matriisipy”ritysten esimerkkipseudossa oli moka, korjattu.
+       Kiitos informoinnista, sin„-joka-MBnetiss„-k„yt„t-nime„
+       Mika&Janne Tolvanen.
+     - Pikkupukkeja korjattu.
+     - Gouraudiin lis„tty optimointivinkki joka v„hent„„ cmp:n ja
+       mahdollisia xchg:it„ hliness„.
+     - Perspektiivikorjauksen periaate selostettu. Kiitos kun
+       selvensit sit„ minulle, Timo Saarinen.
+     - Hidden face removalia tarkennettu.
+     - Tulossa-osio lis„tty.
+     - FAQ lis„tty.
+     - Thanks for support -osio lis„tty.
+
+   Uutta versiossa 2.11:
+     - 3dican virallisen levityspaikan osoite lis„tty.
+     - Yleist„ l”pin„„ l”pisty lis„„, mm. 3d-enginen mainos ja
+       paikat asm97:lla ilmoitettu.
+     - Jotkut purkit ottivat  3di_src.zipin dizzin koko 3dican
+       dizziksi, joten muutin sen p„„tteen.
+     - Yksi kysymys lis„tty FAQ:iin (vau).
+
+   Uutta versiossa 2.2:
+     - Enp„ taida joka versioon kirjoittaa ett„ yleist„ l”pin„„ on
+       tullut lis„„. T„ss„ verssussa se loppuu. Viimeinkin.
+     - Yleist„ l”pin„„ tullut lis„„.  ;D
+     - Mukana -- yleis”n hartaista rukouksista huolimatta ;) --
+       c-esimerkkikoodia (djgpp) by Kaj.
+     - Kappalejakoa fiksattu (alkeellisemmat 3d-py”ritykset pudotettu
+       pois).
+     - En ole en„„ Ica/2 vaan Ica /Hubris, niin mainostetaan
+       samalla k„tev„sti tuota gruuppiakin 8-)
+     - Vaihdoin 3x3-matriiseihin ihan k„yt„nn”n syist„, ja 3dicakin
+       k„sittelee sitten t„st„ l„htien niit„. Valitan kovasti jos
+       n„ist„ versionumeroiden muuttuessa tapahtuvista muutoksista
+       on haittaa 3d-enginesi kehittelyyn, mutta karu totuus on ett„
+       opettelen itsekin koko ajan uusia tekniikoita ja paremman
+       l”ytyess„ vaihdan aina v„litt”m„sti siihen.
+     - Portalien idea on selostettu by Jere Sanisalo.
+     - Texturen fittaus objektiin lis„tty.
+     - Texture + varjostus lis„tty.
+     - J„tin pascal-esimerkkiohjelmat ainakin v„liaikaisesti pois
+       paketista, koska niiden kehitt„j„ Kaj on siirtynyt c:hen
+       eik„ en„„ osoita mielenkiintoa niiden paranteluun (sellai-
+       senaanhan nuo ovat aikamoista sotkua). Jos joku muu haluaa
+       jatkaa pascal-sorsien kehitt„mist„, ottakoon yhteytt„.
+     - Johdatusta matriiseihin laajennettu.
+     - Mukana wanha kunnon licenssi-”kriimentti.
+     - Rekister”ityneit„ tullut lis„„, kiitokseni heille. Toivotta-
+       vasti tahti pysyy v„hint„„n samana.
+     - Henri Tuhkasen kirjoittama assembly-optimointikurssi on
+       liitetty mukaan.
+     - Oikean view conen periaate mukana lukijoiden painostuksesta.
+     - Vektoriprojektio lis„tty.
+     - Kameramatriisin muodostaminen suuntavektorista lis„tty.
+     - Paletinkvantisointi (Local K) mukana by Sampsa Lehtonen.
+     - Verteksinormaalien generointipseudossa on ep„tarkkuus, jota
+       en kyll„k„„n korjannut mutta kerroin sent„„n ett„ siell„
+       on sellainen :)
+     - 3d-sanastoon lis„tty mip-mappaus.
+     - u- ja v-deltan vakiona s„ilymist„ texturemappauksessa sel-
+       vennetty by Kaj.
+     - Z-bufferissa mukana 1/z-optimointivinkki.
+     - Verteksinormaalien luonnekuvaus :) mukana by Kaj.
+     - Aito phong lis„tty.
+     - Vastaavasti Voltaire/OTM:n phong pudotettu pois yleis”n
+       pyynn”st„. Ok, Voltairen systeemi kielt„m„tt„ oli itsest„„n
+       selv„ ja n„ytt„„ ik„v„sti gouraudilta.
+     - 0-osion kappalejakoa muutettu fiksumpaan suuntaan; mukana
+       mm. l„hdekirjallisuuslistaus (ei kattava, tosin).
+     - Mukana itse k„ytt„m„ni varjostussysteemi.
+     - Samoin vapaasti liikkuvien valonl„hteiden tekniikka (siis
+       systeemi jolla valot voivat kulkea scenen l„pi).
+     - Kuin my”s spotlightien toteutus.
+     - Ja viel„ himmenevien valojen idea.
+     - Convex-polyjen tekniikkaa yritetty valaista by Kaj.
+
+
+ 0.8 Tulossa
+
+   Some potential features to be added:
+
+     - Bugikorjausta, jos korjattavaa l”ytyy
+     - Lis„„ c-esimerkkikoodia
+     - 3d-sanaston ja FAQ:n laajentamista
+     - Kompleksilukujen alkeet (tarvitaan fraktaaleissa)
+     - Quaternionit
+     - Splinet
+     - 3d-varjot
+     - Bresenhamin viiva-algoritmi (tmappauksen optaamiseen)
+     - Py”ritys vapaavalintaisen vektorin ymp„ri
+     - Ehdota itse uusia aiheita!
+
+
+ 0.9 Gr33tZ
+
+   iCA /hUBRiS gRe37z th3 f0ll0WiNG d00dz...
+
+   Friction/Morel Arts: Esit„ taas kanaa=) Ventolin qsee.
+   Ducha: (Don't) Keep up the (v„hemm„n) good work, pal!
+          (kuulin yhden biisisi X)
+   Ripple/Inside: Ei kukaan VOI olla noin hyv„. Paitsi min„ ;)
+   Firestorm/Morel Arts: Kehitt„isit nyt sit„ QWKProtakin...
+   Frac(tal): Olet perfektionisti. ("miten p„in ne vektorit
+              oikein muodostetaan?")
+   MiGbear: "Nyt se on loppu. Nyt se on LOPPU! AAAAAAAA!!!"
+   Oca: Viel„k” k„r„yttelet prossutuulettimia? :) Kyykkyyn, yl”s,
+        kyykkyyn, yl”s :P
+   Ozmo: Onko se polttamisen lopettaminen tosiaan niin hauskaa,
+         ett„ se pit„„ tehd„ useampia kertoja kuussa?-)
+   Jucka: En viel„k„„n osaa piin sataaviitt„kymment„ desimaalia :(
+   RoDeX/Static: Žij„ll„ on aika kovat puheet...
+   Praetor: Voisi varmaan lopettaa sen sinun html-versiosi kehitt„misen..
+   Pizzaman: V„itell„„n jos elet„„n. Eik„ se el„m„ kirjoituksiin
+             loppunut :I
+   Wrath: Mik„ projekti nyky„„n rullaa? ;)
+   Jokke: Kai se pit„„ sitten sinuakin greetata ;) Olet muuten
+          aika lailla sen n„k”inen kuin oletinkin.
+   tonic/Trauma: tAAt rlz 8-) Vasomotorinen riniitti p„rj„si
+                 yll„tt„v„n hyvin assyilla.
+   Wog/Orange: Colors oli 'ihan kiva'. Irkataan!
+   RRRulettavaKonna: Olet er„s oudoimmista tyypeist„ joiden kanssa
+                     olen m”lissyt... :I
+   Chem/Hubris: Kiitos RC:n ilmaisesta rekkauksesta! :) Olet
+                muuten ensimm„inen ihminen joka hakkasi MINUT
+                ko. peliss„ :..(
+   Bull/Hubris: L„hdit assyilta varkain, min„ en edes huomannut.
+                Flaresi on c00l!
+   Tweeker/Hubris: Ostitko sen uuden skitan?-)
+   Acute/Hubris: Optimoihan poika kvantisointia :P
+   Codger/Hubris: Et ole ollenkaan hullumpi rendaaja. Joko olet saanut
+                  kasaan niit„ auto-obuja?-)
+   Hyphen/Static: Miesh„n OSAA jotain... Minulle oli yll„tys ett„
+                  kuulut Staticiin.
+   Beta/5C: Žij„ se vaan tekee rahaa javap**kalla... Snyyh :(
+   _ilga_: N„hr„„nh„n koululla! Mikset k„y matikanluennoilla?-)
+   JayLettu: Y™K mik„ alias #XI Imuttakaa kaikki „ij„n koodaama
+             FLAMECD.ZIP mbnetist„! Mukana hirvitt„v„t pascal-sorsat :D
+   JereSaniSalo: Miten raytrace-enginesi toimii?
+   HenriKronLund: Miten menee? Ei ole messuiltu sitten TZ:n
+                  kaatumisen! Kai olet sent„„n pari nuorten EM:„„
+                  jo voittanut k”ssiss„?-)
+   JanneGr”nThal: SIK rulaa? Voe poeka, etp„ tied„ hyv„n p„„lle :P
+   TeemuK„m„r„inen: Tere tulemast tikille ensi vuonna!
+
+
+ 0.10 3d-termist”„ yms.
+
+   Ensinn„kin k„ytt„m„ni koordinaatisto on seuraavanlainen:
+   x-akseli kulkee vasemmalta oikealle, y-akseli ylh„„lt„ alas ja
+   z-akseli osoittaa suoraan ruudun sis„„n, eli koordinaatisto on
+   oikean k„den systeemi. T„m„ tarkoittaa kahta asiaa:
+
+     1) Z-akselin suunta saadaan oikean k„den kolmella ensimm„isell„
+        sormella ty”nt„m„ll„ peukalo oikealle ja etusormi alas.
+        Keskisormi osoittaa t„ll”in z-akselin suuntaan.
+
+     2) Py”ritys akselien ymp„ri m„„r„ytyy n„in: kun oikean k„den
+        peukalo osoittaa akselin suuntaan, sormet taipuvat positii-
+        viseen py”rityssuuntaan (eli py”ritt„ess„si z-akselin ymp„ri
+        positiiviseen suuntaan, pisteet py”riv„t ruudulla my”t„p„i-
+        v„„n).
+
+   Ja sitten 3d:hen liittyv„„ termist”„. N„m„ ovat vain ensimm„i-
+   sin„ p„„h„n juolahtaneita termej„, seuraaviin versioihin saata-
+   neen huomattavasti kattavampi "sanasto". Mailia vain, niin
+   selvitet„„n muutkin ep„selv„t termit ja saadaan listaankin
+   lis„yst„!
+
+     Bilineaarinen filtter”inti (suodatus)
+                 Tekniikka, jolla l„helle zoomattujen bittikart-
+                 tojen piksel”itymist„ voidaan v„hent„„. Esim:
+                 Ota pala ruutupaperia, ja t”kk„„ siihen piste.
+                 Se ei luultavasti osu ruudun keskelle. Piirr„
+                 pisteen ymp„rille ruutu. Osa ruudusta on nyt
+                 toisten paperin ruutujen alueella, eli tietty
+                 pinta-alaprosentti osuu yhteens„ nelj„n ruudun
+                 alueelle. N„iden prosenttim„„rien mukaan
+                 sekoitetaan texeleist„ oikeanv„rinen pikseli,
+                 joka laitetaan ruudulle.
+                 T„m„ oli muuten Wog/Orangen messusta, kiitos.
+
+     Complex-polygoni
+                 Monimutkainen polygoni; polygoni voi leikell„
+                 itse„„n (masokismia! X). piirt„minen monimutkai-
+                 sempaa kuin kuperan polygonin.
+
+     Concave-polygoni
+                 Kovera polygoni; polygonissa on kulmia, jotka
+                 ovat yli 180 astetta, mutta polygoni ei kuiten-
+                 kaan leikkaa itse„„n. Piirt„minen monimutkaisempaa
+                 kuin kuperan polygonin.
+
+     Convex-polygoni
+                 Kupera polygoni; polygonin kaikkien reunojen
+                 v„liset kulmat pienemm„t kuin 180 astetta. Piir-
+                 t„minen yht„ helppoa kuin tavallisen kolmion.
+
+     Face        Objektin pinnan polygoni, jonka kulmat ovat
+                 verteksej„.
+
+     Klippaus    N„kym„tt”miss„ olevien polygonien tai niiden
+                 osien piirt„m„tt„ j„tt„mist„.
+
+     Matriisi    Er„„nlainen lukutaulukko, jonka avulla er„„t
+                 monimutkaiset laskutoimitukset ovat helpompia.
+                 Matriisimatematiikkaa k„ytet„„n mm. 3d-py”ri-
+                 tysten helpottamiseen.
+
+     Mip-mappaus
+                 Texturesta pidet„„n eri kokoisia, valmiiksi
+                 filtter”ityj„ versioita muistissa. Piirrett„-
+                 v„lle polygonille valitaan sopivan kokoinen
+                 mipmap riippuen polygonin koosta. N„in saadaan
+                 maukas filtter”intiefekti texturemappaukseen
+                 "ilmaiseksi". Kun t„m„ lis„t„„n bilineaariseen
+                 filtter”intiin, on tulos todellinen nautinto :O
+
+     Objekti     Esine 3d-avaruudessa.
+
+     Origo       Avaruuden keskipiste, koordinaatit (0,0,0).
+
+     Paletin kvantisointi
+                 Tapa, jolla voidaan k„ytt„„ 256-v„risess„ tilas-
+                 sa samanaikaisesti sek„ 256-v„rist„ bittikarttaa
+                 ett„ varjostusta, montaa eri bittikarttaa joissa
+                 on eri paletit, tai vaikkapa 24-bittisi„ kuvia
+                 256-v„risess„ tilassa. K„yt„nn”ss„ l„hinn„ v„ri-
+                 m„„r„n pienent„mist„ enemm„n tai v„hemm„n opti-
+                 maalisesti.
+
+     Polygoni    Monikulmio, huom. EI v„ltt„m„tt„ kolmio. n-
+                 kulmainen polygoni voidaan muodostaa n-2 kolmi-
+                 osta.
+     
+     Quaternion  4d-piste, k„ytet„„n haluttaessa helpottaa esimerkiksi
+                 demossa liikkumista; ilmoitetaan vain alkuorientaatio
+                 ja loppuorientaatio, ja interpoloidaan quaternioneilla
+                 v„liss„.
+
+     S-buffer    Segmented buffer, Z-bufferin paranneltu versio
+                 jossa pisteiden sijaan tarkastellaan vaakaviivoja
+                 (k„ytet„„n my”s nimistyst„ scanline Z-buffer,
+                 mik„li olen ymm„rt„nyt oikein).
+
+     Sorttaus    Polygonien piirt„misj„rjestyksen m„„ritt„minen
+                 siten, ett„ takimmaiset piirret„„n ensin ja etum-
+                 maiset vasta lopuksi.
+
+     Subpixel    Sijainti pikselin sis„ll„ (ks. bilineaarinen
+                 filtter”inti).
+
+     Subtexel    Sijainti texelin sis„ll„ (ks. bilineaarinen
+                 filtter”inti).
+
+     Texel       Texture element eli bittikartan pisteen v„ri (vrt
+                 pixel = picture element).
+
+     Vektori     Jana jolla on vakituinen pituus ja suunta, mutta
+                 ei paikkaa (voi l„hte„ origosta, mutta my”s
+                 huomattavan monesta muusta pisteest„ :)
+
+     Verteksi    Objektin kulmapiste, johon kiinnittyy yksi tai
+                 useampia faceja.
+
+     Verteksinormaali
+                 Kulmapisteen normaali, joka saadaan laskemalla
+                 ristitulolla jokaisen verteksiin kiinnittyv„n
+                 polygonin normaali ja ottamalla niiden keskiarvo.
+                 Yleens„ verteksinormaalit ovat yksikk”vektoreita,
+                 koska siten p„„st„„n eroon jakolaskuista loopeissa
+                 (niiss„ tarvitaan usein skalaarituloa joka vaatii
+                 parikin vektorin pituudella jakamista. Jos pituus
+                 on yksi, ei jakolaskua luonnollisesti tarvita :)
+
+     Z-buffer    Sorttaustapa, jossa pisteet lajitellaan ruudun
+                 kokoiseen taulukkoon niiden z-koordinaattien
+                 mukaiseen j„rjestykseen. Vain etummaisin pikseli
+                 piirret„„n.
+
+
+ 0.11 Frequently Asked Questions
+
+   Perustavanlaatuinen neuvo kaikkiin kysymyksiin: KŽYTŽ
+   JŽRKEŽSI! TIETENKŽŽN koodisi ei toimi, jos ohjelma ei vastaa
+   edes k„ytt„m„si ohjelmointikielen SYNTAKSIA!
+
+
+   Q: 3d-py”ritykseni, jotka on otettu suoraan pseudosta, eiv„t
+      toimi.
+
+   A: Tutki, ovatko kaikki muuttujat oikeaa tyyppi„. Oletko k„yt-
+      t„nyt yhdess„ kohdin muuttujaa jonka nimi on otettu pseu-
+      dosta, ja toisessa itse nimetty„, muka samana muuttujana?
+      Oletko vilkaissut c-sorsia? ;)
+
+   Q: Texturemappausrutiinini sotkee ruudun. En l”yd„ mist„„n
+      mit„„n vikaa.
+
+   A: Mahdollisesti py”ristysongelma.
+      Fixed:
+
+        putpixel( x, y, tmap[ u/65536+v/256) ] )
+
+      Olet nerokkaasti ajatellut optimoivasi, eli kun v pit„isi
+      jakaa 2^16:lla ja kertoa 2^8:lla, oletkin jakanut 2^8:lla.
+      Tulos on v„„r„. Miksik”? Nyt fixedpointtisi kahdeksaa
+      ylemp„„ bitti„ ei nollata ollenkaan vaan tmap k„sitt„„ ne
+      u-koordinaateiksi joten tulos on p„in ..rsett„.
+      Oikea tapa on seuraava:
+
+        putpixel( x, y, tmap[ u/65536+(v/65536)*256) ] )
+
+      Float:
+
+        putpixel( x, y, tmap[ word(u+v*256) ] )
+
+      u:n ja v:n desimaaliosat sotkeutuvat toisiinsa v„„rist„en
+      tuloksen. Oikea tapa:
+
+        putpixel( x, y, tmap[ word(u)+word(v)*256) ] )
+
+      Itsell„ni oli muuten tasan t„m„ ongelma ja ihmettelin
+      *pitk„„n* kun flotareiden k„ytt„minen sotki rutiinit
+      totaalisesti :I
+
+   Q: Flat-polygonirutiinini ei toimi.
+
+   A: Onko muuttujat m„„ritelty oikein? K„yt„tk” pascalin
+      kokonaislukujakolaskua floateilla tai p„invastoin? Onko
+      fixedpointtisi oikein m„„ritelty? Muistatko jakaa sill„
+      loppuvaiheessa? Toimiiko verteksinsorttauksesi varmasti?
+
+   Q: Mit„ ovat 3D-Studion asc-formaatissa face-listauksessa
+      esiintyv„t termit AB, BC ja CA? (no huhhuh :)
+
+   A: Ne ilmoittavat wireframe-kuviossa, piirret„„nk” viiva vai
+      ei (minusta ainakin eritt„in k„tev„ ominaisuus).
+
+   Q: Milloin k„ytet„„n verteksi- milloin facenormaaleja?
+
+   A: Verteksinormaaleja k„ytet„„n gouraudissa ja phongissa,
+      facenormaaleja lambert flatissa.
+
+
+ 0.12 Thanks for support
+
+   L„mpim„t kiitokseni n„ille 3dican kehitysty”t„ rahallisesti
+   tukeneille henkil”ille (lainausmerkeiss„ heid„n omat moikkauk-
+   sensa, niiden per„ss„ minun kommenttini).
+
+     Joonas Pihlajamaa:
+
+       "Imuroi lamertutti, imuroi lamertutti! BAD KARMA rulettaa!"
+
+       Ai ai, kyll„h„n Jokke-pojan pit„isi tiet„„ ett„ Ilkka-set„
+       on jo liian iso k„ytt„m„„n mink„„nlaisia tutteja. Tosin
+       sen takiahan sit„ voisi niit„ vaikka imuroidakin jos ei
+       roskiin jaksa heitt„„ ;)
+       Ja kaikkihan tiet„v„t ett„ Bad Karma on l„hinn„ vitsi.
+       (vitsi (vitsi (vitsi (vitsi (vitsi))))) (eli loppujen
+       lopuksi: kommentti oli vitsi -- siis se edellinen, ei
+       j„lkimm„inen) :]
+
+     Tommi Pisto
+
+       Mit„s hommaat nyky„„n? Matiskan kanssa at The Opisto?-)
+       Mailaa jos haluat kommentin t„h„n!
+
+     JiMM:
+
+       "jeejee p„„sin greetzeihin .."
+
+       Kyll„h„n kaikki RAHASTA p„„sev„t :) Suurempi kunnia taisi
+       viel„ olla kun sait kirjoittaa tuon kommenttisi itse minun
+       koneellani assyilla ;)
+
+     Erik Seesj„rvi
+
+       Vau, maksum„„r„yksen t„h„nastinen enn„tys: 40FIM. Tosin
+       lienet saanut sen edest„ helppi„ jo privamailissakin ;)
+
+     Juhana Ven„l„inen:
+
+       "Ei mill„„n pahalla mutta hyv„„ p„iv„„."
+
+       P„iv„„, p„iv„„. P”llit tuon tageistani! :) T„ytyy kyll„ sanoa
+       ett„ oli se hauska messu lukea 8-)
+       Uusi enn„tys: 50FIM. *Kiitos*.
+
+
+ 0.13 L„hdeteoksia & -dokumentteja
+
+   Suurena apunani ja tietotekniikan Raamattuna k„yt„n loistavaa
+   kirjaa Computer Graphics: Principles & Practice, 2nd Ed, teki-
+   j”in„ herrat Foley, Van Dam, Feiner ja Hughes ja julkaisijana
+   Addison-Wesley. Muita teoksia ja dokumentteja listattu alla.
+
+     Algebra ja Geometria, Kivel„, Simo, Otatieto 1997
+      - matriisit, 3d-py”ritykset, projektiot
+
+     OTMMATX.DOC
+      - matriisit, hierarkiset systeemit
+
+     OTMPHONG.DOC
+      - phong illuminating
+
+     PC Game Programmer's Encyclopedia 1.0
+      - BSP-puu
+
+     PENTOPT.TXT
+      - pentiumin optimointikikat
+
+     [muita lukuisia dokumentteja joita en mill„„n saa p„„h„ni]
+
+
+-- asiaan... --
+
+
+
+
+1. Vektori- ja matriisialgebraa
+-------------------------------
+
+
+ Jos t„m„ ei tunnu kiinnostavan, siirry vain suoraan efekteihin;
+ joudut kuitenkin palaamaan t„m„n kappaleen pariin jossain
+ vaiheessa ;)
+
+
+ 1.1 Vektorit
+
+    1.1.1 Yleist„
+                                                     y ^      _ B
+     Vektorit ovat janoja joilla on suunta,            |      /|
+     ja joita voidaan siirrell„ koordinaa-             |    /
+     tistossa haluttuihin paikkoihin kunhan            |  A\
+     niit„ ei k„„nnet„.                                |
+     Vektori piirret„„n merkitsem„ll„ kuvan     -------|-------->
+     mukaisesti poikkiviiva sen alkup„„h„n             |        x
+     (ei pakollinen) ja nuolen k„rki loppup„„h„n.
+       Vektorit on tapana ilmoittaa yksikk”vektoreiden i, j ja k
+     avulla. i on x-, j y- ja k z-akselin suuntainen vektori. N„iden
+     kaikkien pituus on yksi pituusyksikk”, mist„ nimityskin.
+       Mainittakoon t„ss„ vaiheessa, ett„ kaikki vektoriyht„l”t ovat
+     sovellettavissa sek„ 2d- ett„ 3d-koordinaatistoihin, ainoa ero on
+     3d-koordinaatistossa ylim„„r„inen termi zk.
+       Vektoreiden kirjaintunnusten p„„lle piirret„„n yleens„ viiva
+     osoittamaan kyseess„ olevien vektorien, mutta DOS-tekstitilan
+     ollessa kyseess„ katson oikeudekseni olla n„in tekem„tt„ :)
+     (My”s i:n, j:n ja k:n p„„ll„ on siis normaalisti viiva. i:n ja
+     j:n p„„ll„ olevia pisteit„ ei t„ll”in tarvitse merkit„.)
+
+
+   1.1.2 Vektorin yht„l”
+
+     Nyt laskemme vektorin AB yht„l”n. Jos A-pisteen koordinaatit ovat
+     A(Ax,Ay,Az) ja B-pisteen vastaavasti B(Bx,By,Bz), miss„ x,y ja z
+     ovat alaindeksej„, vektorin AB yht„l” on
+       __          _          _          _
+       AB = (Bx-Ax)i + (By-Ay)j + (Bz-Az)k
+             _    _    _
+          = Xi + Yj + Zk.
+
+     (yht„l” esitet„„n siis normaalisti alemmassa, sievennetyss„
+     muodossa)
+     Toinen mahdollinen esitt„mistapa on t„m„:
+       __
+       AB = ( Bx-Ax , By-Ay , Bz-Az )
+
+     (t„t„ esitystapaa k„ytet„„n 'edistyneemm„ss„' kirjallisuudessa).
+
+     T„m„ tarkoittaa siis, ett„ vektorin suunta saadaan kun menn„„n
+     ensin jostain mielivaltaisesta pisteest„ X yksikk”„ x-akselin
+     suuntaan, sitten Y yksikk”„ y-akselin suuntaan ja lopuksi Z
+     yksikk”„ z-akselin suuntaan. Kun t„h„n saatuun pisteeseen
+     piirret„„n viiva pisteest„ josta aloitettiin (ja viivan loppu-
+     p„„h„n se nuoli osoittamaan vektorin suuntaa), saadaan vektori
+     jonka yht„l” on Xi+Yj+Zk. Vektori voidaan siis k„sitt„„ my”s
+     janana pisteest„ (0,0,0) pisteeseen (X,Y,Z).
+     HUOM! LOPPUPISTEEN koordinaatista VŽHENNETŽŽN aina ALKUPISTEEN
+     koordinaatti.
+
+
+   1.1.3 Vektorin pituus
+
+     Vektorin AB pituus merkit„„n sen itseisarvona ja lasketaan
+     ynn„„m„ll„ sen termien neli”t yhteen ja ottamalla summasta
+     neli”juuri (sqrt, SQuare RooT; ruotsia. ;)
+        __
+       |AB| = sqrt( X^2 + Y^2 + Z^2 ).
+
+     Matikkaa koulussa opiskelleet muistavat, ett„ t„m„ on sama
+     kuin pisteen (X,Y,Z) et„isyys origosta.
+       Yksikk”vektori on vektori, jonka pituus on yksi. Saat
+     vektorista yksikk”vektorin jakamalla i:n, j:n ja k:n kertoimen
+     vektorin pituudella. Jos et usko, voit kokeilla itse ;)
+
+     Vektorin pituuden laskemista tarvitaan mm. phongissa ja ver-
+     teksinormaalin laskemisessa.
+                    _                      _
+    TEHTŽVŽ: Olkoon a = i + j + k. M„„rit„ a:n suuntainen yksikk”-
+    vektori.
+
+      Ratkaisu:
+         _
+        |a| = sqrt ( 1^2 + 1^2 + 1^2 ) = sqrt(3),
+        _
+        a:n suuntainen yksikk”vektori:
+
+          (1/sqrt(3))i + (1/sqrt(3))j + (1/sqrt(3))k).
+
+
+   1.1.4 Vektorien yhteenlasku
+
+     Vektorien yhteenlasku tapahtuu laskemalla termit yhteen.
+     V„hennyslasku vastaavasti, mutta miinusmerkkinen vektori
+     osoittaa vastakkaiseen suuntaan kuin plusmerkkinen.
+                   _     _     _     _            _     _     _
+     Esim. Olkoon  a = Axi + Ayj + Azk  ja  b = Bxi + Byj + Bzk.
+                    _   _          _          _          _
+           T„ll”in  a + b = (Ax+Bx)i + (Ay+By)j + (Az+Bz)k
+                    _   _          _          _          _
+                ja  a - b = (Ax-Bx)i + (Ay-By)j + (Az-Bz)k.
+                                 _
+                            __-->/|
+                     a+b__--   /
+                    __--     / b
+                  |----a---->
+                   \      /
+                 a-b\   / -b
+                     >/_
+
+                  _    _    _      _   _    _           _   _
+    TEHTŽVŽ: Olkoon a = 2i - 6j  ja  b = i + 3j. Laske | 2a - b |.
+
+      Ratkaisu:
+
+        2a = 2*2i - 2*6j = 4i - 12j,
+
+        2a-b = (4-1)i + (-12-3)j = 3i - 15j,
+
+        | 2a-b | = sqrt( 3^2 + (-15)^2 ) = sqrt(9+225) = sqrt(234).
+
+
+   1.1.5 Skalaaritulo
+
+     Vektorien tulosta k„ytet„„n nimityst„ skalaari- eli pistetulo.
+     Pistetulo luetaan "a piste b" ja se lasketaan kertomalla a:n
+     pituus b:n pituudella ja viel„ vektorien v„lisen kulman
+     kosinilla. Sen voi my”s laskea kertomalla molempien vektorien
+     i:n, j:n ja k:n kertoimet yhteen ja lis„„m„ll„ ne toisiinsa.
+     HUOM! Vektorien v„linen kulma tarkoittaa aina pienemp„„ kulmaa
+     joka j„„ vektorien v„liin niiden alkaessa samasta pisteest„.
+       _ _    _  _     _ _                 _
+       aúb = |a||b|cos(a,b)                /|
+           = Ax*Bx + Ay*By + Az*Bz.    b /\
+                                       /   |
+                                      ---------->
+                                           a
+
+     HUOM! Vektorit ovat toisiaan vastaan kohtisuorassa, kun niiden
+     v„linen kulma on 90 astetta eli cos(a,b)=0 eli aúb=0!
+
+     Skalaarituloa tarvitaan mm. phong illuminating -efektiss„ ja
+     monissa valo-operaatiossa.
+                              _ _      _ _
+    TEHTŽVŽ: M„„rit„ vektorien  a+b  ja  a-b  v„linen kulma, kun
+    a = 3i + j  ja  b = i - 7j.
+
+      Ratkaisu:
+
+        a+b = (3+1)i + (1-7)j = 4i - 6j
+        a-b = (3-1)i + (1+7)j = 2i + 8j
+
+        (a+b)ù(a-b) = |a+b| * |a-b| * cos(a+b,a-b),
+        toisaalta (a+b)ù(a-b) = 4*2 + (-6)*8 = 8-48 = -40.
+
+        |a+b| = sqrt( 4^2 + (-6)^2 ) = sqrt(16+36) = sqrt(52),
+        |a-b| = sqrt( 2^2 + 8^2 ) = sqrt(4+64) = sqrt(68).
+
+        Yht„l”st„
+
+        sqrt(52) * sqrt(68) * cos(a+b,a-b) = -40 saadaan
+
+        cos(a+b,a-b) = -40 / sqrt(52*68).
+
+        T„st„ kulma on 132.3 astetta.
+
+
+   1.1.6 Vektoriprojektio
+
+     Tarkoituksena on laskea vektorin projektio toisella vektorilla,
+     eli laskea vektorin a vektorin b suuntainen komponentti.
+
+                      b^
+                       |
+                       |_______
+                       ^      /|
+                a:n    |    /
+             projektio |  /a
+               b:ll„   |/
+
+     Selvent„miseksi pit„nee sanoa ett„ kaikki vektorit alkavat samasta
+     pisteest„, ja a:n projektio b:ll„ on lyhyt b:n suuntainen vektori.
+     Homma hoituu yksinkertaisesti laskemalla vektorien a ja b skalaa-
+     ritulon ja kertomalla b:n sill„:
+
+       a:n b:n suuntainen komponentti = (a piste b)*b.
+
+     Skalaaritulon tuloshan on skalaari eli vakio, joten (a piste b)
+     vain skaalaa b:t„ kuten pit„„kin.
+
+     Vektoriprojektiota tarvitaan ainakin vektorin konvertoimisessa
+     matriisiksi.
+
+
+   1.1.7 Vektoritulo
+
+     Kolmiulotteisessa avaruudessa m„„ritell„„n kahden vektorin a ja
+     b vektori- eli ristitulo  a x b  (luetaan "a risti b") vektorina,
+     jonka                                   _
+      - pituus |a x b| ilmoittaa vektorien  |\ axb      _
+        a ja b m„„r„„m„n suunnikkaan alan:    \         /|
+        |a x b| = |a||b|sin(a,b) (suunnikkaan  \    a /   \ b
+        alan kaava, k„ytet„„n my”s geomet-      \/\ /      >
+        riassa)                                  \/ |axb|  /|
+      - suunta m„„r„ytyy siten, ett„  a x b       \      /
+        on kohtisuorassa vektoreita a ja b        b\   / a
+        vastaan.                                    >/
+
+     HUOM! Kuviossa siis my”s b ja axb ovat suorassa kulmassa
+     toisiaan vastaan, vaikkei silt„ n„yt„ :)
+
+     Muuta muistettavaa ristitulosta:
+      - a x a = 0,
+      - a x b = -(b x a) eli vaihdantalaki ei ole voimassa suoraan,
+      - kun r on vakio, (ra) x b = r(a x b) eli vakion siirr„nt„laki
+        on voimassa,
+      - a x (b + c) = a x b + a x c  eli osittelulaki on voimassa,
+      - i x j = k (ja vastaavasti k x i = j  ja  j x k = i).
+
+     Ristitulon lauseke voidaan kirjoittaa helposti muistettavaan
+     muotoon ottamalla avuksi k„site determinantti (matriiseja, jee!-)
+     Kaksirivinen determinantti m„„ritell„„n nelj„st„ luvusta
+     muodostettuna kaaviona, jonka arvo lasketaan seuraavasti:
+
+       ³ a b ³
+       ³ c d ³ = ad - cb (kyseess„h„n on RISTItulo :)
+
+     Kolmirivinen determinantti taas, jota useimmiten k„ytet„„n,
+     tarkoittaa vektorien a=Axi+Ayj+Azk ja b=Bxi+Byj+Bzk ristituloa:
+                  _  _  _
+       _   _    ³ i  j  k  ³
+       a x b =  ³ Ax Ay Az ³
+                ³ Bx By Bz ³
+
+               ³ Ay Az ³ _   ³ Az Ax ³ _   ³ Ax Ay ³ _
+             = ³ By Bz ³ i + ³ Bz Bx ³ j + ³ Bx By ³ k
+                          _                _                _
+             = (Ay*Bz-By*Az)i + (Az*Bx-Bz*Ax)j + (Ax*By-Bx*Ay)k
+
+     Eli siirryt„„n yksi kerrallaan ylimm„ll„ vaakarivill„ i:n, j:n
+     ja k:n kohdalle, ja peitet„„n jokaisen kohdalla vuorollaan
+     kohdalla oleva pystyrivi (siis niin, ett„ kyseess„ oleva
+     kirjain j„„ peittoon). Lopuista alemmista riveist„ muodostetaan
+     kaksirivinen determinantti, lasketaan sen normaalisti ja
+     lopuksi kerrotaan ylimm„n rivin kirjaimella. Piis of keik,
+     isnt it, m„„„n?-)
+
+     Useampirivisi„kin determinantteja on n„kynyt, ja ne ratkaistaan
+     vastaavasti. Siis esimerkiksi nelirivisest„ determinantista
+     muodostetaan kolmirivisi„ jne.
+
+     Ristituloa tarvitaan mm. normaalien ja siten my”s tason yht„l”n
+     laskemisessa.
+
+    TEHTŽVŽ: M„„rit„ vektorien  i - j + 2k  ja  2i + 3j - k
+    m„„r„„m„n suunnikkaan ala.
+
+      Ratkaisu:
+
+        ³ i  j  k ³   ³-1  2³    ³ 2 1 ³    ³ 1 -1³
+        ³ 1 -1  2 ³ = ³ 3 -1³i + ³-1 2 ³j + ³ 2  3³k
+        ³ 2  3 -1 ³
+                    = (-1*(-1)-3*2)i + (2*2-(-1)*1)j + (1*3-2*(-1))k
+
+                    = (1-6)i + (4+1)j + (3+2)k = -5i + 5j + 5k.
+
+        Ala = vektorin pituus = sqrt( (-5)^2 + 5^2 + 5^2 ) = sqrt(75).
+
+
+   1.1.8 Skalaarikolmitulo
+
+     Skalaarikolmitulo merkit„„n  (a x b)úc  ja sen itseisarvo
+     ilmoittaa vektorien a, b ja c m„„r„„m„n suuntaiss„rmi”n
+     tilavuuden (ks. ristitulossa suunnikas). HUOM! Jos t„m„
+     tilavuus on nolla, vektorit a, b ja c ovat tietysti samassa
+     tasossa!
+       Skalaarikolmitulo on helppo laskea kolmirivisell„
+     determinantilla, jolloin ristitulon tapauksessa k„ytetty„
+     determinanttia muutetaan vain ylimm„n rivin osalta,
+
+        _   _  _    ³ Cx Cy Cz ³
+       (a x b)úc =  ³ Ax Ay Az ³
+                    ³ Bx By Bz ³
+
+     ja lasketaan muuten t„sm„lleen samalla tavalla.
+
+     Esim. Vektorien  i + j - k,  2i - 4j + k  ja  -4i + 3k
+     skalaarikolmitulo:
+
+       ³  1  1 -1 ³       ³-4 1³       ³ 1  2³        ³ 2 -4³
+       ³  2 -4  1 ³ = 1 * ³ 0 3³ + 1 * ³ 3 -4³ + -1 * ³-4  0³
+       ³ -4  0  3 ³
+                    = (-4*3 - 0*1) + (1*(-4) - 3*2) - (2*0 - (-4)*(-4))
+
+                    = -12 + (-10) + 16 = -6.
+
+     TEHTŽVŽ: M„„rit„ vakio a siten, ett„ vektorit  i - j + 2k,
+     2i + 3j - k  ja  ai - 4j + k ovat saman tason suuntaisia.
+
+       Ratkaisu:
+
+         ³ 1 -1  2 ³     ³ 3 -1³        ³-1 2 ³     ³ 2  3³
+         ³ 2  3 -1 ³ = 1*³-4  1³ + (-1)*³ 1 a ³ + 2*³ a -4³
+         ³ a -4  1 ³
+                     = (3*1-(-4)*(-1)) - (-1*a-1*2) + 2*(2*(-4)-a*3)
+
+                     = (3-4) - (-a-2) + 2*(-8-3a)
+
+                     = -1 + a + 2 - 16 - 6a = -5a - 15
+
+         Samassa tasossa -> skalaarikolmitulo = 0,
+
+         -5a - 15 = 0  <=>  -5a = 15  <=>  a = -3.
+
+
+ 1.2 Matriisit
+
+   1.2.1         Yleist„
+
+     (Algebra ja Geometria, Simo K. Kivel„, Otatieto 1989. P„„t„
+     s„rkee, siksi t„„ll„ ei ole mit„„n hauskaa v„liss„ X(
+     Matriisiksi kutsutaan reaaliluvuista muodostettua j„rjestetty„
+     joukkoa:
+           Ú                          ¿
+           ³ a(1,1) a(1,2) ... a(1,n) ³
+           ³ a(2,1) a(2,2) ... a(2,n) ³
+       A = ³   .      .    .     .    ³
+           ³   .      .      .   .    ³
+           ³ a(p,1) a(p,2) ... a(p,n) ³
+           À                          Ù
+     Matriisit merkit„„n siis sikaisoihin hakasulkeisiin (tai taval-
+     lisiin kaarisulkeisiin). Determinantti erotetaan matriisista
+     j„tt„m„ll„ sulkeiden p„ist„ haat piirt„m„tt„ eli vet„m„ll„ vain
+     pystyviivat molemmille puolille determinanttia (kts. kappale
+     1.1.6).
+     Luvut a ovat matriisialkioita. Ne muodostavat p vaakarivi„ ja n
+     pystyrivi„. Matriisin tyyppi on t„ll”in p x n; tarvittaessa se
+     voidaan ilmaista matriisin nimen alapuolelle kirjoitettuna: A.
+                                                                pxn
+     Matriisialkion a(j,k) edellinen indeksi j osoittaa, mill„
+     vaakarivill„ alkio on; j„lkimm„inen indeksi k osoittaa vastaa-
+     vasti pystyrivin (indeksit menev„t siis samalla tavalla kuin
+     c-kielen taulukoissa: verrattaessa pisteen (x,y) esitt„miseen,
+     matriiseissa ja c-kielen taulukoissa indeksit ovatkin (y,x)).
+
+     Matriisien nimin„ k„ytet„„n yleens„ isoja latinalaisia kirjaimia.
+
+     Tyyppi„ p x 1 olevia matriiseja kutsutaan pystyvektoreiksi.
+     Poikkeuksellisesti niit„ merkit„„n pienill„ latinalaisilla kir-
+     jaimilla:
+           Ú        ¿
+           ³ x(1,1) ³
+           ³ x(2,1) ³
+       x = ³   .    ³
+           ³   .    ³
+           ³ x(p,1) ³
+           À        Ù
+     Tyyppi„ 1 x n olevat matriisit ovat vastaavasti vaakavektoreita.
+     Esimerkiksi vektori i+j+2k on pystyvektorina t„m„n n„k”inen:
+           Ú   ¿
+           ³ 1 ³
+       x = ³ 1 ³
+           ³ 2 ³
+           À   Ù
+     Jos matriisin vaaka- ja pystyrivien m„„r„t ovat yht„ suuret,
+     kyseess„ on neli”matriisi (vrt. 3d-py”ritysten 3x3-matriisit).
+     Matriisialkiot, joiden indeksit ovat yht„ suuret, muodostavat
+     neli”matriisin l„vist„j„n; kyseess„ on siis vasemmasta yl„nur-
+     kasta oikeaan alanurkkaan suuntautuva viistorivi.
+     Jos l„vist„j„n ulkopuoliset matriisialkiot ovat = 0, on kyseess„
+     l„vist„j„- eli diagonaalimatriisi:
+           Ú                          ¿
+           ³ a(1,1)   0    ...   0    ³
+           ³   0    a(2,2) ...   0    ³
+           ³   .      .    .     .    ³
+           ³   .      .      .   .    ³
+           ³   0      0    ... a(p,n) ³
+           À                          Ù
+     L„vist„j„matriisin erikoistapaus on yksikk”matriisi:
+           Ú           ¿
+           ³ 1 0 . . 0 ³
+           ³ 0 1 . . 0 ³
+       I = ³ . . .   . ³
+           ³ . .   . . ³
+           ³ 0 0 . . 1 ³
+           À           Ù
+     Yksikk”matriisin symboli on siis I.
+
+     Nollamatriisiksi kutsutaan matriisia, jonka kaikki alkiot ovat = 0.
+     Matriisin tyyppi voi olla mik„ tahansa. Merkint„ on O tai vektorin
+     tapauksessa o.
+
+
+   1.2.2 Matriisien laskutoimitukset
+
+    1.2.2.1 Yhteenlasku
+
+      Matriisien yhteenlasku m„„ritell„„n siten, ett„ jokaiseen ensim-
+      m„isen matriisin alkioon a(j,k) lis„t„„n j„lkimm„isen alkio b(j,k)
+      eli n„in:
+             Ú                                 ¿
+             ³ a(1,1)+b(1,1) ... a(1,n)+b(1,n) ³
+             ³ a(2,1)+b(2,1) ... a(2,n)+b(2,n) ³
+       A+B = ³       .       .         .       ³
+             ³       .         .       .       ³
+             ³ a(p,1)+b(p,1) ... a(p,n)+b(p,n) ³
+             À                                 Ù
+
+    1.2.2.2 Kertominen skalaarilla
+
+      (Skalaari = reaaliluku)
+      T„m„ hoituu samalla systeemill„ kuin yhteenlasku, mutta nyt lai-
+      tetaan +-merkin tilalle * ja b(j,k):n tilalle se skalaari jolla
+      halutaan kertoa.
+      Skalaarilla kertominen skaalaa matriisia.
+
+    1.2.2.3 Kertolasku
+
+      Kertolasku onkin jo astetta teknisempi laskutoimitus. T„ss„p„
+      siis kaava:
+        Ú       ¿   Ú       ¿   Ú                            ¿
+        ³ a b c ³   ³ k l m ³   ³ ak+bn+cq al+bo+cr am+bp+cs ³
+        ³ d e f ³ * ³ n o p ³ = ³ dk+en+fq dl+eo+fr dm+ep+fs ³
+        ³ h i j ³   ³ q r s ³   ³ hk+in+jq hl+io+jr hm+ip+js ³
+        À       Ù   À       Ù   À                            Ù
+      Matriisituloa voidaan selvitt„„ tulkitsemalla se ensimm„isen
+      matriisin vaaka- ja toisen matriisin pystyrivien muodostamien
+      "vektorien" pistetuloiksi (ks. 1.1.5): ensin ensimm„isen
+      matriisin ylin vaakarivi ja toisen matriisin ensimm„inen
+      pystyrivi, sitten ensimm„isen matriisin ylin vaakarivi ja
+      toisen keskimm„inen pystyrivi, sitten 1. matriisin ylin
+      vaakarivi ja toisen viimeinen pystyrivi. Edelleen 1. matriisin
+      keskimm„inen vaakarivi ja toisen ensimm„inen, ... Ja tulokset
+      uuteen matriisiin 1. matriisin termien paikoille, kaavan
+      mukaisesti.
+      HUOM! Vain yhteensopivat matriisit voidaan kertoa kesken„„n.
+      T„m„ tarkoittaa, ett„ jos ensimm„inen matriisi on kokoa p x q,
+      toisen on oltava kokoa q x r, eli sen pystyrivien m„„r„n pit„„
+      olla sama kuin ensimm„isen matriisin vaakarivien m„„r„. p:lle
+      ja q:lle ei aseteta rajoituksia.
+      Kun mainitun kokoiset matriisit kerrotaan kesken„„n, ulos
+      tulee p x r -kokoinen matriisi, kuten kertolaskun m„„ritel-
+      m„st„ helposti n„hd„„n.
+      Matriisikertolaskua tarvitaan erilaisissa objektien transfor-
+      mointioperaatioissa.
+
+     1.2.2.3.1    Erikoistapaus: vektorin ja matriisin tulo
+
+       Asia on helpoin ymm„rt„„ tekem„ll„ halutusta vektorista
+       vaakavektori:
+
+         Xi+Yj+Zk = [ X Y Z ]
+
+       Nyt muodostetaan t„m„n vektorin ja transformointimatriisin
+       kertolasku:
+                     Ú       ¿
+                     ³ a b c ³
+         [ X Y Z ] * ³ d e f ³ = [ aX+dY+hZ bX+eY+iZ cX+fY+jZ ]
+                     ³ h i j ³
+                     À       Ù
+       T„t„ kaavaa voidaan k„ytt„„ vektorien lis„ksi my”s pisteen
+       transformoimiseen matriisilla, jolloin kirjaimet (X,Y,Z)
+       ilmoittavat pisteen alkuper„iset koordinaatit, ja kaavan
+       tulos vastaavasti tuloskoordinaatit.
+
+    1.2.2.4 Transponointi
+
+      M„„ritelm„: Matriisin A(pxn) transpoosi on
+
+               T
+        C  =  A    (yl„indeksi T),
+       nxp   pxn
+
+      miss„ C(j,k) = A(k,j). Matriisi siis 'flipataan' ymp„ri.
+      Esimerkki: Matriisin
+            Ú       ¿
+            ³ 1 2 3 ³               Ú           ¿
+            ³ 4 5 6 ³               ³ 1 4 7 0 1 ³
+        A = ³ 7 8 9 ³ transpoosi on ³ 2 5 8 4 5 ³.
+            ³ 0 4 2 ³               ³ 3 6 9 2 3 ³
+            ³ 1 5 3 ³               À           Ù
+            À       Ù
+
+      Transponointia tarvitaan mielivaltaisen vektorin ymp„ri
+      py”ritt„misess„.
+
+
+
+
+2. 3D-geometriaa
+----------------
+
+
+ 2.1 2D- ja 3D-maailman yhteys
+
+   Avaruudessa sijaitsevan pisteen koordinaatit ilmoitetaan kolmen
+   koordinaatin - x:n, y:n ja z:n - avulla. Kaksiulotteiselle
+   monitorin pinnalle t„llaista pistett„ ei kuitenkaan voida
+   suoraan piirt„„, joten tarvitaan muunnoskaava, jolla
+   z-koordinaatti voidaan sis„llytt„„ x:„„n ja y:hyn.
+     Mietit„„np„ asiaa. Pisteen voi kertoa vakiolla, jolloin se
+   pysyy origon kautta kulkevalla suoralla:
+
+      k*(X, Y, Z) = (kX, kY, kZ)
+
+   Jos m„„rit„mme kamerapisteeksi origon, voimme k„ytt„„ t„t„
+   kaavaa ja ottaa k:ksi 1/z:n jolloin z-koordinaatista tulee
+   vakio:
+
+     1/Z * (X, Y, Z) = (X/Z, Y/Z, 1).
+
+   T„llaiset pisteet ovat tasolla Z=1. Jos haluamme avaruutemme
+   l„hemm„s / kauemmas oletusarvoisesti, voimme muuttaa kaavaa
+   hiukan:
+
+     a/Z * (X, Y, Z) = (X*a/Z, Y*a/Z, a)
+
+   Nyt tason, jolla kaikki pisteet ovat, yht„l” on Z=a,
+
+                 ____________________________________
+                |  ^y            _                   |
+                |  ³             /|z           x(10,0,30)
+                |  ³           /                     |
+                |  ³         /                       |
+              -----³-------/---------x(10*a/30,0,a)-----
+                |  ³     / ^                         |
+                |__³___/___³_________________________|
+                   ³ /   (0,0,a)
+       ÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ>
+                   ³                          x
+                   ³
+
+   eli kaikki avaruuden pisteet siirret„„n nelikulmion
+   esitt„m„lle tasolle siten, ett„ ne pysyv„t origon kautta
+   kulkevalla suoralla.
+
+   Kaava on siis seuraavanlainen:
+
+      X_SCREEN = X0 * SCALE / Z0
+      Y_SCREEN = Y0 * SCALE / Z0
+
+   SCALE kertoo, kuinka l„helt„ 3d-maailmaa tarkastellaan
+   (mit„ pienempi arvo, sit„ l„hemp„n„ ollaan). Kokeilemalla
+   selvi„„ kuhunkin tilanteeseen sopiva arvo, usein k„ytet„„n
+   2:n potensseja 8 ja 9; niill„ on nopea laskea, ja ne ovat
+   sopivalla et„isyydell„. T„ll”in z-akselin 0-kohta eli kohta,
+   jossa z-koordinaatin arvo ei vaikuta x:„„n ja y:hyn, on
+   tietysti sama eli 256 tai 512, ja muuteltaessa z:n arvoa
+   reaaliaikaisesti huomataan 3d-efekti.
+     HUOM! Jos z:n arvoksi tulee kesken ohjelman ajon nolla, ei
+   tapahdu mit„„n kivaa. Siisp„ v„ltt„k„„mme t„llaista sattu-
+   essaan niin kovin valitettavaa tapahtumaa mahdollisuuksiemme
+   mukaan!
+
+   Kolmiulotteisuuden havainnollistamisen esimerkki pseudokoodina
+   (piirt„„ pisteen ruudun keskiosaan. Z:n arvon muuttuessa se
+   h„vi„„ ruudusta):
+
+     x = 1
+     y = 1
+     z = 256
+     while (gx<320) and (gx>-1) and (gy<200) and (gy>-1)
+       gx = x * 256 / z + 160 ; keskipiste = ruudun keskipiste
+       gy = y * 256 / z + 100 ; (320x200-tila)
+       putpixel(gx,gy,15)
+       z = z - 1
+       if (z = 0)  ; varmistetaan ettei VAIN... :)
+         z = -1
+       endif
+     endwhile
+
+   "Viritetty" versio onkin sitten jo 3d-starfield, demoscenen
+   perusefekti puolenkymment„ vuotta sitten. Suositeltava
+   harjoitusteht„v„ muuten!
+
+
+ 2.2 Matriisitekniikka -- johdanto
+
+   HUOM! Vaikka et ymm„rt„isik„„n matriisien ideaa, tutki esi-
+   merkkisorsia ja k„yt„ hiukan cut'n'pastea luodaksesi oman
+   3d-enginesi pohjan. My”hemmin voit sitten palata matriisien
+   perusteisiin, itse matriisisysteemien k„ytt” ei edellyt„
+   kovinkaan kummoista tietoutta.
+
+   Matriisitekniikassa objekti esitet„„n objektimatriisin, joka
+   sis„lt„„ kolme vektoria (suunnat alas, oikealle ja eteen),
+   avulla. Kaikki operaatiot suoritetaan sille ja vasta lopuksi
+   liitet„„n verteksit mukaan kertomalla ne objektimatriisilla.
+     T„ss„ tavassa on monta hyv„„ puolta: se on nopeampi,
+   yksinkertaisempi ymm„rt„„, helpompi toteuttaa ja eksaktimpi,
+   kuin 'perinteinen' systeemi jota useimmiten n„kee 3d-docuissa.
+   Ai miss„k” mieless„ eksaktimpi? Otetaan esimerkiksi (juujuu,
+   on se suoraan otmmatx.doc:sta :) lentokone, jonka nokka
+   osoittaa z-akselin, oikea siipi x-akselin ja vasen siipi
+   y-akselin suuntaan. Py”rit„ lentokonetta y-akselin ymp„ri
+   niin, ett„ sen nokka osoittaa negatiivisen x-akselin suuntaan.
+   Nyt kun py”rit„t sit„ z-akselin ymp„ri, py”riik” se *oman*
+   z-akselinsa vai *avaruuden* z-akselin ymp„ri? Tarkoitus on
+   tietysti, ett„ se py”rii oman z-akselinsa ymp„ri (miten muuten
+   olisivat toteutettavissa esim. lentosimulaattorit?), mutta
+   "normaaleilla" py”rityksill„ n„in ei k„y. Siisp„ matriiseja.
+
+   3D-ohjelmoinnissa k„ytet„„n 3x3-matriiseja, joista tiedot
+   l”ytyv„t seuraavasti:
+     Ú                                    ¿
+     ³  [X-akselin yksikk”suuntavektori]  ³
+     ³  [Y-akselin yksikk”suuntavektori]  ³
+     ³  [Z-akselin yksikk”suuntavektori]  ³
+     À                                    Ù
+   Eli ensimm„inen rivi ilmoittaa objektin x-akselin suuntavek-
+   torin i:n, j:n ja k:n kertoimien arvot, toinen ja kolmas
+   rivin vastaavasti y- ja z-akselin, kuvan mukaisesti.
+   HUOM! Kuten kuvasta n„kyy, vektorit ovat YKSIKK™vektoreita,
+   eli niiden pituus on yksi. Kannattaa ehk„ alustaa objekti-
+   matriisi aina siten, ett„ objekti lep„„ esimerkkimme
+   lentokoneen mukaisesti xz-tasolla, jolloin se on seuraava:
+     Ú       ¿
+     ³ 1 0 0 ³
+     ³ 0 1 0 ³
+     ³ 0 0 1 ³
+     À       Ù
+   T„llainen matriisi on nimelt„„n yksikk”matriisi.
+   Nyt siis objektin yksikk”vektorit ovat i, j ja k eli samat
+   kuin avaruuden yksikk”vektorit.
+
+   Kaikki 3d-operaatiot ovat matriisitekniikalla matriisien
+   kertolaskua tai matriisin ja vektorin kertolaskua.
+
+
+ 2.3 Objektimatriisin py”ritt„minen
+
+   Objektia py”ritett„ess„ kerrotaan objektimatriisi n„ill„
+   matriiseilla j„rjestyksess„ X, Y, Z tai tarpeen mukaan.
+
+   X-akselin ymp„ri:
+     Ú             ¿
+     ³   1   0   0 ³
+     ³   0  cx  sx ³
+     ³   0 -sx  cx ³
+     À             Ù
+   Y-akselin ymp„ri:
+     Ú             ¿
+     ³  cy   0 -sy ³
+     ³   0   1   0 ³
+     ³  sy   0  cy ³
+     À             Ù
+   Z-akselin ymp„ri:
+     Ú             ¿
+     ³  cz  sz   0 ³
+     ³ -sz  cz   0 ³
+     ³   0   0   1 ³
+     À             Ù
+   cx, sx, cy, sy, cz ja sz tarkoittavat tietysti ao. akse-
+   lien ymp„ri py”ritett„vien kulmien kosineja ja sinej„ (KUVIA
+   en sent„„n ripannut otmmatx:sta ;)
+
+   N„it„ ei tietenk„„n tarvitse kertoa joka framelle, vaan
+   voimme hiukan prekalkuloida:
+               Ú          ¿   Ú          ¿   Ú                  ¿
+               ³ 1  0  0  ³   ³ cy 0 -sy ³   ³ cy     0  -sy    ³
+     [X]*[Y] = ³ 0  cx sx ³ * ³ 0  1  0  ³ = ³ sx*sy  cx  sx*cy ³
+               ³ 0 -sx cx ³   ³ sy 0  cy ³   ³ cx*sy -sx  cx*cy ³
+               À          Ù   À          Ù   À                  Ù
+                   Ú                  ¿   Ú          ¿
+                   ³ cy     0  -sy    ³   ³  cz sz 0 ³
+     [X]*[Y]*[Z] = ³ sx*sy  cx  sx*cy ³ * ³ -sz cz 0 ³
+                   ³ cx*sy -sx  cx*cy ³   ³  0  0  1 ³
+                   À                  Ù   À          Ù
+                   Ú                                      ¿
+                   ³ cy*cz          cy*sz          -sy    ³
+                 = ³ sx*sy*cz-cx*sz sx*sy*sz+cx*cz  sx*cy ³
+                   ³ cx*sy*cz+sx*sz cx*sy*sz-sx*cz  cx*cy ³
+                   À                                      Ù
+   T„ss„ optimoidussa muodossa on se hyv„ puoli, ett„ py”ritykset
+   toimivat aina oikein (lentokone-esimerkki).
+
+   Py”ritetty objektimatriisi saadaan siis kaavasta
+
+     [O] = [O]*[XYZ].
+
+   HUOM! 3dican versioissa <2.2 v„itettiin virheellisesti ett„
+   trigonometriset funktiot (k„yt„nn”ss„ sini ja kosini) kannattaa
+   taulukoida nopeuttamiseksi. Pentium kuitenkin kalkuloi mainitut
+   funktiot niin vikkel„„n, ettei ole mit„„n j„rke„ tuhlata muistia
+   riitt„v„n suuren taulukon kasaamiseen. Hierarkisilla objekteilla
+   kumulatiivisuus vaatii esimerkiksi aikamoista tarkkuutta. T„ll”in
+   jouduttaisiin varaamaan v„hint„„n megan kokoinen taulukko pelk„lle
+   trigonometrialle, eik„ se tunnu en„„ kovinkaan mielekk„„lt„.
+   Kiitokset vain Paul Nettlelle joka minua valaisi t„ss„ asiassa
+   (tuskin ko. henkil” kuitenkaan lukee t„t„ ;I
+
+
+ 2.4 Kamera
+
+   Kameran saa matriisitekniikalla huomattavasti k„tev„mmin
+   mukaan kuin geometrisissa py”rityksiss„: ei tarvitse tehd„
+   muuta kuin kertoa transformoitu world-matriisi kameramat-
+   riisilla! K„yt„nn”ss„ t„m„ tapahtuu n„in:
+
+     [O] = [O] * [XYZ]
+     [W] = [W] * [O]
+     [W] = [W] * [C],
+
+   miss„ W on world-matriisi (ilmoittaa 3d-maailman orientaation)
+   ja C kameramatriisi.
+
+   HUOM! Muistathan k„ytt„„ *verteksien* transformointiin W-mat-
+   ruusia ja *normaalien* transformointiin O-matriisia (muuten
+   valonl„hteet py”riv„t mukana kun liikutellaan kameraa).
+   Niin, ja jokaiselle objektille tehd„„n sitten luonnollisesti
+   ikioma world-matriisi.
+
+   C-esimerkkikoodista l”ytyy t„ydelliset kamerarutiinit, mukaan
+   lukien kameran liikuttamiseen tarvittavat rutiinit.
+
+   2.4.1 Kameramatriisin generointi vektorin avulla
+
+     Kaj-poju se kyseli ett„ mihin ihmeeseen t„t„ tarvitaan. Mai-
+     nittakoon kaikille, ett„ esim. 3D Studion kamerat on ilmoi-
+     tettu vain suuntavektorilla, jolloin on hiukan hankala alkaa
+     v„s„t„ niill„ mit„„n ilman tiettyj„ matemaattisia operaatioita
+     eli k„yt„nn”ss„ t„m„n kappaleen tietoja :) Ok, asiaan.
+
+     T„m„ on ollut The Big Question monelle pikku 3d-koodaajalle.
+     Itse„nikin aihe kiinnosti sen verran ett„ v„„nsin matikan
+     luennolla mukavan purkkaviritelm„n, johon kului aikaa kolme
+     tuntia. Tuskin olin p„„ssyt valmiiksi, kun vieruskaveri ni-
+     melt„ Jussi Vainionp„„ kys„isi viattomasti: eik”s t„m„ olisi
+     k„tev„mpi tapa? Tutkin h„nen viidess„ minuutissa v„s„„m„„ns„
+     systeemi„ v„h„n aikaa ja tulin siihen tulokseen ett„ paitsi
+     ett„ h„nen tapansa oli selke„mpi, se my”s toimi paremmin X)
+     T„ss„ siis Vainionp„„n Jussin kehitt„m„ tekniikka. Perustuu
+     yksinkertaiseen vektorialgebraan.
+     Kysymyksess„ on siis tapa jolla saadaan generoitua kameralle
+     py”ritysmatriisi, kun tiedet„„n vain vektori jonka suuntaan
+     se osoittaa.
+
+     Pieni ascii-kuva varmasti sekoittaa p„„nne niin ettei kysymyk-
+     sille j„„ sijaa ;D
+     (z = kameran suunta, y = kameran pysty, j = maailman pysty,
+     (j piste z)*z = j:n projektio z:lla)
+
+                  ^            _ z
+                  | \          /|
+                  |   \y     /
+                 j|     \_ /
+                  |      /|
+                  |    /
+                  |  / (j piste z)*z
+                  |/
+
+     Sivuhuomautus: en viitsinyt kehitell„ tuosta 3d-kuvaa, jossa
+     olisi ollut kameran x-akseli mukana ;I
+     Maailman pystyvektori j on tiedossa: (0,1,0). Lasketaan j:n
+     z:n suuntainen komponentti (j piste z)*z, ja v„hennet„„n se
+     j:st„, jolloin tuloksena on y:
+
+       y = j - (j piste z)*z.
+
+     (vektoriprojektio on k„sitelty kappaleessa 1.1.6).
+     Kaavahan on ilmiselv„ ja kuvan tilanteesta suoraan johdetta-
+     vissa. Se viel„p„ sievenee johtuen j:n erikoislaatuisesta
+     luonteesta:
+
+       (yx,yy,yz) = (0,1,0) - (0*zx+1*zy+0*zz)*(zx,zy,zz)
+                  = (0,1,0) - (zy*zx,zy*zy,zy*zz)
+                  = (-zy*zx,1-zy*zy,-zy*zz)
+
+     Kun t„m„ viel„ normalisoidaan, saadaan kameramatriisin lopul-
+     linen y-vektori (vektorin normalisointi ks. 1.1.3). Z-vektori
+     oli tiedossa, mutta sekin pit„„ normalisoida. Lopulta saadaan
+     x-vektori y:n ja z:n ristitulona (huom. j„rjestys):
+
+       x = y risti z.
+
+     X-vektoria ei tarvitse normalisoida jos y ja z olivat jo yksik-
+     k”vektoreita.
+
+     Lopuksi sijoitetaan vektorit matriisiin kuten matriisitekniikan
+     johdantokappaleessa on n„ytetty.
+
+
+ 2.5 Pisteen transformointi objektimatriisilla
+
+   Nyt tarvitsee en„„ transformoida kaikki pisteet t„ll„
+   saadulla matriisilla, ja objektin liikuttaminen on selv„!
+   Transformointi voidaan tehd„ helposti luvun 1.9 esitt„m„ll„
+   tavalla, tosin pisteen koordinaatteja pidet„„n t„ll”in
+   vektorin i:n, j:n ja k:n kertoimina:
+
+     X = X0*a + Y0*e + Z0*i + center_x
+     Y = X0*b + Y0*f + Z0*j + center_y
+     Z = X0*c + Y0*g + Z0*k + center_z
+
+   T„h„n tarvitaan siis yhdeks„n kertolaskua ja yhdeks„n
+   yhteenlaskua.
+
+   Pseudoa lapsukaisille (py”ritet„„n pistett„ matriisitek-
+   niikalla x-akselin ymp„ri):
+
+     - tm (transformation matrix), om (object matrix),
+       wm (world matrix) (3,3)-kokoisia liukulukutaulukoita
+     - (xp,yp,zp) alkup. piste, (x,y,z) py”ritetty piste
+     - ox, oy, oz objektin keskipisteen koordinaatit
+     - ORIGO_X, ORIGO_Y ruudun keskipisteen koordinaatit
+
+     reset_matrix(om) ; objektimatriisi nollataan vain alussa
+
+     xa,ya,za = 1*PI/180; radiaaneina 1 aste; py”rityskulmat
+     ox = 0 ; objekti SCALE yksik”n p„„h„n z-akselille
+     oy = 0
+     oz = SCALE
+     xp = 50
+     yp = 0
+     zp = 30
+
+     looppaa joka framelle:
+
+       reset_matrix(tm)
+       reset_matrix(wm)
+
+       tm[0,0] = cos(xa)*cos(za)
+       tm[0,1] = cos(ya)*sin(za)
+       tm[0,2] = -sin(ya)
+       tm[1,0] = sin(xa)*sin(ya)*cos(za)-cos(xa)*sin(za)
+       tm[1,1] = sin(xa)*sin(ya)*sin(za)+cos(xa)*cos(za)
+       tm[1,2] = sin(xa)*cos(ya)
+       tm[2,0] = cos(xa)*sin(ya)*cos(za)+sin(xa)*sin(za)
+       tm[2,1] = cos(xa)*sin(ya)*sin(za)-sin(xa)*cos(za)
+       tm[2,2] = cos(xa)*sin(ya)
+
+       matrix_mul(om,tm) ; transformoidaan objektimatriisi
+       matrix_mul(wm,om) ; samat world-matriisille
+
+       ; py”ritet„„n pistett„
+       x = xp*wm[0,0] + yp*wm[1,0] + zp*wm[2,0] + ox
+       y = xp*wm[0,1] + yp*wm[1,1] + zp*wm[2,1] + oy
+       z = xp*wm[0,2] + yp*wm[1,2] + zp*wm[2,2] + oz
+
+       x = x * SCALE / z + ORIGO_X ; 2d-transformointi
+       y = y * SCALE / z + ORIGO_Y
+
+       putpixel(x,y)
+
+     „l„_en„„_looppaa
+
+   HUOM! Objekti py”rii tasaisesti kun kulmaa ei muuteta, eli
+   se lopettaa py”rimisen vasta kun kulmaksi annetaan nolla.
+   Miksik”? You see, objektimatriisia ei resetoida miss„„n eli
+   se py”rii aina yhden asteen / frame, jos kulma pysyy ennallaan.
+
+
+ 2.6 Hierarkiset transformaatiot
+
+   Juu, *t„m„kin* on otmmatx:sta, enk„ edes keksinyt parempaa
+   suomenkielist„ nime„ tuolle otsikolle (englanninkielinen
+   vastinehan kuuluu "hierarchical transformations" :I
+
+   Oletko koskaan miettinyt, miten on toteutettu pelit, joissa
+   on (vektoripohjaisia) tyylikk„„sti liikkuvia ihmism„isi„
+   objekteja (Tomb Raider, Quake, mechailut, ...)? Homma hoituu
+   hierarkisilla transformaatioilla.
+     Otetaan esimerkiksi ihmisen k„si. Kun py”rit„t k„tt„
+   olkap„„st„ asti ymp„ri, my”s ranne, k„mmen ja sormet py”riv„t.
+   Jos taas py”rit„t k„mment„, k„si ei py”ri ranteesta yl”sp„in
+   mutta sormet py”riv„t. K„den osat ovat siis hierarkisesti
+   riippuvaisia: k„mmen voi antaa komentoja sormille, muttei
+   ranteelle, eli se on hierarkisessa j„rjestyksess„ n„iden
+   v„liss„. Samaan tapaan voidaan jakaa linkitettyyn listaan
+   kaikki ruumiinosat.
+     Hierarkisessa systeemiss„ objekti on siis jaettuna osiin,
+   ja eri osat ovat riippuvaisia toisista osista. Mutta miten
+   t„m„ sitten toteutetaan?
+     Jatketaan k„siesimerkill„. Ranteen matriisi on [R], k„mmenen
+   [K] ja sormien [S1], [S2], [S3], [S4] sek„ [S5], ja ne
+   sijaitsevat linkitetyss„ listassa seuraavasti:
+
+                       [R]
+                        ³
+                ÚÄÄÄÂÄÄ[K]ÄÄÄÂÄÄÄ¿
+                ³   ³   ³    ³   ³
+             [S1] [S2] [S3] [S4] [S5]
+
+   (hieno kuva, vaikka itse sanonkin :)
+   Ranteen transformointi, kuten muistamme, tapahtuu n„in:
+
+     [R] = [R]*[Xr]*[Yr]*[Zr]*[Tr].
+
+   K„mmen pit„„ siis oman liikkeens„ lis„ksi transformoida
+   samalla kaavalla,
+
+     [K] = [K]*[Xk]*[Yk]*[Zk]*[Tr]*[R],
+
+   ja sormet kaavalla
+
+     [S?] = [S?]*[Xs?]*[Ys?]*[Zs?]*[Tr]*[K].
+
+   HUOM! Jotta n„it„ kaavoja voi k„ytt„„, pit„„ jonossa edellinen
+   matriisi olla valmiiksi transformoitu, eli laskemisj„rjestys on
+   "nokkimisj„rjestys": linkitetyss„ listassa ylh„„lt„ alas.
+
+
+
+
+3. Erilaisia polygonifillej„
+----------------------------
+
+
+ Piste py”rii nyt siis ruudulla, mutta alkaa pidemm„n p„„lle
+ n„ytt„„ aika tyls„lt„, joten jotain j„re„mp„„ olisi kiva saada
+ aikaan. T„ss„ astuvat kuvaan polygonit. K„sittelen enimm„kseen
+ kolmioita, n-kulmiotekniikasta on mukana vain idea.
+
+
+ 3.1 Flat-kolmio
+
+   Haluamme piirt„„ seuraavan kolmion:
+
+                   a
+                  /|
+                /  |   <-yl„osa
+              /     |
+          b /_______|     <- huom
+            \        |
+              \      |
+                \     |  <-alaosa
+                  \   |
+                    \  |
+                      \|
+                       c
+
+   Pelk„st„„n t„t„ kuviota katselemalla pit„isi saada aikaan
+   t„ydellinen kolmiofilleri. Jos ongelmia (tai laiskuutta :)
+   kuitenkin ilmenee, idea on seuraava:
+     Interpoloi a.x:„„ niin ett„ se liukuu a.x:st„ b.x:„„n
+   (b.y-a.y) askeleessa. Interpoloi a.x:„„ my”s niin, ett„ se
+   liukuu a.x:st„ c.x:„„n (c.y-a.y) askeleessa. Sitten liiku
+   a.y:st„ b.y:hyn lis„ten joka askelella yhden y-koordinaattiin
+   ja interpoloiden „skeisi„ arvoja sek„ vetelem„ll„ vaakaviivoja
+   liu'utettavien x-arvojen v„liin. N„in olet piirt„nyt kolmion
+   yl„osan. Sitten vain sama homma b.y:st„ c.y:hyn, niin
+   alaosakin piirtyy.
+
+   Voisi olla fiksua mietti„ ja koodata t„m„ kohta itse, ilman
+   seuraavan pseudop„tk„n apua, jotta idea menisi kunnolla
+   kaaliin ja my”hemm„t interpoloinnit etc selkiytyisiv„t parem-
+   min, joten suosittelen sen yli hypp„„mist„ kunnes olet ymm„r-
+   t„nyt interpoloinnin idean (selitetty alla).
+
+   ** begin triangle **
+
+     - koordinaatit ovat (x1,y1), (x2,y2), (x3,y3),
+     - x, y ovat kolmen alkion taulukoita samaa tyyppi„ kuin
+       koordinaatit,
+     - a on apumuuttuja,
+     - delta_x, delta_y ovat kolmen alkion taulukoita samaa tyyppi„
+       kuin koordinaatit,
+     - d on kolmen alkion taulukko reaalilukutyyppi„.
+
+     < j„rjestet„„n x- ja y-taulukkoon pisteet siten, ett„
+       (x[0],y[0]):ssa on piste, jonka y-koordinaatti on pienin,
+       (x[1],y[1]):ssa toiseksi pienin ja viimeisess„ suurin >
+
+     delta_x[0] = x[1]-x[0]
+     delta_y[0] = y[1]-y[0]
+     delta_x[1] = x[2]-x[1]
+     delta_y[1] = y[2]-y[1]
+     delta_x[2] = x[0]-x[2]
+     delta_y[2] = y[0]-y[2]
+
+     for (a=0 -> 2)
+       jos (delta_y[a] ei ole nolla)
+         d[a] = delta_x[a] / delta_y[a]
+       muussa tapauksessa
+         d[a] = 0
+       endjos
+     endfor
+
+     for (a=y[0] -> y[1])
+       horizline( x[0] + (a-y[0]) * d[0], x[0] + (a-y[0]) * d[2], a, color )
+     endfor
+
+     for (a=y[1] -> y[2])
+       horizline( x[1] + (a-y[1]) * d[1], x[0] + (a-y[0]) * d[2], a, color )
+     endfor
+
+   ** end triangle **
+
+   ** begin horizline **
+
+     - a on apumuuttuja
+
+     for (a=x1 -> x2)
+       putpixel(a, y, color)
+     endfor
+
+   ** end horizline **
+ 
+
+   ..„n ti ikspl„neiss”n:
+
+   Kohta joka luultavasti ihmetytt„„ on koodin ensimm„inen looppi,
+   jossa m„„ritell„„n d:n arvot. Mik„ ihmeen dee? Katsotaanpas...
+     Horizline-loopeissa d:t„ n„yt„„n k„ytt„v„n x-koordinaattien
+   m„„ritt„miseen. Hmm... Kun ollaan viimeist„ kertaa ensimm„i-
+   sess„ silmukassa, eli a = y[1], kutsuttaessa horizline„ ensim-
+   m„inen x-koordinaatti n„kyy saavan arvon
+
+       x[0] + (y[1]-y[0]) * d[0])
+     = x[0] + (y[1]-y[0]) * (x[1]-x[0]) / (y[1]-y[0]).
+
+   Lausekkeesta supistuvat (y[1]-y[0]:t pois, ja j„ljelle j„„
+
+     x[0] + x[1] - x[0] = x[1],
+
+   eli kun y-koordinaatti on y[1], x-koordinaatti on vastaavasti
+   x[1], mik„ lienee melko j„rkev„„. Ahaa! d on siis jonkinlainen
+   kerroin, jonka avulla x- ja y-koordinaatti suhteutetaan
+   toisiinsa! Very, VERY smart, I'd say!
+     T„m„ on nyt sitten sit„ interpolointia: x- ja y-koordinaatit
+   suhteutetaan toisiinsa siten, ett„ kun y:t„ lis„t„„n yhdell„,
+   x:„„ lis„t„„n sellaisella luvulla, ett„ y:n saavuttaessa loppu-
+   arvonsa my”s x saavuttaa omansa, eli suomeksi: lineaarinen
+   interpolaatio on yhden arvon liu'uttamista tasaisesti toiseen.
+
+   Esim. Interpoloikaamme arvo 0 arvoon 4 seitsem„ss„ askeleessa.
+
+     Askel   Arvo
+
+     0       0.00
+     1       0.57
+     2       1.14
+     3       1.71
+     4       2.29
+     5       2.86
+     6       3.43
+     7       4.00
+
+   Kuten varmasti huomasitkin, arvo kasvaa 4/7:lla joka askeleel-
+   la, eli arvo on funktio
+
+     f(X) = X0 + X*(4/7).
+
+   Yleinen funktio lineaariseen interpolointiin on siis
+
+     f(X) = A + X*((B-A)/steps),
+
+   miss„ liu'utaan A:sta B:hen steps m„„r„ss„ askeleita, ja f'(X)
+   (f(X):n derivaatta) eli f(X):n kasvunopeus on (B-A)/steps.
+
+   Eli jos meill„ on looppi
+
+     for (y=10 -> 20)
+       x=f(y)
+       piste(x,y)
+     endfor
+
+   eli
+
+     for (y=10 -> 20)
+       x=a+x((b-a)/steps)
+       piste(x,y)
+     endfor,
+
+   se voidaan esitt„„ my”s muodossa
+
+     x=a
+     for (y=10 -> 20)
+       piste(x,y)
+       x=x+f'
+     endfor
+
+   eli
+
+     x=a
+     for (y=10 -> 20)
+       piste(x,y)
+       x=x+(b-a)/steps
+     endfor.
+
+   N„in olemme n„pp„r„sti optimoineet yhden addin, yhden
+   kertolaskun, yhden jakolaskun ja yhden miinuslaskun yhteen
+   ainoaan pluslaskuun (koska (b-a)/steps on vakio, sen voi
+   laskea etuk„teen l. prekalkuloida).
+
+   Yll„oleva pseudokoodi ei ota huomioon sit„, ett„ polygoni
+   saattaa olla osittain tai kokonaan reunojen ulkopuolella.
+   Horizline ei my”sk„„n osaa aavistaakaan, ett„ sille saattaa
+   tulla ensimm„isen„ x-arvona suurempi kuin j„lkimm„inen, jolloin
+   loopista tulee *hyvin* pitk„.
+     Tarttis varmaan tehr„ jotain, ja se jotain olisi sitten niin
+   kuin klippaukset ja parit xchg:t. Klippaukset on helppo tyrk„t„
+   horizline-rutiiniin (huomattavaa on my”s, ett„ mik„li klippauk-
+   set ovat gouraud- tai texture-filleriss„, on muistettava p„i-
+   vitt„„ u:ta ja v:t„ tai gouraudin v„riarvoja oikeissa paikoissa):
+
+   ** begin horizline **
+
+     - a on apumuuttuja
+     - max_x on ruudun leveys
+
+     jos y>max_y tai y<0
+       ei_sitten_piirret„k„„n
+     endjos
+     jos x1 suurempi kuin x2
+       eXCHanGe(x1,x2)
+     endjos
+     jos x1 pienempi kuin nolla
+       x1 = 0
+     jos taas x1 suurempi kuin max_x
+       ulostaudu_rutiinista
+     endjos
+     jos x2 pienempi kuin nolla
+       ulostaudu_rutiinista
+     muussa tapauksessa jos x2 suurempi kuin max_x
+       x2 = max_x
+     endjos
+     for (a=x1 -> x2)
+       putpixel(a, y, color)
+     endfor
+
+   ** end horizline **
+
+   Ja viel„ pikku huomautus: jos k„yt„t 3d-klippauksia, voit
+   tietysti unohtaa n„m„ polygonirutiinissa tapahtuvat klip-
+   paukset tyystin, ja s„„st„„ siis kohtalaisen paljon las-
+   kettavaa. Suosittelen.
+
+   Wauziwau. Siin„ siis kaikessa yksinkertaisuudessaan
+   kolmionpiirt„misen idea, mutta optimoitavaa tuostakin toki
+   l”ytyy. Hauskoja hetki„ vain optimisaation parissa, sill„
+   t„m„h„n on se kaikkein eniten aikaa viev„ osa koko
+   3d-enginess„.
+
+   3.1.1 Fixed point
+
+     T„m„ oli jotenkin luonnollisinta laittaa interpoloinnin
+     j„lkeen, vai mit„ mielt„ olette?-)
+       Aina ei ole j„rkev„„ k„ytt„„ liukulukuja. T„ll”in,
+     esimerkiksi tarvittaessa jakolaskuja, kannattaa joskus ottaa
+     fixed point, jossa esim. 32-bittist„ lukua k„sitell„„n niin,
+     ett„ 16 ylint„ bitti„ ovat luvun kokonaislukuosa ja alimmat
+     16 bitti„ desimaaliosa. Mitenk” t„m„ onnistuu? Helppoa:
+     ensin siirret„„n 32-bittiseen muuttujaan jaettava, sitten
+     kerrotaan se 2^16:lla eli siirret„„n jaettava luvun 16
+     ylimm„ksi bitiksi, ja lopuksi jaetaan jakajalla.
+     Tuloksesta saadaan 2^16 kertaa liian suuri, mutta sikapaljon
+     tarkempi kuin normaalilla kokonaislukujen jakolaskulla,
+     juuri niiden 16 desimaalibitin ansiosta.
+       Nyt sitten operoidaan t„ll„ luvulla, ja muistetaan kertoa
+     kaikki muutkin samassa yhteydess„ tarvittavat luvut
+     2^16:lla, ja kun ollaan valmiita ja tulos pit„isi esitt„„
+     (esim. polygonirutiinissamme pikseli ruutuun), muistetaan
+     viel„ jakaakin, yll„tys yll„tys, 2^16:lla (tuosta 2^16:sta
+     pit„„ kyll„ tehd„ makro -- shift-f1 ;)
+       Fixed pointtia k„ytt„v„ pseudokoodiesimerkki l”ytyy alta,
+    kappaleesta 3.2 (eli IHAN alta :)
+
+
+ 3.2 Gouraud-kolmio
+
+   Gouraud-kolmion ja flat-kolmion piirt„misen idea on pitk„lti
+   sama. Gouraud-rutiinille ilmoitetaan vain kolme arvoa enemm„n
+   (jokaisen kulman v„riarvo), ja rutiini interpoloi sitten niiden
+   v„lill„ piirt„en kauniin varjostetun kolmion. Flat-kolmio
+   k„ytti yksinkertaista interpolaatiota, gouraudiin tarvitaan
+   kolminkertainen (interpoloidaan x:n ja y:n, v„riarvon ja y:n
+   sek„ v„riarvon ja x:n v„lill„).
+     Piirrett„ess„ gouraud-kolmio flat-kolmioon lis„t„„n vain
+   kaksi uutta osiota. Horizline-rutiini muuttuu monimutkaisem-
+   maksi v„rin ja x:n v„lisen interpolaation my”t„, mutta itse
+   p„„rutiini s„ilyy suurin piirtein samanlaisena.
+     Gouraud-kolmiosta en esit„ t„sm„llist„ pseudoversiota, vaan
+   jokainen saa itse kehitell„ sen vinkkien pohjalta. N„yt„n
+   kuitenkin t„rkeimm„t kohdat.
+     Ensimm„inen outer loop uusitusta p„„rutiinista:
+
+     - c[0] on (x[0],y[0]):n v„riarvo
+     - dc:t lasketaan d:n tapaan mutta interpoloimalla c:n ja
+       y:n eik„ x:n ja y:n v„lill„
+
+     for (a=y[0] -> y[1])
+       gouraud_horizline( x[0] + (a-y[0]) * d[0],  x[0] + (a-y[0]) * d[2],
+                          c[0] + (a-y[0]) * dc[0], c[0] + (a-y[0]) * dc[2],
+                          a )
+     endfor
+
+   Gouraud-horizline fixedpointilla ja ilman klippauksia:
+
+     - dc on 32-bittist„ kokonaislukutyyppi„
+
+     < vertailu: onko x1 suurempi kuin x2? Jos on, vaihda sek„ x1
+       ja x2 ett„ c1 ja c2 >
+     dc = ((c2-c1)*65536)/(x2-x1)
+     for (a=x1 -> x2)
+       putpixel(a,y,c1+((a-x1)*dc)/65536)
+     endfor
+
+   Sulkuja tarvitaan noin paljon jotta laskutoimitukset tulisivat
+   varmasti oikeassa j„rjestyksess„ (jotkut k„„nt„j„t aloittavat
+   lausekkeen purkamisen oikealta).
+
+   T„h„nkin voisi ottaa derivaatan k„sitteen, eli c1+((a-x1)*dc):n
+   derivaatta eli kasvunopeus on dc. N„in p„„semme eroon kaikista
+   kertolaskuista, ja saamme gouraudin interpolaatiosan hilpe„sti
+   yhteen addiin:
+
+     c1=c1*65536 ; HUOM!
+     for (a=x1 -> x2)
+       putpixel(a,y,c1/65536) ; HUOM!
+       c1=c1+dc
+     endfor
+
+   Itse asiassa onkin muuten ep„selvemp„„ mietti„k„„n koko
+   c1+((a-x1)*dc)-k„sitett„, sill„ tuo on varsin selv„, tuttu
+   jo edellisest„ interpolointi-esimerkist„, jossa interpoloitiin
+   arvo 0 arvoksi 4 seitsem„ss„ askeleessa. Tuo looppi siis
+   liu'uttaa arvon c1 arvoksi c2 (x2-x1) askeleessa. Voiko t„t„
+   en„„ helpommaksi tehd„? ;)
+
+   Nyt lienee pikainen sana optimoinnista paikallaan, jotta kaikki
+   p„„sev„t hieman sen makuun :) Assya osaat tietysti, mill„ sin„
+   muuten luulet nopeaa vektorigrafiikkaa koodaavasi?-)
+     Kuten huomaatte, tuossa yll„olevassa esimerkiss„ joudutaan
+   jakamaan 65536:lla, ja jakolasku on tunnetusti varsin hidas
+   operaatio jos sit„ tehd„„n paljon (tosin esim. djgpp optaa 2:n
+   potensseilla jakamiset sareiksi). Nopeinta j„lke„ saa aikaan
+   k„ytt„m„ll„ hyv„ksi iki-ihanaa carry-lippua:
+
+   Meill„ on kaksi 16-pittist„ muuttujaa, rekisteri„ if you wish.
+   (Vaihtoehtoisesti voi olla yksi 8-bittinen ja toinen 16-bittinen,
+   jos haluamme s„„st„„ rekistereit„ ja tyyty„ 8 bitin desimaali-
+   osaan.)
+
+     < dx = c1:n desimaaliosa, eli 32-bittisen fixedpoint-luvun 16
+     alinta bitti„, bx = c1:n kokonaislukuosa, yli ylimm„t piltit. >
+
+   loopissa:
+     add dx,[adderin_desimaali_osuus]
+     adc bx,[adderin_kokonaisluku_osuus]
+
+   Ai miksik” noin? Kun ylempi k„sky py”r„ytt„„ dx:n ymp„ri, carry
+   -lippu menee p„„lle, ja dx:n arvoksi j„„ yhteenlaskun alimmat
+   16 bitti„. adc-k„skyss„ lis„t„„n bx:„„n kokonaislukuosa ja yksi
+   ylim„„r„ist„, jos desimaaliosuus ylitti luvun 2^16-1 eli 0.999...
+   (eli jos siis carry-lippu on p„„ll„).
+   N„in bx:ss„ on sitten pelkk„ kokonaislukuosuus, joten emme joudu
+   edes shiftaamaan.
+     Toinen vaihtoehto olisi .8-fixedpointilla toteutus:
+
+     < ax=16-bittinen fixedpoint-luku  (=alkuper„inen c1*256) >
+
+   loopissa:
+     mov [ruutu+ruutupos],ah ;ah = kokonaislukuosa.
+     add ax,[fixed_inkkaaaja]
+
+   N„in 256:lla jakaminen k„y ihan ilmaiseksi (ah:ssa on ax:n 8
+   ylint„ bitti„).
+
+   T„t„ ideaa voi laajennella hyvin, hyvin paljon, esimerkiksi niin,
+   ett„ yhdess„ rekisteriss„ interpoloidaan useampaa arvoa etc.
+
+
+ 3.3 Texture-kolmio
+
+   K„sittelyss„ lineaarinen texturemappaus ilman perspektiivi-
+   korjausta. Perspektiivikorjaamaton mappaus toimii aika
+   mukavasti objekteilla joissa ei ole isoja polygoneja. T„ll”in
+   texturen v„„ristymist„ ei huomaa, eli klassisen mappauksen
+   k„ytt” lienee t„ss„ tapauksessa perusteltua. Perspektiivi-
+   korjausta tarvitaan kuitenkin useimmissa 3d-systeemeiss„.
+
+   Anyway, asiaan:
+   Ja j„lleen interpolointi-ideaa kehitell„„n: nyt on vuorossa
+   texturemappaus. Ja j„lleen kerran idea on sama, vain kaksi
+   interpoloitavaa lis„„ eli yhteens„ viisinkertainen inter-
+   polaatio. Texturemappauksessa interpoloidaan x:n ja y:n,
+   u:n ja y:n, v:n ja y:n, u:n ja x:n sek„ v:n ja x:n v„lill„
+   (u ja v ovat pisteit„ bittikartta-avaruudessa).
+     Tilanne on "helpoin" (lainausmerkit varmaan ymm„rr„tte :I
+   hahmottaa seuraavanlaisesta kuviosta:
+
+          (x1,y1)           (u1,v1)_________________(u2,v2)
+          /\                      |    /(au2,av2) /
+         /   \                    |  /          /
+ (ax1,y)/------\(ax2,y)           |/          /
+       /         \                |(au1,av1)/
+      /____        \              |       /
+  (x3,y3)  -----_____\            |     /
+                   (x2,y2)        |   /
+                                  | /
+                                 (u3,v3)
+
+   Vasemmanpuoleinen kuvio on siis ruudulle piirtyv„ kolmio,
+   johon on piirretty yksitt„inen "scanline" eli yhden outer
+   loopin tulos, yksi horizlinen kutsu. Oikeanpuoleinen kuvio
+   vastaa kolmiota bittikartta-avaruudessa, ja sama scanline
+   on merkitty siihenkin toiselta kantilta katsottuna.
+     Texturemappausrutiinissa ei siis tarvitse kuin inter-
+   poloida, interpoloida ja viel„ kerran interpoloida; helppo
+   homma gouraud-rutiinin ymm„rt„neelle (itse v„„nsin
+   gouraudin j„lkeen texturemappauksen -- tosin ilman pers-
+   pektiivikorjausta -- yhdess„ p„iv„ss„)!
+     Ai ett„ koodia kaipaisitte? No way:
+   a) koodi on niin samanlaista kuin gouraudissa ja flat
+      -kolmiossa, ett„ sit„ olisi tyls„ kirjoittaa t„h„n
+      uudelleen ja
+   b) pit„„h„n sit„ jotain itsekin tehd„ ;)
+
+   Mutta kuten sanottu, e-mail toimii jos olet keskim„„r„ist„
+   typer„mpi yksil” ;)
+
+   Optimointivinkki: gouraudissa v„rideltat ja texturessa (u,v)
+   -koordinaattien deltat s„ilyv„t vakioina, joten niit„ ei tarvitse
+   laskea kuin kerran / poly. Toki kannattaa mietti„, mist„ sen
+   deltan ottaa ;)
+   Otetaan esimerkiksi lineaarisen (=klassisen) texturemappauksen
+   u-delta. Kuten tied„mme, hliness„ u1 pit„„ interpoloida u2:ksi
+   (x2 - x1):ss„ askeleessa. Tarvitsemme u-deltan (ku, u-kulmaker-
+   roin), joka on siis koko polygonin ajan vakio.
+   Eli sen sijaan ett„ laskisimme joka hlinelle
+   (h_ tarkoittaa ett„ kyse on hlinen muuttujista)
+
+     h_ku = (h_u2 - h_u1) / (h_x2 - h_x1),
+
+   toimimme polygonin setup-osassa seuraavasti:
+   Tied„mme, ett„
+
+     h_u2 = u2 = u1 + (y2 - y1) * ku2,
+     h_u1 =      u1 + (y2 - y1) * ku1,
+     h_x2 = x2 = x1 + (y2 - y1) * kx2,
+     h_x1 =      x1 + (y2 - y1) * kx1,
+
+   KUN y=y2 (eli y on kolmion toisen verteksin y). T„m„ n„hd„„n
+   helposti esimerkiksi kolmion toisen osan setupista.
+   Kun sijoitamme u-deltan h_ku lauseeseen
+
+     h_ku = (h_u2 - h_u1) / (h_x2 - h_x1)
+
+   muuttujille h_u2, h_u1, h_x2 ja h_x1 lasketut arvot kohdassa
+   y=y2, saamme deltalle lausekkeen
+
+             [u1 + (y2 - y1) * ku2] - [u1 + (y2 - y1) * ku1]
+     h_ku = -------------------------------------------------
+             [x1 + (y2 - y1) * kx2] - [x1 + (y2 - y1) * kx1]
+
+           (y2 - y1) * (u1 - u1 + ku2 - ku1)
+        = -----------------------------------
+           (y2 - y1) * (x1 - x1 + kx2 - kx1)
+
+           ku2 - ku1
+        = -----------,
+           kx2 - kx1
+
+   eli siis selke„mmin
+
+                        outerloopUdelta2-outerloopUdelta1
+     innerloopdeltaU = -----------------------------------.
+                        outerloopXdelta2-outerloopXdelta1
+
+   Nice! Mutta ent„ jos kx2 = kx1? T„m„h„n tietysti tarkoittaa,
+   ett„ polygoni on k„yt„nn”ss„ viiva, joten on aivan yhdentekev„„
+   mit„ ku:ssa on; nolla k„y oikein hyvin. Vastaavasti voidaan
+   yo. kaavaa muuten k„ytt„„ my”s v:n tapauksessa.
+   HUOM! Kokonaislukujen ollessa kyseess„ pit„„ luonnollisesti
+   k„ytt„„ fixed pointtia riitt„v„n tarkkuuden takaamiseksi!
+
+   Optimointivinkki #2: Hline-rutiinissa ei tarvitse verrata x:n
+   arvoja toisiinsa vaan x1 on aina pienempi kuin x2, jos
+   kolmiorutiinissa tutkitaan kulmakertoimia (eli d:n arvoja)
+   y1:st„ y2:een (d[0]), y1:st„ y3:een (d[2]) ja y2:sta y3:een
+   (d[1]) sek„ annetaan hlinen ensimm„iseksi parametriksi
+   seuraavat arvot: interpoloitaessa y1:st„ y2:een suurempikulma-
+   kertoiminen, y2:sta y3:een pienempikulmakertoiminen tekij„.
+
+
+   3.3.1 Perspektiivikorjauksen periaate
+
+     Aloitetaan esimerkill„: 3d-starfieldin toiminta. Otetaan
+     piste (1,1,3000), josta haluamme liikkua tasaisesti
+     pisteeseen (1,1,1). T„m„ onnistuu tietysti interpoloimalla
+     z-koordinaattia lineaarisesti: nyt piirtyy 3d-avaruuteen
+     kaunis suora viiva, joka 2d-n„yt”lle transformoitaessa
+     muuttuukin yll„tt„en k„yr„ksi. Mit„s jos haluamme liikkua
+     t„m„n v„lin siten, ett„ se n„ytt„„ *ruudulla* suoralta
+     viivalta? Pit„„ tietysti k„ytt„„ 2d-koordinaattien
+     lineaarista interpolointia. 3d->2d -transformointikaavathan
+     ovat seuraavat:
+
+       x_2d = x/z,
+       y_2d = y/z.
+
+     Esimerkkitapauksessamme x ja y ovat molemmat ykk”si„, eli
+     kaavamme sievenev„t muotoon
+
+       x_2d = 1/z,
+       y_2d = 1/z.
+
+     N„in olemme saaneet selville, ett„ jos haluamme 3d-k„yr„n
+     n„ytt„v„n ruudulla suoralta, pit„„ interpoloida z:n k„„nteis-
+     arvoa eik„ z:aa itse„„n. My”skin huomaamme, ett„ jos z pysyy
+     vakiona, 'perspektiivin korjaamista' ei tarvita.
+
+     Mitenk” t„m„ texturemappaukseen liittyy -- texture-kolmiohan
+     l„nt„t„„n jo 2d:hen transformoitujen koordinaattien varaan?
+     Kyll„, *3d-maailman* koordinaatit on transformoitu n„yt”lle,
+     mutta miten on *texture-avaruuden* eli k„yt„nn”ss„ bittikar-
+     tan kanssa? Kyll„, se on 2d-taso jota ei tunnu j„rkev„lt„
+     en„„ uudelleen v„„nt„„ (tai siis suoristaa :) 2d:hen, mutta
+     kokeile itse klassista texturemappausta ja tule sen j„lkeen
+     sanomaan ett„ texture-kolmiosi liittyv„t toisiinsa saumatto-
+     masti -- ja kerro minulle tekniikka jolla teit sen ;)
+     Tarttis tehr„ jotain j„lleen kerran. Mitenk„s olis jos
+     teht„iski se n„in:
+
+       u_2d = u/z,
+       v_2d = v/z.
+
+     Ei, homma ei todellakaan ole t„ll„ selv„. Nyt lineaarinen
+     interpolointi n„ytt„„ ruudullakin lineaariselta, mutta
+     eiv„th„n nuo ole ne koordinaatit joita kaipasimme esitt„m„„n
+     bittikartta-avaruuden koordinaatteja; (u,v) olisi sopivampi
+     koordinaattipari. Hey! Nyt keksin! Interpoloidaan my”s
+     1/z:aa (z_2d) lineaarisesti, ja toimitetaan jokaiselle
+     pikselille seuraava opereiss”ni (operatsioone jos on
+     italialaisia lukijoita):
+
+       u_bitmap = u_2d / z_2d,
+       v_bitmap = v_2d / z_2d eli
+
+       u_bitmap = (u/z) / (1/z),
+       v_bitmap = (v/z) / (1/z) eli
+
+       u_bitmap = u,
+       v_bitmap = v!
+
+     Tuloksena ovat siis juuri haluamamme koordinaatit ja viel„
+     oikein interpoloituina! K„tev„ systeemi, etten sanoisi.
+     Mutta hidas. Ah niin sikamaisen hidas. Vaatimattomat kaksi
+     jakolaskua per PIKSELI X) Ei auta itku markkinoilla jos
+     *h„t„* yll„tt„„, mutta kyll„ se keinot keksii vaikka ylei-
+     nen vessa olisikin varattu.
+     Suomeksi, optimointikeinoja l”ytyy.
+
+      1) Ei toimiteta t„t„ hankalaa operaatiota joka pikselille,
+         vaan otetaan mallia Quakesta ja k„ytet„„n sit„ vain joka
+         8. tai 16. pikseli sek„ interpoloidaan lineaarisesti eli
+         k„ytet„„n klassista, perspektiivikorjaamatonta tekniik-
+         kaa niiden v„lill„. Eroa ei k„yt„nn”ss„ voi havaita
+         muussa kuin nopeudessa ;)
+
+      2) Toinen jakolasku saadaan pois (tosin tilalle kaksi
+         kertolaskua, mutta joka tapauksessa paaljon nopeampaa)
+         n„in (hlinen loopissa):
+
+           z = 1/z_2d ; z = 1/(1/z) = z
+           u_bitmap = u_2d*z
+           v_bitmap = v_2d*z.
+
+         T„m„h„n ei vaikuta perspektiivikorjaukseen h„iritsev„sti,
+         koska z_2d se kuitenkin on jota interpoloidaan.
+
+   3.3.2 Texturen fittaus objektiin
+
+     Voehan pojaat. Vai ett„ teksturointi ei onnistu kun ei tied„
+     miten texturen fittaisi siihen obuun? Ei se nyt niiin
+     vaikeaa ole... [jurputusta] [marinaa] [uhittelua]
+     No jooh, kai se pit„„ kertoa: otat env-mappauksen py”ritt„-
+     m„tt”mist„ verteksinormaaleista, seivaat n„m„ texturekoor-
+     dinaatit ja k„yt„t niit„ koko ajan vaikka py”rittelisit obua
+     sitten miten tahansa. Olikossenyt niin kamalan vaikeaa?
+     K„yt„nn”ss„:
+
+       - au = verteksin a u-koordinaatti
+       - av = verteksin a v-koordinaatti
+       etc...
+
+       for (a=0 -> face_lkm)
+         face[a].au = normal[ face[a].a ].x / 2 + 127
+         face[a].av = normal[ face[a].a ].y / 2 + 127
+         face[a].bu = normal[ face[a].b ].x / 2 + 127
+         face[a].bv = normal[ face[a].b ].y / 2 + 127
+         face[a].cu = normal[ face[a].c ].x / 2 + 127
+         face[a].cv = normal[ face[a].c ].y / 2 + 127
+       endfor
+
+     Useeraus f”rb„„ sitten t„h„n tapaan:
+
+       super_mega_giga_hieno_texture_rutiini (
+                x1,y1,z1,face[].au,face[].av,
+                x2,y2,z2,face[].bu,face[].bv,
+                x3,y3,z3,face[].cu,face[].cv
+                )
+
+     HUOM! Systeemi sukkaa yhdess„ asiassa: polygonit, joiden
+     normaalina toimii l„hes x- tai y-akseli, saavat huonot uv-
+     koordinaatit t„ll„ systeemill„. Tarttis tehr„ jotain,
+     mutta mit„? Parempia ideoita saa esitt„„.
+
+
+ 3.4 Texture + varjostus
+
+   Texturen ja varjostuksen k„ytt„minen samalla kertaa on
+   kohtalaisen yksinkertaista toteuttaa. Perusideahan on ett„
+   interpoloidaan sek„ texturen ett„ varjostuksen arvoja ja
+   blendataan sitten niit„ sopivassa suhteessa.
+
+   Esimerkki-inneri:
+     - 16-bittinen fixed point
+     - tab = precalcattu taulukko josta l”ytyy texturen ja
+       kulmainterpolaatiophongin arvot
+     - kx, ku, kv, kc kulmakertoimet
+     - tpixel = texture pixel
+     - putpixelin parametrit: x,y,red,green,blue.
+
+     for (a=y1 -> y2)
+       tpixel = tmap[ u/65536 + v/65536*256 ]
+       putpixel( x/65536,a,tab[tpixel,c/65536].r,
+                           tab[tpixel,c/65536].g,
+                           tab[tpixel,c/65536].b )
+       x += kx
+       u += ku
+       v += kv
+       c += kc
+     endfor
+
+   Tab-taulukon esimerkki-precalccaus (ei hilite„):
+
+     for (a=0 -> 255)
+       for (b=0 -> 255)
+         tab[a,b].r = pal[a].r * phong[b].r / 256
+         tab[a,b].g = pal[a].g * phong[b].g / 256
+         tab[a,b].b = pal[a].b * phong[b].b / 256
+       endfor
+     endfor
+
+
+ 3.5 Convex-polygonien tekniikka
+
+   Kyll„, saatte taas nauttia ihanasta asciista! (eik„ yht„„n vinoilla,
+   se on hiano!-) [gawd ett„ min„ odotan sit„ html:„„] (joo, se on vaan
+   kaj „„ness„. -ica ;)
+
+   Haluamme piirt„„ seuraavan viisikulmion:
+
+                        __--\  <- kulma
+                    __--     \
+       kulma -> __--          \
+               /               \
+              /                 \   <- kulma
+             /   "viisikulmio"  /
+   kulma -> \                  /
+              \               /
+                \            /
+                  \         /
+                    \      /
+                      \   /
+                        \/ <- kulma
+
+   L„hden liikeelle siit„ oletuksesta, ett„ olet lukenut ja YMMŽRTŽNYT
+   t„ydellisesti miten piirret„„n kolmio. Samoin kuin siin„, yll„oleva
+   kuva selv„sti paperille piirrettyn„ ei voi johtaa mihink„„n muuhun
+   kuin hienoon filleriin.
+
+   P„„ideana on, ett„ seuraamme ylimm„st„ verteksist„ alimpaan puolta 1
+   ja puolta 2 ja piirtelemme v„liin vaakaviivoja.
+
+    1. Etsimme ylimm„n verteksin, josta aloitamme piirt„misen.
+       Ylin verteksi on sama sek„ puolelle 1, ett„ puolelle 2,
+       joten ylin verteksi on sek„ "start1" ett„ "start2".
+
+    2. Otamme verteksilistasta *edellisen* verteksin ja kutsumme
+       sit„ nimell„ "stop1". Otamme seuraavan verteksin ja
+       kutsumme sit„ "stop2":ksi.
+
+    3. T„ss„ vaiheessa lienee selv„„, ett„ olemme seuraamassa
+       janoja start1-stop1 ja start2-stop2. Sitten vaan interpoloimme
+       start ykk”sen „ks„„ stop ykk”sen „ks„ksi, start kakkosen
+       „ks„„ stop kakkosen „ks„ksi ja piirr„mme joka askeleella
+       vaakaviivan interpoloitujen x-koordinaattien v„liin.
+
+       Interpolointi aloitetaan "startin" y-kohdasta ja
+       lopetetaan *ylemm„n* "stop"in y-kohtaan. Start on alussa
+       start1. Ylempi stop on jatkossa "stop".
+
+    4. Olemme saapuneet kohtaan "stop", eli olemme onnistuneesti
+       piirt„neet yhden palan polygonia. Nyt riippuen siit„, kumpi
+       "stop" (stop1 vai stop2) oli ylempi, toimimme seuraavasti:
+
+            stop1 oli ylempi:
+                 start1 = stop1
+                 stop1 = stop1:st„ *edelt„v„* verteksi
+                 start = start1 = stop1
+            stop2 oli ylempi:
+                 start2 = stop2
+                 stop2 = stop2:sta seuraava verteksi
+                 start = start2
+
+    5. Mene kohtaan 3 kunnes olemme piirt„neet kolmion kaikki palat.
+
+    En suinkaan v„it„, ett„ t„m„ olisi jotenkin paras tyyli piirt„„
+    n„it„. T„m„ oli se tekniikka, joka ensiksi tuli mieleen. Huomaa
+    my”s, ett„ t„m„ on nimenomaan convex-polygoneille, concave ja
+    complex eiv„t toimi n„in yksinkertaisesti!
+    [Min„ kyll„ sanoisin ett„ t„m„ on paras tekniikka. Kommentteja?
+    -ica]
+
+
+
+
+4. Sorttaustapoja
+-----------------
+
+
+ Ilman mink„„nlaista sorttausta ruudulle tulee aikamoista sotkua
+ piirrett„ess„ isompia m„„ri„ polygoneja; polygonit piirret„„n
+ aina samassa j„rjestyksess„, joten engine piirt„„ joissain
+ kulmissa p„„llimm„iset polygonit ensin ja kauimmaiset vasta
+ viimeiseksi. T„ss„h„n tulee ik„vi„ "l„pin„kyvyys"-efektej„,
+ eli jonkinlaista polygonien lajittelua kaivattaisiin.
+
+
+ 4.1 Z-sorttaus
+
+   Z-sorttauksen idea on, ett„ lajitellaan polygonit niiden
+   z-koordinaattien keskiarvon mukaan. T„h„n on helppo k„ytt„„
+   quicksorttia, kuten seuraavassa pseudokoodissa:
+
+    funktio quicksort(left, right)
+     - q on apumuuttuja
+
+       jos left pienempi kuin right
+         q = partition(left,right)
+         quicksort(left,q)
+         quicksort(q+1,right)
+       endjos
+     endf
+
+    funktio partition(left, right)
+     - x, a, b apumuuttujia
+     - crd on py”ritettyjen pisteiden taulukko
+     - face on polygonitaulukko
+
+      x = crd[face[left,0],2] + crd[face[left,1],2] + crd[face[left,2],2]
+      a = left-1
+      b = right+1
+
+      toista ikuisesti:
+
+        v„henn„ b:st„ yksi niin kauan kuin
+          (crd[face[b,0],2] + crd[face[b,1],2] + crd[face[b,2],2])
+          on pienempi kuin x
+        lis„„ a:ta yhdell„ niin kauan kuin
+          (crd[face[a,0],2] + crd[face[a,1],2] + crd[face[a,2],2])
+          on suurempi kuin x
+
+        jos a pienempi kuin b
+          vaihda(face[a],face[b])
+        muussa tapauksessa
+          lopeta funktio ja palauta arvona b
+        endjos
+
+      endtoista
+
+    endf
+
+   Sitten vain piirret„„n polygonit j„rjestyksess„.
+     Z-sortti ei ole todellakaan t„ydellinen sorttaustapa, mutta
+   kelpaa perussortiksi ihan hyvin. Kun pidemm„lle p„„st„„n,
+   kannattaa opetella vaikka t„ss„kin selitetty BSP-puu, joka on
+   jo huomattavasti kehittyneempi algoritmi -- ja toisaalta my”s
+   huomattavan paljon vaikeatajuisempi ja vaikeampi toteuttaa.
+
+
+ 4.2 Z-buffer
+
+   Z-bufferointi on helpoin (mutta ei todellakaan nopein!) tapa
+   tehd„ p„„llekk„in menevi„ objekteja. Toisin kuin esim. BSP,
+   Z-buffer ei vaadi polygonien pilkkomista osiin niiden leika-
+   tessa. BSP on kyll„kin aivan omaa luokkaansa muuttumattomien
+   objektien tms. tekoon.
+
+   Kuten nimikin kertoo, p„„osassa on puskuri (taulukko), johon
+   talletetaan objektin pisteiden Z- ja v„riarvoja. Taulukon
+   koon t„ytyy olla sama kuin ruudun pikselim„„r„n, esim. MCGA
+   -tilassa 64000 v„hint„„n 16-bittist„ alkiota (hirve„ sana)
+   sek„ jokaiselle alkiolle lis„tavu v„riarvoa varten.
+   Muistia kuluu siis rmodessa 192000 tavua ja pmodessa 256000
+   tavua.
+
+   Z-buffer on siis t„m„n n„k”inen C:ll„:
+
+     typedef struct
+     {
+       short z;
+       unsigned char color;
+     } zbuftype;
+     zbuftype zbuf[64000];
+
+   Ennen kuin piirr„mme ruudulle mit„„n, t„ytyy meid„n asettaa
+   Z-buffer-taulukkomme t„yteen sen suurinta mahdollista arvoa
+   (16-bittisill„ muuttujilla 32767). Sitten polygoneja piirt„-
+   ess„mme interpoloimme X:n (ja esim. gouraudissa v„rin)
+   lis„ksi my”s Z:aa. Vaakaviivanpiirtorutiinissa tarkistamme
+   jokaisella pikselill„ onko interpoloimamme Z *pienempi* kuin
+   Z-bufferissa t„ll„ kohdalla oleva Z-arvo. Jos on, asetamme
+   interpoloimamme Z-arvon bufferiin. Jos taas ei, siirrymme
+   suoraan seuraavaan pikseliin.
+   T„m„ tarkistus hidastaa rutiinia j„rjett”m„sti, mutta onneksi
+   Z:aa voi interpoloida aivan samoin kuten X:n tai v„rin: vain
+   yksi ADD per pikseli.
+   Lopuksi, kun kaikkien n„kyvien polygonien kaikki pisteet on
+   k„ytetty Z-bufferin kautta, piirret„„n Z-bufferissa olevat
+   pisteet ruudulle.
+
+   Jos k„yt„t fixed-point -tekniikkaa, muista, ett„ Z-bufferiin
+   kannattaa tallettaa vain kokonaislukuosa; muuten muistintarve
+   kasvaa nopeasti kaksinkertaiseksi (esim. C: short -> long),
+   koska tarvitaan arvoalueeltaan suurempia muuttujia.
+
+   *Lyhyt* pseudo-p„tk„ h-linest„:
+
+     z = z1
+     for x=x1 -> x2
+       if (z < zbuffer[y*320+x])
+         zbuffer[y*320+x] = z
+       endif
+       < interpoloidaan z:aa >
+       z = z + kz
+     endfor
+
+   Optimoinnista t„m„n verran: z-bufferia ei tarvitse tyhjent„„
+   niin usein (k„yt„nn”ss„ ei koskaan), jos k„ytet„„n 1/z-systee-
+   mi„. T„m„ tarkoittaa ett„ interpoloidaan 1/z:aa, ja tehd„„n
+   aina muuten vastaavat operaatiot kuin z:n kanssa mutta ver-
+   tailussa k„„ntyy vertailumerkki < toisin p„in >:ksi :)
+   Ai miten tuo sitten toimii k„yt„nn”ss„? Yksinkertaisesti n„in:
+   1/z on aina v„lill„ 0..1, joten kun v„hennet„„n z-bufferin
+   jokaisesta arvosta 1 (tai otetaan vastaluku), z-buffer on
+   'tyhjennetty' eli mik„ tahansa 1/z:n arvo on suurempi kuin
+   t„m„ v„lill„ -1..0 oleva arvo. Kun viel„ hoksaamme, ett„ t„m„n
+   uuden systeemin voi k„tev„sti tehd„ samassa inneriss„ muun
+   z-bufferin operoinnin kanssa, tyhjent„misen viem„ teho on
+   saatu minimoitua. Esim:
+
+   1. frame:
+     if (uusi1/z-arvo + 1) > zbuffer[kohta] then pist„ pikseli
+
+   2. frame:
+     if (uusi1/z-arvo + 2) > zbuffer[kohta] then pist„ pikseli.
+
+   etc.
+
+
+ 4.3 BSP-puu
+
+   BSP-puu on saanut mainetta eritt„in vaikeana mutta
+   erinomaisena sorttaustapana. Molemmat m„„ritelm„t ovat
+   oikeita: vaikka valmiilla rutiineilla voi saada eritt„in
+   nopeaa j„lke„, omien BSP-puuta k„ytt„vien rutiinien koodaus on
+   todella ty”l„s operaatio. Varsinkin jos kaikki dokumentaatio
+   on englanniksi eik„ tarvittava matikka ole hallussa ;)
+   EN selosta BSP-puuhun tarvittavan linkitetyn listan k„ytt”„,
+   sen voi jokainen osaamaton lukea esim. Mikrobitin numerosta
+   11/95.
+   Linkitetyn listan erikoistapaus, bin„„ripuu, tarkoittaa, ett„
+   jokaisesta puun haarakohdasta l„htee kaksi uutta haaraa:
+
+               1
+             /   \
+            2     3
+           / \   / \
+          4   5 6   7
+
+   Etcetc. T„m„n toteuttaminen on yksinkertaista, enk„ usko
+   lukijallekaan j„„v„n vaikeuksia.
+
+
+   4.3.1 The main idea
+
+     BSP-puuta on yht„ helppo soveltaa 2d-maailmaan kuin
+     3d-avaruuteenkin (tosin en n„e mit„„n j„rke„ 2d-maailman
+     sorttauksessa). 2d-maailma on helpompi piirt„„ ;) joten
+     selostan p„„periaatteen sen avulla.
+       T„ss„ on kuusi viivaa:
+
+          1                   |
+     -------------            | 2
+                              |
+                ---___  3     |           /
+                      ---___            /
+                \           ---___    /
+                 \ 4                / 6
+                  \               /
+                   \            /
+
+                  ________---------
+          --------     5
+                                      X (kamerapiste)
+
+     N„m„ pit„isi piirt„„ oikeassa j„rjestyksess„ k„ytt„en
+     BSP-puuta.
+       Ensin tehd„„n puun alustus:
+     Aloitamme viivasta 1. Tutkimme, mill„ puolella sit„ ovat
+     loput viivat, ja teemme bin„„ripuun jonka toiselle haaralle
+     menev„t viivan 1 "oikealla" puolella olevat viivat ja toiselle
+     "vasemmalla" olevat viivat. Jos jokin viiva on osittain
+     oikealla, osittain vasemmalla, se katkaistaan leikkauskohdasta
+     ja siit„ muodostetaan kaksi viivaa joista molemmat ovat
+     luonnollisesti jommalla kummalla puolella viivaa 1. Sitten
+     otetaan viiva 2 ja tutkitaan viivojen 3, 4, 5 ja 6 osalta
+     sama, ja jatketaan t„t„ kunnes kaikki viivat on j„rjestetty
+     somaan pikku puuhun.
+       Kun sitten pit„isi piirt„„ n„m„ viivat, tehd„„n seuraavasti:
+     Tutkitaan, mill„ puolella ollaan viivaa 1. Jos ollaan
+     vasemmalla, tutkitaan onko oikealla puolella viivoja, ja jos
+     on, menn„„n alas oikeaa haaraa. Kun oikea haara on k„yty l„pi,
+     piirret„„n viiva 1 ja siirryt„„n vasempaan haaraan. Jos
+     alunperin oltiin oikealla, tehd„„n p„invastoin eli ensin
+     vasenta, sitten oikeaa haaraa. MUISTA piirt„„ viiva 1
+     mainitussa kohdassa!
+
+     Esimerkkitapauksessamme tehd„„n seuraavat viivojen
+     jako-operaatiot:
+
+          1                   | 2a
+     -------------
+                              | 2b
+                ---___  3a    |           /
+                      ---___            / 6a
+                \           -- ___
+                 \ 4           3b   /
+                  \               / 6b
+                   \            /
+                         5b
+             5c   ___ ____--- ----
+          --------             5a
+                                      X (kamerapiste)
+
+     Bin„„ripuu taas n„ytt„„ t„lt„:
+
+                     _____1______
+                   2a            2b
+                               /    \
+                             3a      3b
+                            /       /  \
+                           4      5a    6a
+                          / \       \
+                        5c   5b      6b
+
+     Kuvassa n„kyv„n kamerapisteen suhteen piirrettyn„
+     viivojenpiirtoj„rjestys lasketaan siis n„in:
+      1) Olemme ykk”sen oikealla puolella. 2a piirret„„n siis ensin,
+         sitten 1, sitten menn„„n alas oikeaa haaraa.
+      2) Olemme my”s 2b:n oikealla puolella, eli ensin menn„„n alas
+         vasenta haaraa.
+      3) 3a:n suhteen olemme vasemmalla. Siisp„ 3a piirret„„n ensin
+         ja sitten menn„„n alas vasenta haaraa (oikealla puolella ei
+         ole viivoja).
+      4) Viivan 4 suhteen olemme 5b:n puolella eli oikealla.
+         Piirtoj„rjestys on siis 5c, 4, 5b.
+      5) Palaamme takaisin 2b:hen ja piirr„mme sen, mink„ j„lkeen
+         marssimme kohti sen oikeaa puolta ja 3b:t„.
+      6) Olemme 3b:n vasemmalla puolella eli piirr„mme 6a:n ja 3b:n
+         ja menemme 5a:han.
+      7) 5a:n suhteen olemme vasemmalla, siisp„ piirr„mme ensin
+         6b:n ja vihon viimeisen„ 5a:n.
+     Eli j„rjestys on 2a,1,3a,5c,4,5b,2b,6a,3b,6b,5a. N„ytt„„pi
+     kohtuullisen j„rkev„lt„.
+
+     Kannattaa kokeilla itse paperilla, ei tuosta v„ltt„m„tt„
+     muuten tolkkua saa. Itse piirsin 18:n viivan "maailman" vain
+     hahmottaakseni BSP-puun paremmin. Puusta tulikin sitten A4:n
+     kokoinen ;)
+
+
+   4.3.2 Kaavat
+
+     Hieno homma tuo BSP-puu, mutta miten se toteutetaan?
+     Itsekin kysyin asiaa ennen kuin itse asiassa edes mietin
+     toteutustapoja, mutta keksin itsekin ihan hyv„n konstin.
+
+     Lukion analyyttisen geometrian kurssilla opetetaan mm. miten
+     muodostetaan tason ja avaruussuoran yht„l” pelkist„
+     avaruuspisteist„. Koska en voi olettaa lukijalla olevan t„t„
+     tietom„„r„„, selostan asian itse.
+       Tason yht„l” on seuraava:
+
+       Nx * (X-ax) + Ny * (Y-ay) + Nz * (Z-az) = 0,
+
+     miss„ N on tason normaalivektori (Nx etc ovat siis sen i:n,
+     j:n ja k:n kerroin), X, Y ja Z samat kuin esim. 2d-suoran
+     yht„l”ss„ eli niiden arvot vaihtelevat ihan sikana, ja
+     (ax,ay,az) on tason yksi piste.
+       T„ll„ perusteella pit„isi siis muodostaa kolmion k„rkien
+     kautta kulkeva taso. T„h„n taas tarvitaan normaalivektoria,
+     joka lasketaan tekem„ll„ ensiksi kolmion pisteist„ kaksi
+     vektoria ja ottamalla sitten niiden ristitulon.
+       Nyt sijoitetaan X:n, Y:n ja Z:n paikalle tutkittavan
+     pisteen koordinaatit. Jos tulokseksi saadaan nolla, piste
+     on tasolla. Jos taas tulos on negatiivinen, se on tason
+     toisella puolella, jos se on positiivinen, se on toisella.
+     T„t„ sovelletaan kohdassa 4.3.1 selostettuun systeemiin, ja
+     toimitaan tulosten mukaisesti.
+
+     Jos kaikki tietyn kolmion kulmat eiv„t ole samalla puolella
+     tutkittavaa tasoa, ne leikkaavat toisensa. T„ll”in pit„„
+     laskea leikkauspisteet ja muodostaa niiden avulla kolme
+     uutta kolmiota, joista jokainen on jommalla kummalla
+     puolella tasoa.
+       T„h„n tarvitaan avaruussuoran yht„l”„, joka on t„llainen:
+
+       X = X1 + (X2-X1)t
+       Y = Y1 + (Y2-Y1)t
+       Z = Z1 + (Z2-Z1)t
+
+     T„m„ suora kulkee siis pisteiden (X1,Y1,Z1) ja (X2,Y2,Z2)
+     kautta, t-kertoimen saadessa kaikki reaalilukuarvot.
+     Kun suoran X, Y ja Z sijoitetaan tason X:n, Y:n ja Z:n
+     paikalle, ratkaistaan t ja sijoitetaan se taas suoran X:„„n,
+     Y:hyn ja Z:aan, olemme saaneet suoran ja tason
+     leikkauspisteen koordinaatit:
+
+       Nx*(X1+(X2-X1)t-ax) + Ny*(Y1+(Y2-Y1)t-ay) +
+       Nz*(Z1+(Z2-Z1)t-az) = 0
+
+     T„st„ ratkaistaan siis t:
+
+       Nx*(X2-X1)t + Ny*(Y2-Y1)t + Nz*(Z2-Z1)t =
+       Nx*(X1-ax) + Ny*(Y1-ay) + Nz*(Z1-az)
+
+                       < = >
+
+       t * ( Nx*(X2-X1) + Ny*(Y2-Y1) + Nz*(Z2-Z1) ) =
+       Nx*(X1-ax) + Ny*(Y1-ay) + Nz*(Z1-az)
+
+                       < = >
+
+           Nx*(X1-ax) + Ny*(Y1-ay) + Nz*(Z1-az)
+       t = ------------------------------------
+           Nx*(X2-X1) + Ny*(Y2-Y1) + Nz*(Z2-Z1)
+
+     Onneksi t„t„ ei tarvitse k„ytt„„ kuin inittiosassa ;)
+
+
+   4.3.3 Vinkkej„
+
+     1) Tason yht„l”n laskeminen on sen verran hidasta, ett„
+        kannattaa laskea normaalit vain ihan ohjelman alussa
+        ja py”ritell„ sitten niit„ pisteiden mukana.
+
+     2) Helpoin tapa ei tosiaankaan ole nopein. Kannattaa ehk„
+        inittiosassa tutkia, montako polygonisplitti„ eri
+        vaihtoehdot eli eri polygonien valinta ykk”spolygoniksi
+        aiheuttavat, ja ottaa sitten k„ytt””n se jossa niit„
+        tulee v„hiten -- nopeutta tulee roimasti lis„„ kun
+        polygonien m„„r„ pienenee puoleen, mik„ tapahtuu varsin
+        helposti.
+
+     3) K„rsiv„llisyytt„. BSP-puurutiinien koodaus on todella
+        hidasta hommaa, ne kun vaativat jo sen verran
+        monimutkaisempaa matikkaa kuin joku rupunen z-sort :)
+
+     4) Jos BSP-rutiinisi ovat hitaammat kuin Z-buffer, on
+        jossain pahasti vikaa ;)
+
+     5) BSP-puu ei ole itsetarkoitus eik„ se sovellu kaikkeen
+        3d:hen. Esimerkiksi raytrace-enginess„ on pakko k„ytt„„
+        Z- tai S-bufferia koska objektit voivat leikata toisensa,
+        mit„ BSP-puu ei salli. Henkil”kohtaisesti suosittelenkin
+        S-bufferia.
+
+
+ 4.4 S-buffer
+
+   S-buffer eli segmented buffer on Hot Wax Softwaren Paul
+   Nettlen kehitt„m„ Z-bufferin paranneltu -- ja *huomattavasti*
+   nopeampi (mies itse kehuu, ett„ S-buffer p„ihitt„„ nopeudessa
+   jopa hardware-Z-bufferin :O -- versio, jossa ei pidet„ kirjaa
+   pisteist„ vaan vaakaviivoista. T„ll„ tavalla s„„stet„„n
+   huomattavasti laskutoimituksia; suurimmassa osassa horizline-
+   kutsuista ei tarvitse vertailla kuin p„„tykoordinaatteja.
+     S-bufferissa on siis 3d-taulukko (tai linkitetty lista, jota
+   Nettle itse suosittelee jostain k„sitt„m„tt”m„st„ syyst„),
+   johon sijoitetaan jokaisen hline-kutsun tiedot, vertaillaan
+   niit„ toisiinsa, toimitaan asianmukaisesti ja lopulta piirre-
+   t„„n n„kyviss„ olevat viivat (tai osat).
+   Itse k„yt„n seuraavanlaista taulukkoa (texturemappaukseen
+   tarkoitettu, pmode):
+
+     typedef struct
+     {
+       short xb,xe,zb,ze;         // x_begin, x_end, ...
+       byte ub,ue,vb,ve;
+       long kz,ku,kv;             // kz = (ze-zb)*65536/(xe-xb) jne
+       unsigned char used;        // jos 0 -> ei k„yt”ss„
+     } sbuf_t;
+     sbuftype sbuf[200][100];     // 200 rivi„ 320x200-tilassa,
+                                  //  max. 100 segmentti„ / rivi
+
+   HUOM! Segmentit ovat taulukossa x-koordinaattien suuruus-
+   j„rjestyksess„ vasemmalta oikealle.
+
+   T„llainen taulukko vie siis muistia rmodessa 200*100*25=500000,
+   pmodessa alignoinnista johtuen 200*100*28=560000 tavua, ja mit„
+   monimutkaisempi maailma on kyseess„, sit„ suuremmaksi pit„„
+   maksimisegmenttim„„r„„ kasvattaa.
+
+   S-buffer-polygonirutiinille pit„„ "normaalista" rutiinista
+   poiketen (samoin kuin Z-bufferissa) ilmoittaa my”s pisteiden
+   z-koordinaatit (x:ien ja y:iden pit„„ silti olla jo 2d-n„yt”lle
+   transformoituja). Outer loopissa interpoloidaan sitten muiden
+   lis„ksi my”s z-koordinaatteja, ja ilmoitetaan ne S-buffer-
+   hlinellekin. S-buffer-hline ei varsinaisesti piirr„ mit„„n,
+   vaan lis„„ vain uuden rivin S-bufferiin, ja vasta kun S-buffer
+   on valmis, piirret„„n koko roska kerralla n„yt”lle.
+
+   P„tk„ polyrutiinista:
+
+     for y=y1 -> y2
+       sbuf_hline(xb,xe,y,zb,ze,col)
+       xb=xb+dx1
+       yb=yb+dx2
+       zb=zb+dz1
+       ze=ze+dz2
+     endif
+
+   HUOM! Jos polyrutiinille ilmoitettavat koordinaatit ovat
+   pisteen 3d-koordinaatit, pit„„ muistaa transformoida x ja y
+   2d-koordinaateiksi ennen looppia!
+
+   Sbuf_hline:
+
+     Klippaa ja tee muut normaalit initialisoinnit (klippaus
+     vasta dz:n, du:n ja dv:n laskemisen j„lkeen, of coz)
+     for i=0 -> 99
+       if not sbuf[y][i].used
+         lis„„ hline suoraan bufferiin ja merkitse se varatuksi
+         poistu
+       Tee muut vertailut
+     endfor
+
+   Ai mik„ "tee muut vertailut"? Nooh: samalla rivill„ olevat
+   horizlinet voivat sijaita monin eri tavoin toistensa suhteen,
+   joten niit„ pit„„ vertailla toisiinsa ja toimia tulosten
+   mukaisesti.
+   L”yd„n itse Nettlest„ poiketen vain kuusi tapaa, miten viivat
+   voivat sijaita toistensa suhteen (vanha viiva = v, uusi = u):
+
+   (1)           vvvvvvvv
+        uuuuuuuu
+
+   (2)  vvvvvvvv
+                 uuuuuuuu
+
+   (3)  vvvvvvvv
+           uuuuuuuuuuu
+
+   (4)        vvvvvvvv
+        uuuuuuuuuuu
+
+   (5)  vvvvvvvv
+       uuuuuuuuuuu
+
+   (6) vvvvvvvvvvv
+        uuuuuuuu
+
+   N„ill„ tavoilla voidaan esitt„„ kaikki viivojen erilaiset
+   sijainnit, mukaanlukien my”s erikoistapaukset (kuten yhden
+   pikselin mittaiset viivat ja t„sm„lleen samoissa (x,y)
+   -koordinaateissa olevat viivat).
+   Hmhm... Paul kertoi #codersilla ett„ h„nen oma s-bufferinsa
+   ei tarvitse kuin korkeintaan pari cmp:t„ hliness„! Olisipa
+   mielenkiintoista n„hd„ toteutus...
+
+   Kohdan 1 viiva lis„t„„n vain suoraan puskuriin *ennen* oikealla
+   puolella olevaa viivaa ja keskeytet„„n hlinen ajo (kaikki
+   viivat ovat sen jommalla kummalla puolella, koska vasemman-
+   puoleiset viivat on jo tarkistettu -- neh„n ovat S-bufferissa
+   j„rjestyksess„ vasen -> oikea).
+   Kohdan 2 tapauksessa hyp„t„„n tutkimaan seuraavaa vanhaa
+   viivaa, jos sellainen l”ytyy. Jos ei, lis„t„„n viiva puskurin
+   viimeiseksi.
+   Kohdassa 3 viiva katkaistaan vanhan viivan xe:n kohdalta
+   (muista interpoloida z:aa, u:ta ja v:t„ oikein), vertaillaan
+   vasemmanpuoleisen p„tk„n ja vanhan viivan z-koordinaatteja,
+   lis„t„„n vasemmanpuoleinen p„tk„ tai sen osa tarvittaessa
+   puskuriin, ja jatketaan oikeanpuoleisen p„tk„n ja seuraavan
+   vanhan viivan kanssa, jos sellainen l”ytyy. Jos ei, p„tk„
+   lis„t„„n puskurin viimeiseksi.
+   4. kohdan viiva katkaistaan vanhan viivan xb:n kohdalta,
+   lis„t„„n vasemmanpuoleinen p„tk„ puskuriin ennen vanhaa
+   viivaa, ja toimitaan oikeanpuoleisen p„tk„n kanssa samoin kuin
+   yll„ vasemmanpuoleisen kanssa.
+   5. kohdassa katkaistaan viiva sek„ oikealta ett„ vasemmalta
+   puolelta ja toimitaan muuten kuin 3. ja 4. kohdassa.
+   6. kohdassa menetell„„n suoraan kuten kohdan 3 vasemmanpuo-
+   leisen p„tk„n kanssa.
+
+   Kun kaikki polygonit on piirretty, k„yd„„n S-buffer l„pi
+   ylh„„lt„ alas, vasemmalta oikealle, ja piirret„„n viivojen-
+   p„tk„t normaalin hlinen tapaan. Piece of cake ;)
+
+   ... [ep„m„„r„ist„ ruikutusta ja vikin„„] ...
+
+   No hyv„ on, kun pyysitte niin kauniisti: t„ss„ S-bufferin
+   hallintaan tyhjennys- ja piirt„misrutiinit. K„ytt„v„t muuten
+   ylemp„n„ esitelty„ sbuf-taulukkoa.
+
+     - tmap on 256x256-kokoinen bittikartta
+
+     funktio flip_sbuf
+
+       integer i,j,k  ; apumuuttujia
+       integer du,dv  ; hline„ varten
+
+       for i=0 -> 199
+
+         j = 0
+         while sbuf[i][j].used<>0 sek„ j<100
+           du = 0
+           dv = 0
+           for k=sbuf[i][j].xb -> sbuf[i][j].xe
+             putpixel(k,i,tmap[sbuf[i][j].ub+du/65536+
+                               (sbuf[i][j].vb+dv/65536)*256])
+             du = du + sbuf[i][j].ku
+             dv = dv + sbuf[i][j].kv
+           endfor
+           j = j + 1
+         endwhile
+       endfor
+     endf
+
+
+     funktio clear_sbuf()
+
+       integer i,j
+
+        for i=0 -> 199
+          j = 0
+          while sbuf[i][j].used<>0 sek„ j<200
+            sbuf[i][j].used=0
+            j = j + 1
+          endwhile
+        endfor
+      endf
+
+
+
+
+5. Varjostustapoja
+------------------
+
+
+ Nyt on sitten se polygonikin ruudulla, mutta n„ytt„„ sekin aika
+ tyls„lt„ kun v„rit pysyv„t koko ajan samoina; realismi olisi
+ kiva juttu.
+
+
+ 5.1 Flat-sheidaus
+
+   5.1.1 Z-flat
+
+     Z-flat on melko s„„litt„v„n n„k”inen sheidaus, joka saadaan
+     aikaan nimens„ mukaisesti antamalla polygonille v„riarvo sen
+     kulmien z-koordinaattien keskiarvon perusteella:
+
+       v„ri = max_col - (kulma1.z + kulma2.z + kulma3.z) / a,
+
+     miss„ a on jokin sopiva luku jolla jakamalla keskiarvo saadaan
+     suurimman mahdollisen v„rinumeron (max_col) ja nollan
+     v„limaastoon. Koska kyseess„ on koordinaatisto jossa z-akseli
+     sojottaa siihen suuntaan johon luultavasti t„ll„kin hetkell„
+     katsot ;) niin z-arvo on kauempana suurempi eli saatu arvo
+     pit„„ v„hent„„ suurimmasta mahdollisesta v„rinumerosta.
+
+
+   5.1.2 Lambert Flat
+
+     Lambert Flat onkin jo huomattavasti paremman n„k”inen, siin„
+     kun on ihka oikea valonl„hdekin. Samalla saadaan viimeinkin
+     jotain k„ytt”„ niille vektoreille, joita alussa yritettiin niin
+     kovasti opiskella ;) Lambert flatkin tosin v„lkkyy ik„v„sti.
+       Idea on seuraavanlainen: annetaan valonl„hteelle i-, j- ja
+     k-arvot, eli vektorin kertoimet, jotka osoittavat valonl„hteen
+     suunnan (itse valonl„hde on „„rett”m„n kaukana). Jokaiselle
+     framelle lasketaan sitten jokaista polygonia vastaavan tason
+     normaalivektori (ristituloa ja vektorin yht„l”n laskemista),
+     ja selvitet„„n pistetulon avulla t„m„n vektorin ja valovektorin
+     v„lisen kulman kosini (mit„ pienempi kulma, sit„ kirkkaampi
+     v„riarvo). Sopivalla kertoimella saadaan t„m„ v„riarvo haluttujen
+     v„rirajojen sis„„n, esimerkiksi itsell„ni RGB-tilassa v„lille
+     0..63 kertoimella 63. Lopuksi tarkistetaan onko v„riarvo nega-
+     tiivinen. Jos on, muutetaan se nollaksi, eik„ polygonia n„y.
+       Pseudoa ”ken:
+
+      - LSi, LSj, LSk valonl„hdevektorin kertoimet (Light Source)
+      - Ni, Nj, Nk tason normaalivektorin kertoimet
+      - a apumuuttuja
+
+      funktio LambertFlat
+
+        < lasketaan tason normaalivektorin kertoimet (ensin muodos-
+          tetaan kaksi vektoria kolmesta pisteest„ ja sitten niiden
+          ristitulo) >
+
+        a = sqrt(Ni*Ni + Nj*Nj + Nz*Nz) *                 _     __
+            sqrt(LSi*LSi + LSj*LSj + LSk*LSk)     // a = |N| * |LS|
+        jos a ei ole nolla (nollalla ei viitsi jakaa)
+          color = max_col * (LSi*Ni + LSj*Nj + LSk*Nk) / a
+          jos color pienempi kuin nolla
+            color = 0
+          endjos
+        muussa tapauksessa
+          color = 0
+        endjos
+
+        palauta color
+      endf
+
+     T„m„h„n on aika hidas tapa (tulee kaksi neli”juurta,
+     lukuisia mulleja ja div jokaiselle polygonille), joten
+     nopeutus olisi tarpeellinen.
+
+     Jos molempien vektorien pituus on yksi, l„htee suurin
+     osa mulleista, div ja molemmat sqrt:t litomaan. (miten
+     vektorin pituudeksi varmistetaan yksi, ks. luku 1.1.3)
+       Jos valonl„hdevektoria liikutellaan, pit„„ sen pituudeksi
+     varmistaa t„m„ yksi joka framella, tosin jos liev„ ep„tark-
+     kuus ei haittaa, voidaan laskea se vain n. joka nelj„nnell„
+     framella tai tarpeen mukaan. Jos taas se pysyy paikallaan,
+     voidaan sen pituus laskea ennen py”rittely„ ja se pysyy
+     koko ajan samana.
+       Normaalivektorien tilanne on v„h„n kinkkisempi; tuo
+     pituus on aika hidasta laskea, ja divvej„kin tulisi enemm„n
+     kuin Suomen perustuslaki sallii. Ei, kyll„ on oltava
+     nopeampi konsti. Ja onkin!
+       Mit„s sanot t„st„: lasketaan jokainen normaalivektori
+     taulukkoon init-vaiheessa, varmistetaan sen pituudeksi yksi
+     (tai oikeastaan mieluummin max_col niin ei tarvita sit„
+     yht„ mullia joka polylle ja fixedpointkin tulee samalla
+     suoraan) ja py”ritell„„n sitten niit„kin ihan kuin ne
+     olisivat koordinaatteja! Nopeutus on huomattava.
+     Siis init-osassa:
+
+       - laske normaalivektorin i:n, j:n ja k:n kertoimet,
+       - laske vektorin pituus,
+       - kerro i:n, j:n ja k:n kertoimet max_col:lla,
+       - jaa ne vektorin pituudella.
+
+     Nyt funktio sieventyy muotoon
+
+      funktio LambertFlat
+        color = LSi*Ni + LSj*Nj + LSk*Nk
+        jos color pienempi kuin nolla (ei muuten ole jos
+        k„ytet„„n backface cullingia)
+          color = 0
+        endjos
+         palauta color
+      endf
+ 
+
+ 5.2 Gouraud-sheidaus
+
+   "Mit„s me jollain Flatilla, Gouraudia kehiin!" huutaa kansa.
+   "Gou-raud, Gou-raud!!" kiljuvat kohta jo pikkulapsetkin.
+   "Mik„s siin„", tuumi Caesar, "Kansa on huvinsa ansainnut."
+   "Avatkaa portit!", h„n komensi. "Gouraud esiin!" Ja rauta-
+   porttien viel„ naristessa rynt„si areenalle Gouraud, petojen
+   sukua.
+   (anteeksi, kello on paljon :D
+
+   Lukija pohtii varmaan mit„ selitt„mist„ gouraudissa viel„ on,
+   gouraud-kolmio kun on jo k„sitelty. Homma ei vain toimi niin
+   kauan kuin ei tiedet„ mit„ v„riarvoja millekin objektin
+   pisteelle annetaan.
+
+   5.2.1 Z-Gouraud
+
+     Z-gouraud toimii samalla periaatteella kuin Z-flat, eli
+     v„riarvo otetaan pisteen z-koordinaatista. Se on aika tyls„n
+     n„k”inen, mutta hienompi joka tapauksessa kuin Z-flat, jonka
+     pesee mik„ shade tahansa ;)
+     Eli otetaan pisteen Z-koordinaatti, jaetaan se sopivalla
+     kertoimella (sopiva riippuu objektista) ja v„hennet„„n
+     maksimiv„riarvosta; no problem.
+
+   5.2.2 "Oikea" Gouraud
+
+     T„m„ taas skulaa samoin kuin Lambert Flat, sill„ erotuksella
+     ett„ ei oteta polygonin ja valovektorin v„list„ kulmaa vaan
+     jokaiselle verteksille siihen kiinnittyvien polygonien ja
+     valovektorin v„listen kulmien keskiarvo; verteksinormaalien
+     keskiarvo.
+     Verteksinormaalit ovat periaatteessa objektin (joka on itse
+     asiassa approksimoitu k„ytt„en polygoneja) normaaleja, eli
+     ne ovat jokaisessa pisteess„ kohtisuorassa objektin (*OIKEAN*
+     kappaleen, ei polygonikasan) pintaa vastaan. K„yt„nn”ss„h„n
+     moista ei helposti pysty laskemaan, joten otamme kivan arvion
+     oikeasta objektin normaalista laskemalla verteksi„ ymp„r”ivien
+     tasojen normaalien keskiarvon ja k„ytt„m„ll„ sit„ verteksi-
+     normaalina.
+     Homma toimii siis n„in:
+
+       1. Nollaa kaikki verteksinormaalit
+       2. Laske jokaiselle facelle normaali ja lis„„ se facen
+          jokaiseen verteksinormaaliin
+       3. normalisoi kaikki verteksinormaalit
+
+     Ei mik„„n minuutin nakki, tuon toteuttaminen, joten pseudo
+     lienee paikallaan (esimerkkisorsistakin tuo tosin l”ytyy).
+     Pseudo k„ytt„„ vaihtoehtoista tapaa:
+
+       1. Etsi jokaiseen verteksiin osuvat facet
+       2. Lis„„ ko. verteksin normaaliin n„m„ facenormaalit
+       3. Jaa verteksinormaalin kertoimet facenormaalien m„„r„ll„
+          (verteksinormaalihan oli facenormaalien keskiarvo)
+       4. Normalisoi verteksinormaali
+
+     T„m„ on luonnollisesti hitaampi tapa, mutta eip„s ollut taas
+     aikaa kirjoittaa pseudoa nopeammasta :I Noh, toimiipahan
+     ainakin.
+
+     funktio CalcNormals
+
+       < lasketaan yhden tason normaalivektori ristitulolla >
+       funktio calcnor(X1,Y1,Z1,X2,Y2,Z2,X3,Y3,Z3,NX,NY,NZ)
+         int RelX1,RelY1,RelZ1,RelX2,RelY2,RelZ2
+         RelX1=X2-X1
+         RelY1=Y2-Y1
+         RelZ1=Z2-Z1
+         RelX2=X3-X1
+         RelY2=Y3-Y1
+         RelZ2=Z3-Z1
+         NX=RelY1*RelZ2-RelZ1*RelY2
+         NY=RelZ1*RelX2-RelX1*RelZ2
+         NZ=RelX1*RelY2-RelY1*RelX2
+       endf
+
+       < face = polygonitaulukko, vertex = pistetaulukko >
+       int i,a,ox,oy,oz
+       float cx,cy,cz,len,cn
+
+       for i=0 -> pisteiden lukum„„r„-1
+
+         cx=0
+         cy=0
+         cz=0
+         cn=0
+         for a=0 -> polygonien lukum„„r„-1
+
+           < jos polygoni koskettaa pistett„ i >
+           if ((face[a][0]=i) tai (face[a][1]=i) tai (face[a][2]=i))
+
+             < funktio palauttaa (ox,oy,oz):aan normaalin i:n,
+               j:n ja k:n kertoimet >
+             calcnor(vertex[face[a][0]].x,vertex[face[a][0]].y,
+                     vertex[face[a][0]].z,vertex[face[a][1]].x,
+                     vertex[face[a][1]].y,vertex[face[a][1]].z,
+                     vertex[face[a][2]].x,vertex[face[a][2]].y,
+                     vertex[face[a][2]].z,ox,oy,oz)
+             < (cx,cy,cz) tulevat sis„lt„m„„n normaalien
+               keskiarvon, cn:„„ lis„t„„n koska se ilmoittaa
+               montako normaalia on laskettu cx:„„n jne yhteen >
+             cx=cx+ox
+             cy=cy+oy
+             cz=cz+oz
+             cn+=1
+           endif
+
+         endfor
+
+         < jos joku polygoni koskettaa pistett„ >
+         if cn > 0
+           < lasketaan keskiarvot >
+           cx=cx/cn
+           cy=cy/cn
+           cz=cz/cn
+           < lasketaan normaalivektorin pituus >
+           len=sqrt(cx*cx+cy*cy+cz*cz)
+           if len = 0
+             len=1
+           endif
+           < varmistetaan ett„ kaikki normaalivektorit ovat
+           pituudeltaan 1 eli tehd„„n niist„ yksikk”vektoreita >
+           normal[i].x=cx/len
+           normal[i].y=cy/len
+           normal[i].z=cz/len
+         endif
+
+       endfor
+
+     endf
+
+     Ja k„ytt” siis tapahtuu samaan tapaan kuin Lambert flatissa.
+     Huom! T„m„ systeemi pissii siin„, ett„ jos jokin monikulmio
+     on muodostettu useammasta kolmiosta, se k„yd„„n kahteen kertaan
+     l„pi, jolloin sit„ painotetaan liikaa. Saattaa n„ytt„„ aika
+     ik„v„lt„. Korjauksena ainoastaan pikku checki ett„ onko tiet-
+     ty„ normaaliarvoa viel„ k„ytetty laskettaessa verteksinormaa-
+     lia -- tai n-kulmaiset polygonit :)
+
+
+ 5.3 Phong-sheidaus
+
+   5.3.1 Phong Illumination
+
+     Phong illumination tarkoittaa sit„, ett„ paletin avulla
+     kikkailemalla (ns. ep„lineaarinen paletti) saadaan gouraud
+     n„ytt„m„„n hienommalta phongilta. Mik„s siin„, hienompi
+     siit„ tulee kuin tavallisesta gouraudista.
+       Phong illumination saadaan aikaan k„ytt„m„ll„ seuraavaa
+     kaavaa:
+
+     color = ambient + (cos x) * diffuse + (cos x)^n * specular,
+
+     miss„ ambient on polyn v„ri kun siihen ei osu ollenkaan
+     valoa eli minimiv„ri, diffuse polyn alkuper„inen v„ri, ja
+     specular polyn v„ri kun siihen tuleva valo on kohtisuorassa
+     pintaa vastaan eli v„rin maksimiarvo.
+     x on valovektorin ja verteksin normaalivektorin v„rinen
+     kulma, ja se saa vaihdella vain v„lill„ -90..90 astetta eli
+     -pi/2..pi/2 radiaania. Miksei v„lill„ 0..360 astetta? Siksi,
+     ett„ ment„ess„ yli 90 asteen valoa ei osu polyyn ollenkaan,
+     jolloin pit„ k„ytt„„ minimiarvoa ambient. Siisp„ tarkistuk-
+     set, ja jos kulma ei ole vaaditulla v„lill„, annetaan sille
+     arvo -90 tai 90 astetta, eli kosinille arvo nolla, eli
+     v„rille arvo ambient.
+     n on objektin hohtavuus eli highlightin ominaisuus, joille-
+     kuille varmaan tuttu rendausohjelmista. Kokeilemalla selvi„„
+     kuhunkin tilanteeseen sopiva arvo.
+
+     Pseudoa j„lleen:
+
+     funktio SetPalette
+
+       < katkaistaan v„riarvo oikealle v„lille 0..63 >
+       funktio snap(arvo)
+         if arvo > 63
+           arvo = 63
+         else if arvo < 0
+           arvo = 0
+         endif
+         palauta arvo
+       endf
+
+       int i
+       float cosi,r,g,b
+       for i=0 -> 255
+         cosi=i*PI/1024
+         r=snap(5+cosi*60+cosi*cosi*cosi*cosi*150)
+         g=snap(0+cosi*30+cosi*cosi*cosi*cosi*150)
+         b=snap(-5+cosi*15+cosi*cosi*cosi*cosi*150)
+         muuta_vari(i,r,g,b)
+       endfor
+     endf
+
+     T„ss„ esimerkiss„ punaisen v„rin (r) minimiarvo on siis
+     viisi, arvo normaalivalaistuksella 60, maksimiarvo 150,
+     hohtavuus nelj„ ja kulma vaihtelee v„lill„ 0..90 astetta
+     (v„rill„ 255 kulma on nolla, v„rill„ nolla se on 90
+     astetta, eli kirkkain arvo tulee paletin loppuun).
+
+
+   5.3.2 Environment-mappaus
+
+     Monet sekoittavat oikean phongin env-mappaukseen, mutta ne
+     ovat kaksi eri asiaa. Env-mappauksessa k„ytet„„n bittikarttaa
+     (environment map) josta saadaan pikseleille v„riarvot. Sen
+     avulla voi tehd„ erilaisia kuvioita varjostukseen, jolloin
+     pinnat alkavat n„ytt„„ vaikkapa metallisilta.
+       Env-mappaus toimii muuten samoin kuin gouraud, mutta
+     gouraud-kolmion sijasta kutsutaan texture-kolmiota, ja
+     normaalien ja valovektorin v„listen kulmien sijasta k„ytet„„n
+     normaalien i:n ja j:n kertoimia indeksein„ esim. 256x256
+     -kokoiseen bittikarttaan. T„ll”in tosin ei saada aikaan
+     aitoa liikuteltavaa valonl„hdett„, mutta sekin onnistuu pienen
+     kikkailun avulla -- pseudoesimerkki alla.
+
+       - LS on valonl„hdevektori
+       - N[0..2] ovat kolmion verteksien normaalivektorit
+       - cx1, cy1 etc ovat koordinaatit env-mappiin
+       - a on apumuuttuja
+       - env-map on 256x256-kokoinen bittikartta (metal.pcx)
+
+       if ( LS.k <= 0 ) ; k„ytet„„n systeemi„ suoraan
+
+         cx1 = env_crd( N[0].i - LS.i )
+         cy1 = env_crd( N[0].j - LS.j )
+         cx2 = env_crd( N[1].i - LS.i )
+         cy2 = env_crd( N[1].j - LS.j )
+         cx3 = env_crd( N[2].i - LS.i )
+         cy3 = env_crd( N[2].j - LS.j )
+
+       else
+
+         a = N[0].i + LS.i ; yhteenlasku - LS.i vastakkainen kuin yll„
+         if (a<0) a = a + 1 ; vastakkaiselle puolelle
+         else a = a - 1
+         cx1 = env_crd( a ) ; konvertointi
+         a = N[0].j + LS.j
+         if (a<0) a = a + 1
+         else a = a - 1
+         cy1 = env_crd ( a )
+
+         a = N[1].i + LS.i
+         if (a<0) a = a + 1
+         else a = a - 1
+         cx2 = env_crd( a )
+         a = N[1].j + LS.j
+         if (a<0) a = a + 1
+         else a = a - 1
+         cy2 = env_crd ( a )
+
+         a = N[2].i + LS.i
+         if (a<0) a = a + 1
+         else a = a - 1
+         cx3 = env_crd( a )
+         a = N[2].j + LS.j
+         if (a<0) a = a + 1
+         else a = a - 1
+         cy3 = env_crd ( a )
+
+       endif
+
+       texture( x1, y1, x2, y2, x3, y3, cx1, cy1, cx2, cy2, cx3, cy3 )
+
+
+     funktio env_crd ( float arvo )
+
+       - a apumuuttuja
+
+       a = arvo * 127 + 128
+
+       palauta a
+
+     Funktio env_crd konvertoi siis normaalin kertoimen (v„lill„
+     -1..1) bittikartan koordinaateiksi (0..256, keskell„ kirkkain).
+
+     Pseudon alussa tutkittiin, onko valonl„hteen k:n kerroin
+     positiivinen vai negatiivinen. T„m„ siksi, koska menetelm„ ei
+     p„de molemmille yht„ hyvin, vaan positiiviset arvot vaativat
+     hiukan s„„t„mist„. Negatiivisilla k:n arvoilla saadaan siis
+     pseudon osoittamalla tavalla laskettua env-mapin koordinaatit:
+       V„hennet„„n normaalien i:n ja j:n kertoimista valovektorin i:n
+     ja j:n kertoimet ennen kuin transformoidaan niit„ bittikartan
+     keskikoordinaatteihin. Ai mihink” k:n kerroin? Ei mihink„„n,
+     mutta koska n„iden vektorien pituuden pit„„ olla yksi, voidaan
+     v„hent„m„ll„ i:n ja j:n arvoja saada k:n kertoimelle painoarvoa:
+     esimerkiksi jos i:n ja j:n kerroin on 0.5, k:n kertoimelle j„„
+     arvoa 0.7 (vektorin pituus 0.5^2 + 0.5^2 + 0.7^2 = 1).
+     *T„m„*systeemi*ei*tepsi*valonl„hteisiin*joiden*k:n*kerroin*on*
+     *positiivinen*, vaan ne vaativat seuraavan:
+     k:n kerroin on positiivinen ja vektori (-LS.i,-LS.j,-LS.k) on
+     valonl„hdevektoria vastakkainen. Jos huijataan rutiini luule-
+     maan valonl„hdevektorin olevankin toisella puolella, saadaan
+     tarkalleen p„invastainen tulos kuin olisi tarkoitus.
+     Miksi n„in? Siksi, ett„ t„m„n vastakkaissuuntaisen vektorin
+     k:n kerroin on luonnollisesti negatiivinen, ja voimme k„ytt„„
+     normaalia systeemi„. P„invastaisuus taas h„vi„„, kun siirret„„n
+     keskell„ bittikarttaa olevat arvot laidoille ja laidoilla
+     olevat keskelle -> … vot: tuloksena on haluttu, alkuper„inen
+     valonl„hdevektori!
+
+     T„ytyy kyll„ rintaa kumistellen kertoa, ett„ t„m„ valonl„hde-
+     systeemi on kokonaan itse keksim„ni :O
+
+
+   5.3.3 Aito Phong
+
+     T„ss„ selostetaan hiukan optimoitu versio, joka ei ota huo-
+     mioon kameran ja pinnan v„lisen kulman muuttumista. Silm„ ei
+     eroa juurikaan havaitse, mutta t„ydellisyyden tavoittelijat
+     lukekoot vgophong.doc:n.
+
+     Phong-sheidauksen idea on l”yt„„ tarkka v„riarvo jokaiselle
+     pikselille. T„m„ onnistuu interpoloimalla polygonirutiinissa
+     verteksinormaaleja, eli etsim„ll„ jokaiselle pikselille oman
+     normaalivektorinsa, ja m„„ritt„m„ll„ t„m„n sek„ valovektorin
+     v„lisen kulman kosinin skalaaritulon avulla (ks. 1.5).
+
+     Phongiin tarvitaan siis seuraavat komponentit:
+
+       - valosta pintaan -vektori (xyz) ja deltat (xyz)
+       - pinnan normaali
+
+     Gouraudissahan otit valovektorin ja verteksinormaalin v„lisen
+     kulman kosinin joka *verteksille*, ja k„ytit sit„ kirkkausarvona
+     pikseleille lineaarisen interpolaation siivitt„m„n„.
+     T„m„ ei ole yht„„n monimutkaisempaa; v„riarvon sijasta inter-
+     poloimme verteksin normaalivektoreita (kaikkia komponentteja),
+     sek„ valovektoreita (jos valot eiv„t ole „„rett”m„n kaukana),
+     normalisoimme ne, otamme n„iden v„lisen kulman kosinin, ja
+     k„yt„mme sit„ kirkkausarvona. N„in siis *JOKA* *PIKSELILLE*.
+     Toisin sanoen teemme gouraudin laskut joka pikselille.
+
+     T„m„ ainoa oikea phong-sheidaus on upean n„k”inen, mutta sit„
+     ei ole j„rkev„„ k„ytt„„ kuin still-systeemeiss„ eli esimer-
+     kiksi raytrace-enginess„; lis„laskettavaa tulee joka pikse-
+     lille pistetulon verran: nelj„ kertolaskua, kaksi yhteenlas-
+     kua, yksi jakolasku ja neli”juuri -- l„hemm„s 300 pentium
+     -kelloa! Uh-oh, realtimen„ ei taida onnistua X)
+
+
+ 5.4 Ican ikioma tekniikka
+
+   Suuri ja Mahtava Ica k„ytt„„ ep„lineaarisuuden takaavalla tau-
+   lukkocheckill„ boostattua gouraudia texturemappauksen kanssa.
+   Tekniikka on siit„ kiva, ett„ se
+
+     a) on nopea kuin gouraud
+     b) on hieno kuin kunnon feikkiphongi ainakin
+     c) sallii v„rilliset valonl„hteet
+     d) on itse kehitelty :)
+     e) on suurien #coders-gurujen Paul Nettle ja Harmless (en
+       tied„ oikeaa nime„) suosittelemaa tyyppi„.
+
+   Itse pid„n painoarvoisimpana argumenttina e-kohtaa :)
+   K„yt„nn”ss„ teen n„in: ohjelman init-osassa alustan jonkin
+   kivan taulukon jokaiselle valonl„hteelle phong illuminationin
+   avulla. Polyn initiss„ toimin t„sm„lleen kuten gouraudissa,
+   mutta piirtorutiinissa k„yt„n interpoloitua v„riarvoa indeksin„
+   mainittuun taulukkoon, en piirr„ sit„ suoraan. Systeemi toimii
+   siis ”paut n„in:
+
+   for a=0 -> lights-1
+    for b=0 -> 255 ; max. v„rim„„r„
+      light[a][b].r = ambient.r + diffuse[a].r*cos(b) +
+                      specular[a].r*cos(b)^n[a]
+      light[a][b].g = ambient.g + diffuse[a].g*cos(b) +
+                      specular[a].g*cos(b)^n[a]
+      light[a][b].b = ambient.b + diffuse[a].b*cos(b) +
+                      specular[a].b*cos(b)^n[a]
+
+   Haittapuolena on, ett„ jokaisen valon kirkkausmuuttujaa pit„„
+   interpoloida erikseen, but who cares? Addit ovat halpoja.
+
+
+ 5.5 Valonl„hteiden k„sittelyst„
+
+   N„m„ tekniikat p„tev„t kaikkiin sheidausmenetelmiin. Ne ovat
+   itse asiassa hyvin yksinkertaisia, jopa niin yksinkertaisia
+   ett„ v„„nsin ne kasaan alusta l„htien itse :)
+
+   5.5.1 Vapaasti liikkuvat valonl„hteet
+
+     Ainut ongelma on valovektorin p„ivitt„minen. Miten se on-
+     nistuu? Ha, piece of cake! Pidet„„n valosta ylh„„ll„ vain
+     3d-pistett„ jossa se kullakin hetkell„ on, ja muodostetaan
+     vektori sen ja jokaisen piirrett„v„n verteksin (tai mink„
+     tahansa pisteen josta normaalivektori l„htee) v„lille. T„m„
+     normalisoidaan, ja ta-daa! Uusi valovektori on valmis.
+
+   5.5.2 Spotlitet
+
+     ..kuulen jonkun pikku „„nen ruikuttavan ettei yo. systeemi
+     p„de kuin pistem„isille valonl„hteille; spotlitet saa unoh-
+     taa saman tien. L„ll„stil„„, eip„s saa. Ne ovat vallan hy-
+     vin toteutettavissa t„ll„ seuraavasti: pidet„„n kirjaa my”s
+     alkuper„isest„ valovektorista (tai -matriisista niin on
+     helpompi py”ritell„ sit„ valoa; matriisin tapauksessa valo-
+     vektori on n„pp„r„sti z-akselin suuntavektori) ja spotliten
+     kulmasta. Kun sitten on muodostettu uusi valovektori, tut-
+     kitaan onko sen ja alkuper„isen valovektorin v„linen kulma
+     suurempi kuin spotliten kulma. Jos on, valoisuus on py”re„
+     nolla (tai sitten tehd„„n kiva pikku suhde niille kulmille
+     ja saadaan pehme„reunainen spotlite!), muuten sen arvo
+     saadaan normaalisti uuden valovektorin ja normaalin v„li-
+     sest„ kulmasta.
+     Žl„s sitten ihmettele jos spotlitesi reunat n„ytt„v„t j„n-
+     n„lt„ tai se bugaa jotenkin muuten, kun k„yt„t gouraudia
+     tai flattia. Kyse on yksinkertaisesti siit„, ett„ kun ver-
+     teksien v„lill„ interpoloidaan lineaarisesti, erikokoi-
+     sille polyille tulee eripitk„t fadet, ja t„ll”in spotlite
+     saattaa n„ytt„„ aika s„„litt„v„lt„. Hyvi„ ratkaisuehdotuksia
+     otetaan vastaan ("aito phong" ei kelpaa ;) Kaj ehdotti, ett„
+     splitattaisiin poly useammaksi aina kun sit„ ment„isiin
+     tarpeeksi l„helle. Saattaa toimia, mutta nopeudesta / luotet-
+     tavuudesta en sano mit„„n.
+
+
+   5.5.3 Valon himmeneminen
+
+     Just some more basic math: otetaan jokaisen verteksin et„i-
+     syys valonl„hteest„, ja tehd„„n valon intensiteetin ja
+     et„isyyden v„lille jonkinlainen riippuvuus. Sitten vain
+     lasketaan :)
+     Eli:
+
+       ; jokaiselle facen verteksille
+       for a=0 -> num_of_vertices-1
+
+         ; lasketaan uusi valovektori
+         l_vector.x = vertex[a].x_coord - light.x_coord
+         l_vector.y = vertex[a].y_coord - light.y_coord
+         l_vector.z = vertex[a].z_coord - light.z_coord
+
+         ; et„isyys tulee 'kaupan p„„lle' vektorin pituutena
+         distance = sqrt((l_vector.x)^2 + (l_vector.x)^2 + (l_vector.x)^2)
+
+         ; normalisoidaan uusi valovektori
+         l_vector.x = l_vector.x / distance
+         l_vector.y = l_vector.y / distance
+         l_vector.z = l_vector.z / distance
+
+         ; lasketaan himmeys
+         brightness = 1 - (distance/light.fadezedo)^fogness
+
+         ; lasketaan valoisuusarvot
+         light_at_vertex[a] = gouraud(vertex1.normal,brightness)
+
+       funktio gouraud (param normal, brightness)
+         color = ( l_vector.x*normal.x + l_vector.y*normal.y +
+                   l_vector.z*normal.z ) * brightness
+         if color<0
+           color = 0
+         else if color>255
+           color = 255 ; tai mik„ maksimiv„riarvosi onkin..
+         return color
+       endf
+
+     Jooh. Light.fadezero ilmoittaa, mill„ et„isyydell„ valo
+     ei en„„ n„y lainkaan eli on tasan nolla. Fogness on scenen
+     vakio (Kajn mielest„ ei kovin looginen muuttujanimi), joka
+     ilmaisee, mink„ k„yr„n muotoisesti valo himmenee. Suositan
+     arvoa 0.5 useimpiin tarkoituksiin (t„ll”inh„n potenssi on
+     1/2 eli kyseess„ on itse asiassa neli”juuri).
+
+     T„m„ ei sitten ole the one and only tapa, monenlaisia mui-
+     takin varmasti l”ytyy. Kunhan nyt pid„n t„t„ tutkimusteni
+     perusteella parhaana :)
+
+
+
+
+6. Hidden face removal
+----------------------
+
+
+ 6.1 Backface culling
+
+   Backface cullingin idea on yksinkertainen: jos polygoni on
+   v„„rin p„in, sit„ ei tarvitse piirt„„. T„m„ ei tietenk„„n
+   toimi, ellei polygoneja ole m„„ritelty oikein, joten kannat-
+   taa olla tarkkana (esimerkiksi 3DStudiolla tehdyt objektit
+   ovat oikeanlaisia, eli verteksit clockwise-j„rjestyksess„).
+     Onko polygoni v„„rin p„in, on helppo p„„tt„„ t„m„n pseudo-
+   koodin avulla ((c) Bas van Gaalen / Jeroen Bouwens, don't know
+   / remember):
+
+     funktio backface(x1, y1, x2, y2, x3, y3)
+      - dx1, dy1, dx2, dy2 ovat koordinaattien erotuksia
+
+       dx1 = x3 - x1
+       dy1 = y3 - y1
+       dx2 = x3 - x2
+       dy2 = y3 - y2
+       jos ( ( dx1*(dy2-dy1)-(dx2-dx1)*dy1 ) > 0 )
+         palauta_arvo TRUE
+       muuten
+         palauta_arvo FALSE
+     endf
+
+   Jos funktio palauttaa arvonaan TRUE, eli kameravektorin ja
+   tason normaalivektorin v„lisen kulman kosini on positiivinen
+   eli -90 < kulma < 90 astetta, polygoni piirret„„n, muuten
+   luonnollisesti ei.
+
+
+ 6.2 View cone
+
+   View cone tarkoittaa kartion (cone) muotoista n„kyviss„
+   olevaa aluetta katsottaessa johonkin suuntaan. Tekniikka on
+   siit„ k„tev„, ett„ jos jokin polygoni tai objekti on
+   m„„ritellyn kartion ulkopuolella, sen voi j„tt„„ saman tien
+   huomiotta. Hienostuneempi (ja nopeampi) view conen muoto
+   klippaa kartion reunaan osittain n„kyviss„ olevat polygonit,
+   mutta yksinkertaisemmassa 3d-enginess„ t„llaiset tapaukset
+   voi hoitaa grafiikkaklippauksilla l. polygonirutiinin sis„ll„.
+
+   Homma hoituu yksinkertaisesti vertaamalla 2dx-, 2dy- ja
+   z-koordinaattia ruudun rajoihin ja toimimalla tulosten
+   mukaan. Z-koordinaatin tapauksessa polygoni j„tet„„n
+   piirt„m„tt„, jos sen yhdenkin pisteen z on pienempi kuin
+   nolla, koska muuten k„ypi piirtorutiineissa hiukan h”p”sti.
+   Jos scenesi alkaa pukittaa Z-comparen kanssa, sinun on
+   turvauduttava polygonien 3d-klippaukseen.
+   Pseudoa:
+
+     if
+       KAIKKIEN verteksien z:t positiiviset
+      and
+       JONKIN verteksin x v„lill„ 0..MAX_X
+      and
+       JONKIN verteksin y v„lill„ 0..MAX_Y
+      then
+       piirr„.
+
+   6.2.1 Polygonien 3d-klippaus
+
+     T„m„ onkin hiukan kinkkisempi homma. Helpointa on, jos
+     enginesi sallii n-kulmaiset polygonit, koska klipatusta
+     kolmiosta saattaa tulla nelikulmio, jolloin siit„ pit„isi
+     kolmiosysteemiss„ muodostaa kaksi kolmiota. Ei kiva.
+     Anyway, pseudoa kehiin:
+
+       ; tutkitaan zetat
+       kaikki_zetat_ulkona=true
+       kaikki_zetat_ruudulla=true
+       for a=0 -> verteksien_m„„r„_polyssa-1
+         if z[a]>1 ; varmuus paras...
+           kaikki_zetat_ulkona=false
+         else
+           kaikki_zetat_ruudulla=false
+
+       if (not kaikki_zetat_ulkona) and (not kaikki_zetat_ruudulla)
+         klippaa zetat
+         kaikki_zetat_ruudulla=true
+
+       konvertoi verteksit 2d:hen
+
+       if kaikki_zetat_ruudulla
+         ; tutkitaan kaikkien verteksien 2d-x ja -y
+         kaikki_verteksit_ulkona=true
+         kaikki_verteksit_ruudulla=true
+         for a=0 -> verteksien_m„„r„_polyssa-1
+           if (2d_x[a] v„lill„ 1..MAX_X) and (2d_y[a] v„lill„ 1..MAX_Y)
+             kaikki_verteksit_ulkona=false
+           else
+             kaikki_verteksit_ruudulla=false
+
+         if (not kaikki_verteksit_ulkona)
+          and (not kaikki_verteksit_ruudulla)
+           klippaa
+           kaikki_verteksit_ruudulla=true
+
+         if kaikki_verteksit_ruudulla
+           piirr„
+
+     Siin„ siis p„„periaate. Klippaus hoituu k„ytt„m„ll„ suoran
+     parametriesityst„ ((x0,y0,z0) = verteksin 1 koordinaatit
+     jne):
+
+       x = x0 + t*(x1-x0)
+       y = y0 + t*(y1-y0)
+       z = z0 + t*(z1-z0)
+
+     Z-klipin tapauksessa merkit„„n z=1 ja ratkaistaan t:
+
+       z0 + t*(z1-z0) = 1
+       t = (1-z0) / (z1-z0)
+
+     T„m„ sijoitetaan x:„„n ja y:hyn:
+
+       x = x0 + (x1-x0)*(1-z0)/(z0-z1)
+       y = y0 + (y1-y0)*(1-z0)/(z0-z1)
+       z = 1
+
+     Ja siin„ ovat uuden verteksin koordinaatit!
+
+     Esim.
+                     z=1       v1
+                      ³    __--
+                      ³__--    \
+                   __--         \
+               v3--___³          \
+                      ---___      \
+                      ³     ---___ \
+                      ³           ---
+             Ruudulla ³ Ulkona       v2
+
+     Muodostetaan suorat (v3,v1) ja (v3,v2), klipataan ne, ja
+     k„ytet„„n tulosverteksej„ uusina v1:n„ ja v2:na.
+     Ongelmaksi saattaa tuntua muodostuvan se, miss„ j„rjes-
+     tyksess„ n„m„ uudet verteksit laitetaan klipattuun poly-
+     tauluun; backface culling ei tykk„„ yht„„n hyv„„ jos ne
+     m„iskii sinne miten sattuu. Ei paniikkia: tehd„„nkin
+     backface culling jo ennen klippauksia! Klipattuja polyjahan
+     ei k„ytet„ kuin yhdell„ framella.
+     N-kulmioita k„ytett„ess„ verteksit on silti hyv„ laittaa
+     j„rjestyksess„ faceen, koska rutiinit heitt„v„t ainakin
+     vasemman ja oikean reunan tekniikalla muuten melkoista
+     sontaa ruudulle. J„rjestys on siis t„m„: (uusi_v1,uusi_v2,
+     ...,uusi_vn). Eli jos ollaan klipattu suora (v1,v2) siten
+     ett„ v1 j„„ ruudulle, laitetaan uudeksi v2:ksi klippaus-
+     koordinaatit v1:n s„ilyess„ ennallaan.
+
+
+ 6.3 Portalit
+
+   Portalit ovat todella yksinkertaisia je helppoja ymm„rt„„
+   ja toteuttaa. Niill„ siis saadaan rajattua piirrettyjen
+   polyjen m„„r„„, ettei koko scene„ tarvitse koko ajan kelata.
+
+   Portalit perustuvat siihen, ett„ koko scene on tehty
+   huoneista. Jokainen huone sis„lt„„ omien polyjensa lis„ksi
+   n„kym„tt”m„t pinnat niiss„ kohdissa joista n„kyy toisiin
+   huoneisiin. N„m„ n„kym„tt”m„t pinnat ovat portal-kolmioita,
+   ja niit„ k„sitell„„n kuin mit„ tahansa polya, eli ne (tai
+   siis p„„teverteksit) py”ritell„„n aivan normaalisti. Ero
+   normaaleihin polyihin on siin„, ett„ kun portal-kolmio
+   pit„isi piirt„„, siirryt„„nkin sen osoittamaan huoneeseen
+   jos se on n„kyviss„. N„in jatketaan kunnes olemme tyytyv„isi„
+   piirrettyyn tulokseen.
+   Kannattaa huomata, ett„ niit„k„„n portal-pintoja, jotka ovat
+   liian kaukana, ei kannata k„sitell„. Toinen huomionarvoi-
+   nen asia on, ett„ seuraavien huoneiden pinnat voivat n„ky„
+   vain edellisten huoneiden portal-pintojen "l„pi".
+   Portalien toteuttamistekniikoita on monia. Jotkut niist„
+   tekev„t niin, ett„ jokainen huone koostuu vain convex
+   -polyista, ja kaikki polyt klipataan sitten lennossa portal
+   -alueeseen. Muitakin tapoja on, rajana mielikuvitus.
+     Ja kaikkihan tietysti hoksasivat heti ettei portaleita
+   voida k„ytt„„ kuin tietyntyyppisiss„ sceneiss„... :/ Tosin
+   erilaisia variaatioita l”ytyy, esimerkiksi sellainen ett„
+   tehd„„n tarkistuspiste jonka toisella puolella oltaessa ei
+   tiettyj„ osia scenest„ piirret„ (k„yt„nn”llinen demoissa!).
+
+
+
+
+7. Muuta mukavaa
+----------------
+
+
+ 7.1 Frameskip
+
+   T„ss„ esitell„„n vain yksi tekniikka t„m„n tekemiseksi. Jos se
+   ei jostain t„ysin k„sitt„m„tt”m„st„ syyst„ kelpaa neidille, h„n
+   on vain hyv„ ja lukee Midaksen dokumentit.
+     Frameskipin idea on siis py”ritt„„ opjekteja kaikilla
+   koneilla samaa vauhtia. Perusidea on hyvin yksinkertainen:
+   kun objektit p„ivitet„„n yhden kerran, on piirretty yksi frame.
+   386:lla framen piirt„miseen menee huomattavasti enemm„n aikaa
+   kuin penttijumilla, mist„ seuraa, ett„ 386:lla objektin tulee
+   harppoa enemm„n kuin pentiumilla eli piirt„„ v„hemm„n frameja
+   aikayksik”ss„. Jos siis oletamme, ett„ objektin py”rimiskulman
+   pit„isi kasvaa 9 astetta per sekunti, toimimme seuraavasti:
+
+     Frame   Kulma 386:lla    Kulma penttijumilla
+     --------------------------------------------
+       1       0                0
+       2       3                1
+       3       6                2
+       4       9                3
+       5       -                4
+       6       -                5
+       7       -                6
+       8       -                7
+       9       -                8
+      10       -                9
+
+   Miksik” n„in? Siksi, ett„ pentium joutaa piirt„m„„n 10 freimi„
+   per sekunti, kun kolkasikuutonen pystyy vain nelj„„n. N„in
+   opjektisi py”rii kaikilla koneilla samaa vauhtia, tosin penalla
+   huomattavasti sulavammin kuin 386:lla.
+   Pseudon koodaaminen on sitten hauskaa. K„„nt„j„ ei ainakaan
+   valita ;)
+
+     falku=lueaika;
+     toista
+       <laske>
+       <piirr„>
+       <flippaa>
+       <do vatever jyy vant>
+       floppu=lueaika
+       kulma=kulma+nopeus*(floppu-falku)
+       falku=floppu;
+     kunnes 1=2
+
+   Kaikki muuttujat ovat tietysti reaali(tai fixed)-kamaa. Niin, ja
+   lueaika on sitten *tarkka*, eli mik„„n avuton 18.2Hz:n resoluu-
+   tiolla varustettu perustaimeri ei kelpaa.
+
+   Toinen mahdollisuus frameskipin toteuttamiseen on t„m„: tekee
+   interruptin, joka p„ivitt„„ kaikkia muuttujia 70 kertaa sekassa
+   ja sitten rutiinit piirt„v„t mink„ kerke„v„t, kuitenkin niin,
+   ett„ eiv„t ylit„ tuota seitsem„„kymment„. Not bad, this one,
+   either.
+
+
+ 7.2 Assembly-optimointia
+
+   (
+     Kirjailija : Henri 'RoDeX' Tuhkanen
+     Email      : henri.tuhkanen@mbnet.fi
+     Minut saa my”s kiinni MBnetin ohjelmointi/demoscene alueilta.
+     Gruupit    : CyberVision, Embrace, the Damned, Hard Spoiled,
+                  tAAt, Regeneration, Magic Visions ja pari muuta,
+                  joita en muista. ;)
+     Saavutukset: 7. sija asm'96 4k-introcompossa.
+     Releassit  : Paljon sorsaa, jotka eiv„t ole viel„ jakelussa.
+     Esittely   : Olen 19v 'sis„ilmaihminen', joka koodaa about
+                  aina, l„hinn„ 3Dt„/gfx. Pyrin julkaisemaan kaiken
+                  koodin jota en ole tehnyt kaupalliseen tarkoituk-
+                  seen. Yrit„n my”s seurailla kaikkea, mit„ scenell„
+                  tapahtuu. En pihtaa koodaamiseen liittyv„„ materi-
+                  aalia, mutta annan l„hinn„ vain algoritmeja, koska
+                  en pid„ rippaajista. En pelk„„ olla v„„r„ss„ ja
+                  haluan oppia kaiken ohjelmoinnista ja tietokoneista.
+                  (:
+   )
+
+   Assembly-koodin optimointi on k„ynyt pentiumin tultua melko moni-
+   mutkaiseksi. T„m„n tekstinp„tk„n on tarkoitus selvitt„„ pentiumin
+   salat ja se, miten penalla voi saada aikaa jopa tuplasti nopeampaa
+   koodia kuin mik„ normaalisti luulisi olevan mahdollista.
+     Pentiumin mukana tuli pc-maailmassa tutuksi k„site pairaaminen ja
+   nopea matikkaprossu. Nyt kerron, miten pairaaminen toimii ja miten
+   pystyt hy”dynt„m„„n sit„ omissa rutiineissasi.
+
+   Pentium-prosessoreissa on itse asiassa kaksi prosessoria rinnan.
+   N„ist„ prosessoreista vain toinen on t„ydellinen. T„t„ kutsutaan
+   U-, toista V-pipeksi. V-pipe„ on karsittu niin, ett„ se pystyy
+   suorittamaan vain hypyt ja joitain yleisimpi„ k„skyj„, kuten mov,
+   add, shl ja lea. Pairaaminen on n„iden kahden prosessorin toimintaa
+   yht„ aikaa samalla kellotaajuudella, eli U:n suorittaessa vaikkapa
+   movia, V suorittaa addia. Pairaaminen ei kuitenkaan ole n„in yksin-
+   kertaista, vaan toimii vain tietyiss„ olosuhteissa.
+
+   Esim.
+
+     Oletetaan, ett„ kaikkien k„skysarjojen alussa tilanne on neutraali,
+     eli ensimm„inen k„sky suoritetaan U-pipess„ (t„m„ tilanne saadaan
+     toteutettua vaikka laittamalla 'sti' sarjan eteen).
+
+       mov   eax,ebx ; suoritetaan U-pipess„.
+       add   ecx,edx ; suoritetaan V-pipess„, koska mik„„n ei sit„ est„.
+                     ; T„m„ ei vie k„yt„nn”ss„ yht„„n aikaa; se tapahtuu
+                     ; yht„ aikaa U-pipess„ olevan operaation kanssa.
+
+       mov   eax,ebx ; suoritetaan U-pipess„.
+       add   eax,2   ; ei voida suorittaa yht„ aikaa edellisen movin
+                     ; kanssa koska tarvitsee luonnollisesti ax:n uuden
+                     ; tuloksen.
+
+   Eli ensimm„inen olennainen asia, jonka pit„„ olla kohdallaan, on
+   rekisterien k„ytt”. Yleisesti: jos johonkin rekisteriin kirjoitetaan
+   ja seuraavassa k„skyss„ samaa rekisteri„ k„ytet„„n, niin k„skyt eiv„t
+   pairaa. Jos taas rekisterist„ luetaan, niin seuraava k„sky pairaa
+   vaikka siin„ k„ytett„isiin t„t„ rekisteri„ (joko lukemiseen tai kir-
+   joittamiseen). Oletus tietysti on, ett„ k„skyt itsess„„n pairaisivat
+   kesken„„n.
+
+   Esim.
+
+     mov   eax,ebx ; 1 kello; suoritetaan U-pipess„.
+     add   eax,ecx ; 1 kello; suoritetaan U-pipess„
+                   ; edellisen movin j„lkeen.
+                   ; yht. 2 kelloa
+
+     add   ebx,eax ; 1 kello; suoritetaan U-pipess„.
+     mov   edx,eax ; 0 kelloa; suoritetaan V-pipess„.
+                   ; yht. 1 kello
+
+   Edellisiss„ k„skyiss„ olemme olettaneet, ett„ kummatkin k„skyt pai-
+   raavat kummassakin pipess„. Vaikka t„m„ on yleisin ja selkein
+   tilanne, ei se yksin„„n anna sit„ viimeist„ sys„yst„, joka tekee
+   koodista todella nopeaa.
+
+   Esim.
+                         ; kellot
+     mov   ebx,edx       ;   1
+     shl   eax,1         ;   1  (ei pairaa V:ss„)
+                         ;  ---
+                         ;   2
+   Mutta:
+
+     shl   eax,1         ;   1
+     mov   ebx,edx       ;   0
+                         ;  ---
+                         ;   1
+
+   N„in, koska shl pairaa vain U-pipess„.
+
+     cmp   eax,ebx       ; 1 (U-pipess„)
+     jne   (johonkin)    ; 0 (pairaa vain V-pipess„)
+
+   Flagit p„ivittyv„t niin nopeasti ett„ ne ovat k„ytett„viss„ jo
+   samalla kellolla, jolloin esim. yll„oleva tapaus toimii.
+
+   On useita k„skyj„, jotka pairaavat vain U- tai V-pipess„ tai
+   eiv„t ollenkaan. Esimerkiksi shl ja rol pairaavat vain U-pipess„.
+   Hypyt pairaavat vain V-pipess„, cli ja mul taas eiv„t pairaa
+   miss„„n tapauksessa (varaavat molemmat pipet). Kun alkaa selvit-
+   t„„ mitk„ k„skyt pairaavat mink„kin kanssa, huomaa, ett„ alkaa
+   muodostaa pareja k„skyist„ ja/tai siirrell„ k„skyj„ paikkoihin,
+   joissa ne pairaavat. Tosin useat k„skyt toimivat hyvinkin tapaus-
+   kohtaisesti.
+     K„skyjen pairauss„„nn”t l”ytyv„t ainakin HelpPC:n pentium-p„i-
+   vityksest„, joka l”ytyy esim. MBnetist„.
+
+   Nyt alkavat pairauksen s„„nn”t olla teoria puolelta selvill„,
+   joten on aika soveltaa.
+
+   Optimointiesimerkiss„ teemme hitaasta viivanpiirtorutiinin inner
+   loopista nopean.
+
+     UV: pairaa kummassakin pipess„
+     NU: pairaa vain U-pipess„
+     NV: pairaa vain V-pipess„
+     NP: ei pairaa
+     ? : Muistin k„yt”n nopeus riippuu monesta asiasta.
+         Oletamme, ett„ tilanne on ihanteellinen.
+
+   Linedraw, innerloop 320*200*256-tilassa. Horizline eli piirt„„
+   vaakaviivan.
+   Looppiin tultaessa rekistereiden sis„ll”t ovat seuraavat:
+
+     eax = alku_x*256
+     edx = alku_y
+     [xp]=x_kerroin*256 (dd eli 32 bit)
+     [yp]=y_kerroin     (dd eli 32 bit)
+     ebx = 0
+
+   Koodi:
+                             ; Kellot Pipe Pairaus Kommentti
+   @@inner:                  ; -----------------------------
+     lea   edi,[edx+edx*4]   ;   1     U     UV     edi=edx*5
+     mov   bl,ah             ;   0     V     UV     ebx=ax/256
+     shl   edi,6             ;   1     U     NU     edi*=64
+     add   edi,ebx           ;   1     U     UV     edi+=ebx
+     add   edi,0a0000h       ;   0     U     UV     edi+=ruudunalku
+     mov   [edi],b 10d       ;   1?    U     UV     [edi]=10
+     add   edx,[yp]          ;   0?    V     UV     edx+=[yp]
+     add   eax,[xp]          ;   1?    U     UV     eax+=[xp]
+     dec   ecx               ;   0     U     UV     ecx-=1
+     jnz   short @@inner     ;   1     V     NV     jump if not zero
+                             ;  ---
+                             ;   6?
+
+   Pmodea k„ytet„„n yleens„ flatmodessa, joten n„ytt”muistin alku-
+   osoitte joudutaan lis„„m„„n ediin. Hyppy„ kanttaa k„ytt„„ shorttina,
+   koska et„isyys @@inneriin on tavuissa alle 128; n„in s„„styy 2 tavua
+   k„skyn k„„nnetyst„ versiosta.
+
+   Nyt saamme suoraan pois 'add edi,ebx':n muuttamalla laskun
+   'mov [edi+ebx+0a0000h],b 10d':ksi. J„rjestelemme k„skyt samalla niin,
+   ett„ ne pairaavat aina kun on mahdollista.
+
+                                       ; Kellot Pipe Pairaus Kommentti
+   @@inner:                            ; -----------------------------
+         lea   edi,[edx+edx*4]         ;   1     U     UV     edi=edx*5
+         mov   bl,ah                   ;   0     V     UV     ebx=ax/256
+
+         shl   edi,6                   ;   1     U     NU     edi*=64
+         add   edx,[yp]                ;   0?    V     UV     edx+=[yp]
+
+         mov   [edi+ebx+0a0000h],b 10d ;   1?    U     UV     []=10
+         add   eax,[xp]                ;   0?    V     UV     eax+=[xp]
+ 
+         dec   ecx                     ;   1     U     UV     ecx-=1
+         jnz   short @@inner           ;   0     V     NV     jump
+                                       ;  ---
+                                       ;   4?
+
+   Nopeus lis„„ntyi huomattavasti. Miinuksena koodista tulee seka-
+   vampaa, mutta se hinta on halpa nopeudesta. Tosin rivien, joilla
+   rekisteriin lis„t„„n [muuttuja], kellot ovat eritt„in kyseen-
+   alaisia ja luultavasti jotain ihan muuta kuin nollia. Joka ta-
+   pauksessa looppi pairaa nyt tehokkaimmillaan. Tuntuu vain turhal-
+   ta kertoa aina y 320:ll„.
+   T„m„ ongelma ratkeaa helposti kertomalla y:n kerroin headerissa
+   320:lla, jolloin loopista tulee seuraavanlainen:
+
+     eax=alku_x*256
+     edi=alku_y*320
+     [xp]=x_kerroin*256
+     [yp]=y_kerroin*320
+     edi=0a0000h
+     ebx=0
+                                   ; Kellot Pipe Pairaus Kommentti
+   @@inner:                        ; -----------------------------
+     mov   bl,ah                   ;   1     U     UV     ebx=ax/256
+     add   eax,[xp]                ;   0?    V     UV     eax+=[xp]
+
+     mov   [edi+ebx],b 10d         ;   1?    U     UV     []=10
+     add   edi,[yp]                ;   0?    V     UV     edi+=[yp]
+
+     dec   cx                      ;   1     U     UV     cx-=1
+     jnz   @@inner                 ;   0     V     NV     jump if not zero
+                                   ;  ---
+                                   ;   3?
+
+   Nopeaa? Tosin t„m„ on vain harhaa, sill„ nopeuteen vaikuttavat
+   my”s cache missit, joita tapahtuu usein, ja interruptit, jotka
+   keskeytt„v„t pairauksen ja usein tuottavat ik„v„sti viel„ cache
+   missin kaiken oman suoritusaikansa lis„ksi.
+
+   Cache miss on tilanne, jossa tarvittavaa dataa ei l”ydyk„„n proses-
+   sorin sis„isest„ muistista (1-level cache), jolloin data joudutaan
+   hakemaan ulkoisesta v„limuistista (2-level cache). T„m„ tiet„„
+   yleens„ parin kellon lis„yst„ looppiin ja pairauksen keskeytymist„.
+   Jos dataa ei l”ydy 2-level cachestakaan, se joudutaan hakemaan
+   varsinaisesta muistista, jolloin aikaa kuluu jo yli 10 kellon verran.
+   N„m„ hakuajat riippuvat suoraan siit„, mit„ muistia koneessa on, ja
+   erot voivat olla isojakin. Esim. 60ns multiaccess-edolta voi kulua
+   5 kelloa ja 70ns tavalliselta muistilta 15 kelloa. 2l-cachessa erot
+   pipelineburstin ja jonkun muun v„lill„ voivat vaihdella parikin
+   kelloa. T„ss„ vaiheessa puhkeaa siis se kupla, ett„ kaikki on kiinni
+   koodista :(
+
+   Mutta emme ole sent„„n ihan koneen armoilla. Cacheihin ei voi suo-
+   raan vaikuttaa, mutta muistin k„sittely„ voi nopeuttaa j„rjestele-
+   m„ll„ datat niin, ett„ esim. samassa loopissa k„ytett„v„t muuttujat
+   ovat muistissa per„kk„in ja dataa siirret„„n 32 tavun sarjoissa. 32
+   tavua on se maaginen palikka, mink„ ymp„rill„ pentium-optimoinnissa
+   py”rit„„n: dataa siirret„„n cachen ja perusmuistin v„lill„ 32 tavun
+   palikoissa, ja t„ll„inen palikka s„ilyy aina kokonaisena. Koodi ja
+   data kannattaa siis yritt„„ tehd„ 32 tavun aligmenttiin. Erityisesti
+   looppien ja niiden muuttujien on syyt„ olla niin v„h„ss„ m„„r„ss„
+   palikoita kuin mahdollista.
+
+   Aina kannattaa k„ytt„„ mielikuvitusta kun tekee isompia tai useita
+   looppeja, jotta saa kaiken mahdollisen hy”dyn irti 1l-cachesta.
+
+
+ 7.3 Paletinkvantisointi
+
+   [Tekstin kirjoitti alunperin Sampsa Lehtonen, julkaistaan edi-
+   toituna. Kiitos.]
+
+   7.3.1 Mit„ se oikeastaan on?
+
+     Paletinkvantisointi on tapa, jolla yritet„„n saada 256 (tai
+     vaikka 16 ;) -v„rinen tila mahdollisimman tyylikk„„ksi opti-
+     moimalla palettia. Kvantisointimenetelmi„ on useita, t„ss„
+     selostetaan Local K Mean -niminen systeemi. Se on todella hidas,
+     mutta tulos on vastaavasti eritt„in n„ytt„v„. Kajkin kuulemma
+     kyh„si t„m„n selostuksen pohjalta 'ihan kivan' systeemin :)
+
+   7.3.2 Abstrakti l„hestymistapa
+
+     Abstarkisti ajateltuna LK toimii seuraavasti: kvantisoitavan
+     kuvan ja/tai v„rien arvot kuvitellaan palloina v„riavaruudessa
+     (XYZ = RGB), joka on kuution muotoinen. Mit„ enemm„n tietty„
+     v„ri„ on, sen "isompi" pallo on. Avaruuteen lis„t„„n paletti-
+     palloja, jotka voivat liikkua vapaasti toisin kuin v„ripallot,
+     jotka ovat aina paikallaan. Palettipalloja on sen verran kuin
+     halutulla paletilla on kokoa (256 v„ri„ = 256 palloa).
+       Suoritetaan seuraava prosessi: jokainen v„ripallo k„yd„„n
+     l„pi, ja ne kutsuvat kullakin hetkell„ l„hinn„ olevaa paletti-
+     palloa. Mit„ isompi v„ripallo on, sit„ voimakkaammin se kutsuu.
+     Nyt suunnilleen kaikkiin palettipalloihin kohdistuu voima, joka
+     siirt„„ palloa suuntaan tai toiseen. (Pallon uusi koordinaatti
+     on sit„ kutsuvien v„ripallojen v„riarvojen keskiarvo, siis v„rien
+     summa jaettuna pallojen m„„r„ll„.)
+       Ne palettipallot, joihin ei kohdistu voimaa, "telewarppaavat"
+     jonkun v„ripallon kohdalle tai viereen. N„in palettipallot liik-
+     kuvat avaruudessa, kunnes niiden liike hidastuu tietyn tason
+     alle (uskokaa, kyll„ hidastuu). Sitten uusi paletti voidaan
+     lukea palettipallojen koordinaateista.
+
+   7.3.3 Teknisempi l„hestymistapa
+
+     Kuvitellaan, ett„ on t„ysv„rikuva, joka pit„„ muuttaa 256-v„ri-
+     seksi. Aluksi teemme kuvasta histogrammin, joka k„ytt„„ 15-bit-
+     tisi„ lukuja (tai mit„ tahansa 3*x-bittisi„ lukuja; 15-bittinen
+     taulukko on 65536 tavun kokoinen jos yhdelle v„rille on 2 tavun
+     suuruinen laskuri, 18-bittinen taulukko = 524288 tavua jne :)
+     HUOM! Aluksi histogrammi pit„„ tietysti nollata.
+
+     Nyt teemme toisen taulukon jossa on lista niist„ v„reist„, joita
+     kuvassa oikeasti on. K„ymme siis histogrammin l„pi, ja jokaisessa
+     kohdassa, jossa v„ri„ on enemm„n kuin nolla, pist„mme taulukkoon
+     v„rin arvon ja m„„r„n.
+     Taulukko voi olla esim. muotoa
+
+       typedef struct {
+         unsigned char R,G,B;         // v„riarvot
+         unsigned long count;         // v„rim„„r„ kuvassa
+       } colorListStruct;
+       colorListStruct colorList[32768];
+
+     Lis„ksi eri v„rien m„„r„ talletetaan esim. colorListCountiin.
+
+     Seuraavaksi teemme peruspaletin. Olkoon se muotoa
+
+       unsigned long palette[256][3]; // 3: R,G & B
+
+     Peruspaletin lis„ksi tarvitsemme kaksi muuta muuttujaa: 256:n
+     v„rin kokoisen v„rilaskuritaulukon muotoa
+
+       unsigned long colorSum[256][3]; // 256 v„ri„, 3 = R,G & B,
+
+     ja laskuritaulukon muotoa
+
+       unsigned long colorCount[256];
+
+     (Voidaan yhdist„„ kyll„ colorSummiinkin..)
+     Sitten viel„ muuttuja joka pit„„ kirjaa paletin muutoksista:
+
+       unsigned long variance;
+
+     Seuraavaksi k„yd„„n l„pi seuraavia askelia:
+
+       1) Nollaa colorSum- ja colorCount-taulukot, ja t„yt„ palette
+          colorListin alussa olevilla v„reill„
+
+       2) K„y l„pi kaikki v„rit colorList:ist„ (c = 0..colorListCount)
+         a) ota colorListist„ v„ri c
+         b) katso sille l„hin v„ri palette-muuttujasta (saadaan numero
+             x=0..256)
+         c) lis„„ l„himm„n v„rin colorSum-taulukkoon colorListist„
+            saatu v„ri
+            esim. colorSum[x][0] += colorList[c].R;
+                  colorSum[x][1] += colorList[c].G;
+                  colorSum[x][2] += colorList[c].B;
+         d) lis„„ colorCountia kohdassa x (colorCount[x]++;)
+
+       3) Nollaa variance
+
+       4) K„y l„pi kaikki v„rit peruspaletista (c = 0..255)
+         a) jos colorCount > 0
+              laske R, G ja B-arvot colorSummin ja colorCountin avulla
+              eli keskiarvov„ri:
+              R = colorSum[c][0] / colorCount[c];
+              jne...
+            muuten
+              ota satunnainen luku colorListist„
+              R,G & B <- colorList[RANDOM]
+         b) mittaa paletin vaihtelu:
+            temp = abs(R-palette[c][0]); //punaisen v„rin vaihdos
+            variance+=temp;              //ota yl”s
+            jne...
+         c) kirjaa uusi v„ri: palette[c][0] = R jne..
+
+       5) nollaa colorSum ja colorCount
+
+       6) jos variance > MAX_VARIANCE mene kohtaan 2
+          (MAX_VARIANCE on raja, jolloin paletti on "valmis". Mit„
+          pienempi luku, sen hitaampi prosessi.)
+
+
+
+
+
+EOF

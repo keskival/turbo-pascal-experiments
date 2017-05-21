@@ -1,0 +1,948 @@
+
+{*******************************************************}
+{                                                       }
+{       Delphi Runtime Library                          }
+{       Windows API Interface Unit                      }
+{                                                       }
+{       Copyright (c) 1991,95 Borland International     }
+{                                                       }
+{*******************************************************}
+
+unit WinProcs;
+
+interface
+
+uses WinTypes;
+
+{ function changed from Windows 3.0 to Windows 3.1 }
+procedure AnsiToOem(AnsiStr, OemStr: PChar);
+procedure AnsiToOemBuff(AnsiStr, OemStr: PChar; Length: Word);
+function BringWindowToTop(Wnd: HWnd): Bool;
+function EndDeferWindowPos(WinPosInfo: THandle): Bool;
+function Escape(DC: HDC; Escape, Count: Integer; InData: PChar;
+  OutData: Pointer): Integer;
+function GetMenuItemCount(Menu: HMenu): Integer;
+function GetInstanceData(Instance: THandle; Data: PByte;
+  Count: Integer): Integer;
+procedure GlobalUnfix(Mem: THandle);
+procedure OemToAnsi(OemStr, AnsiStr: PChar);
+procedure OemToAnsiBuff(OemStr, AnsiStr: PChar; Length: Word);
+function SetResourceHandler(Instance: THandle; ResType: PChar;
+  LoadFunc: TFarProc): TFarProc;
+procedure UnlockSegment(Segment: Word);
+function CreateBitmap(Width, Height: Integer; Planes, BitCount: Word;
+  Bits: Pointer): HBitmap;
+
+{ functions new to Windows 3.1 }
+function GetTextExtentPoint(DC: HDC; Str: PChar; Count: Integer;
+  var Size: TSize): Bool;
+function GetSystemDebugState: Longint;
+function LockInput(h1: THandle; hwndInput: HWnd; fLock: Bool): Bool;
+function QuerySendMessage(h1, h2, h3: THandle; lpmsg: PMsg): Bool;
+function EnumFonts(DC: HDC; lpszFace: PChar; fntenmprc: TOldFontEnumProc;
+  lpszData: PChar): Integer;
+function GetWinDebugInfo(DebugInfo: PWinDebugInfo; Flags: Word): Bool;
+function SetWinDebugInfo(DebugInfo: PWinDebugInfo): Bool;
+function IsBadReadPtr(lp: Pointer; cb: Word): Bool;
+function IsBadWritePtr(lp: Pointer; cb: Word): Bool;
+function IsBadHugeReadPtr(lp: Pointer; cb: Longint): Bool;
+function IsBadHugeWritePtr(lp: Pointer; cb: Longint): Bool;
+function IsBadCodePtr(lpfn: TFarProc): Bool;
+function IsBadStringPtr(lpsz: PChar; cchMax: Word): Bool;
+procedure DirectedYield(Task: TTask);
+function PrestoChangoSelector(SourceSel, DestSel: Word): Word;
+function GetSelectorBase(Selector: Word): Longint;
+function SetSelectorBase(Selector: Word; Base: Longint): Word;
+function GetSelectorLimit(Selector: Word): Longint;
+function SetSelectorLimit(Selector: Word; Base: Longint): Word;
+
+function GetDriverInfo(hDriver: THandle; lpdis: PDriverInfoStruct): Bool;
+function GetWindowPlacement(Wnd: HWnd; Placement: PWindowPlacement): Bool;
+function SetWindowPlacement(Wnd: HWnd; Placement: PWindowPlacement): Bool;
+function DlgDirSelectEx(Dlg: HWnd; Path: PChar; cbPath: Integer;
+  ListBox: Integer): Bool;
+function DlgDirSelectComboBoxEx(Dlg: HWnd; Path: PChar; cbPath: Integer;
+  ComboBox: Integer): Bool;
+function GetTimerResolution: Longint;
+function ExitWindowsExec(Exe: PChar; Params: PChar): Bool;
+
+function SpoolFile(Printer, Port, Job, F: PChar): THandle;
+function QueryAbort(DC: HDC; Reserved: Integer): Bool;
+function SetWindowOrgEx(DC: HDC; nX, nY: Integer; Point: PPoint): Bool;
+function GetWindowOrgEx(DC: HDC; Point: PPoint): Bool;
+function SetWindowExtEx(DC: HDC; nX, nY: Integer; Size: PSize): Bool;
+function GetWindowExtEx(DC: HDC; Size: PSize): Bool;
+function OffsetWindowOrgEx(DC: HDC; nX, nY: Integer; Point: PPoint): Bool;
+function ScaleWindowExtEx(DC: HDC; Xnum, Xdenom, Ynum, Ydenom: Integer;
+  Size: PSize): Bool;
+function SetViewportExtEx(DC: HDC; nX, nY: Integer; Size: PSize): Bool;
+function GetViewportExtEx(DC: HDC; Size: PSize): Bool;
+function SetViewportOrgEx(DC: HDC; nX, nY: Integer; Point: PPoint): Bool;
+function GetViewportOrgEx(DC: HDC; Point: PPoint): Bool;
+function OffsetViewportOrgEx(DC: HDC; nX, nY: Integer; Point: PPoint): Bool;
+function ScaleViewportExtEx(DC: HDC; Xnum, Xdenom, Ynum, Ydenom: Integer;
+  Size: PSize): Bool;
+function GetBrushOrgEx(DC: HDC; Point: PPoint): Bool;
+function MoveToEx(DC: HDC; nX, nY: Integer; Point: PPoint): Bool;
+function GetCurrentPositionEx(DC: HDC; Point: PPoint): Bool;
+function GetAspectRatioFilterEx(DC: HDC; Size: PSize): Bool;
+function EnumFontFamilies(DC: HDC; Family: PChar;
+  EnumProc: TFontEnumProc; Data: PChar): Integer;
+function GetKerningPairs(DC: HDC; i: Integer; Pair: PKerningPair): Integer;
+function SetBitmapDimensionEx(BM: HBitmap; nX, nY: Integer; Size: PSize): Bool;
+function GetBitmapDimensionEx(BM: HBitmap; Size: PSize): Bool;
+function SetMetaFileBitsBetter(mf: THandle): THandle;
+function StartDoc(DC: HDC; var di: TDocInfo): Integer;
+function StartPage(DC: HDC): Integer;
+function EndPage(DC: HDC): Integer;
+function EndDoc(DC: HDC): Integer;
+function AbortDoc(DC: HDC): Integer;
+function SetAbortProc(DC: HDC; AbortProc: TAbortProc): Integer;
+
+function IsTask(Task: THandle): Bool;
+function GetFreeSystemResources(SysResource: Word): Word;
+function GlobalPtrHandle(P: Pointer): THandle;
+function GlobalAllocPtr(Flags: Word; Bytes: Longint): Pointer;
+function GlobalReAllocPtr(P: Pointer; Bytes: Longint; Flags: Word): Pointer;
+function GlobalFreePtr(P: Pointer): THandle;
+function GlobalLockPtr(P: Pointer): Pointer;
+function GlobalUnlockPtr(P: Pointer): Bool;
+function GetInstanceModule(Instance: THandle): THandle;
+procedure LogError(Err: Word; Info: Pointer);
+procedure LogParamError(Err: Word; fn: TFarProc; Param: Pointer);
+function IsDBCSLeadByte(Ch: Byte): Bool;
+function GetDCEx(Wnd: HWnd; Clip: HRgn; Flags: Longint): HDC;
+function IsGDIObject(Obj: THandle): Bool;
+function SetBoundsRect(DC: HDC; var Bounds: TRect; Flags: Word): Word;
+function GetBoundsRect(DC: HDC; var Bounds: TRect; Flags: Word): Word;
+function ConvertOutlineFontFile(A, B, C: PChar): Longint;
+function GetFontData(hdc: HDC; dwTable, dwOffset: Longint; lpvBuffer: PChar;
+  cbData: Longint): Longint;
+function GetGlyphOutline(hdc: HDC; uChar, fuFormat: Word;
+  var lpgm: TGlyphMetrics; cbBuffer: Longint; lpBuffer: PChar;
+  var lpMat2: TMat2): Longint;
+function CreateScalableFontResource(fHidden: Word; lpszResourceFile,
+  lpszFontFile, lpszCurrentPath: PChar): Bool;
+function GetCharABCWidths(hdc: HDC; uFirstChar, uLastChar: Word;
+  var lpabc: TABC): Bool;
+function GetRasterizerCaps(var lpRastStat: TRasterizer_Status;
+  cbNumBytes: Integer): Bool;
+function GetOutlineTextMetrics(hdc: HDC; cbData: Word;
+  lpotm: POutlineTextMetric): Word;
+function GetMessageExtraInfo: Longint;
+function GetOpenClipboardWindow: HWnd;
+function GetQueueStatus(Flags: Word): Longint;
+function IsMenu(Menu: HMenu): Bool;
+function RedrawWindow(Wnd: HWnd; UpdateRect: PRect; UpdateRgn: HRgn;
+  Flags: Word): Bool;
+function LockWindowUpdate(Wnd: HWnd): Bool;
+function ScrollWindowEx(Wnd: HWnd; dx, dy: Integer; Scroll, Clip: PRect; UpdateRgn: HRgn;
+  UpdateRect: PRect; Flags: Word): Integer;
+function EnableScrollBar(hwnd: HWnd; fnSBFlags: Integer;
+  fuArrowFlags: Word): Bool;
+function CopyCursor(hInst: THandle; hCur: HCursor): HCursor;
+function GetCursor: HCursor;
+procedure GetClipCursor(var Rect: TRect);
+function CopyIcon(hInst: THandle; Icon: HIcon): HIcon;
+procedure MapWindowPoints(FromWnd, ToWnd: HWnd; var Point; Count: Word);
+procedure MapWindowRect(FromWnd, ToWnd: HWnd; var Rect: TRect);
+function SubtractRect(var Dest, Source1, Source2: TRect): Bool;
+function SetWindowsHookEx(HookId: Integer; Hook: THookProc; Module, Task: THandle): HHook;
+function UnhookWindowsHookEx(Hook: HHook): Bool;
+function CallNextHookEx(Hook: HHook; Code: Integer; wParam: Word; lParam: Longint): Longint;
+function EnableCommNotification(idComDev: Integer; hwnd: HWnd;
+  cbWriteNotify, cbOutQueue: Integer): Bool;
+function OpenDriver(DriverName, SectionName: PChar; lParam2: Longint): THandle;
+function CloseDriver(Driver: THandle; lParam1, lParam2: Longint): Longint;
+function GetDriverModuleHandle(Driver: THandle): THandle;
+function SendDriverMessage(Driver: THandle; message: Word; lParam1,
+  lParam2: Longint): Longint;
+function GetNextDriver(Driver: THandle; lParam: Longint): THandle;
+
+function lstrcpyn(String1, String2: PChar; i: Integer): PChar;
+procedure hmemcpy(p1, p2: Pointer; L: Longint);
+
+function DefDriverProc(DriverIdentifier: Longint; DriverId: THandle; Message: Word; lParam1, lParam2: Longint): Longint;
+function SystemParametersInfo(Action, wParam: Word; lParam: Pointer;
+  UpdateWinIni: Word): Bool;
+
+{ Network support }
+
+function WNetAddConnection(lpszNetPath, lpszPassword,
+  lpszLocalName: PChar): Word;
+function WNetGetConnection(lpszLocalName, lpszRemoteName: PChar;
+  cbBufferSize: PWord): Word;
+function WNetCancelConnection(lpszName: PChar; tForce: Bool): Word;
+
+{ Provided for compatiblity only.  Should use the Pascal RTL functions
+  Ptr, Off, and Seg instead. }
+
+function MakeLP(Sel, Off: Word): Pointer;
+inline(
+  $5A/    { POP DX }
+  $58);   { POP AX }
+
+function SelectorOf(lp: Pointer): THandle;
+inline(
+  $5A/    { POP DX }
+  $58);   { POP AX }
+
+function OffsetOf(lp: Pointer): Word;
+inline(
+  $58/    { POP AX }
+  $5A);   { POP DX }
+
+{ functions introduced in Windows 3.0 or earlier }
+function AccessResource(Instance, ResInfo: THandle): Integer;
+function AddAtom(Str: PChar): TAtom;
+function AddFontResource(Filename: PChar): Integer;
+procedure AdjustWindowRect(var Rect: TRect; Style: LongInt; Menu: Bool);
+procedure AdjustWindowRectEx(var Rect: TRect; Style: LongInt; Menu: Bool;
+  ExtStyle: LongInt);
+function AllocCStoDSAlias(Selector: Word): Word;
+function AllocDStoCSAlias(Selector: Word): Word;
+function AllocResource(Instance: THandle; ResInfo: THandle;
+  Size: LongInt): THandle;
+function AllocSelector(Selector: Word): Word;
+procedure AnimatePalette(Palette: HPalette; StartIndex,	NumEntires: Word; 
+  var PaletteColors);
+function AnsiLower(Str: PChar): PChar;
+function AnsiLowerBuff(Str: PChar; Length: Word): Word;
+function AnsiNext(CurrentChar: PChar): PChar;
+function AnsiPrev(Start, CurrentChar: PChar): PChar;
+function AnsiUpper(Str: PChar): PChar;
+function AnsiUpperBuff(Str: PChar; Length: Word): Word;
+function AnyPopup: Bool;
+function AppendMenu(Menu: HMenu; Flags, IDNewItem: Word;
+  NewItem: PChar): Bool;
+function Arc(DC: HDC; X1, Y1, X2, Y2, X3, Y3, X4, Y4: Integer): Bool;
+function ArrangeIconicWindows(Wnd: HWnd): Word;
+function BeginDeferWindowPos(NumWindows: Integer): THandle;
+function BeginPaint(Wnd: HWnd; var Paint: TPaintStruct): HDC;
+function BitBlt(DestDC: HDC; X, Y, nWidth, Height: Integer; SrcDC: HDC; 
+  XSrc, YSrc: Integer; Rop: LongInt): Bool;
+function BuildCommDCB(Def: PChar; var DCB: TDCB): Integer;
+function CallMsgFilter(var Msg: TMsg; Code: Integer): Bool;
+function CallWindowProc(PrevWndFunc: TFarProc; Wnd: HWnd; Msg, wParam: Word;
+  lParam: LongInt): LongInt;
+function Catch(var CatchBuf: TCatchBuf): Integer;
+function ChangeClipboardChain(Wnd, WndNext: HWnd): Bool;
+function ChangeMenu(A: HMenu; B: Word; C: PChar; D: Word; E: Word): Bool;
+function ChangeSelector(DestSelector, SourceSelector: Word): Word;
+procedure CheckDlgButton(Dlg: HWnd; IDButton: Integer; Check: Word);
+function CheckMenuItem(Menu: HMenu; IDCheckItem, Check: Word): Bool;
+procedure CheckRadioButton(Dlg: HWnd; IDFirstButton, IDLastButton,
+  IDCheckButton: Integer);
+function ChildWindowFromPoint(Wnd: HWnd; Point: TPoint): HWnd;
+function Chord(DC: HDC; X1, Y1, X2, Y2, X3, Y3, X4, Y4: Integer): Bool;
+function ClearCommBreak(Cid: Integer): Integer;
+procedure ClientToScreen(Wnd: HWnd; var Point: TPoint);
+procedure ClipCursor(Rect: PRect);
+function CloseClipboard: Bool;
+function CloseComm(Cid: Integer): Integer;
+function CloseMetaFile(DC: THandle): THandle;
+procedure CloseSound;
+procedure CloseWindow(Wnd: HWnd);
+function CombineRgn(DestRgn, SrcRgn1, SrcRgn2: HRgn;
+  CombineMode: Integer): Integer;
+function CopyMetaFile(SrcMetaFile: THandle; FileName: PChar): THandle;
+procedure CopyRect(var DestRect: TRect; const SourceRect: TRect);
+function CountClipboardFormats: Integer;
+function CountVoiceNotes(Voice: Integer): Integer;
+function CreateBitmapIndirect(var Bitmap: TBitmap): HBitmap;
+function CreateBrushIndirect(var LogBrush: TLogBrush): HBrush;
+procedure CreateCaret(Wnd: HWnd; Bitmap: HBitmap;
+  Width, Height: Integer);
+function CreateCompatibleBitmap(DC: HDC; Width, Height: Integer): HBitmap;
+function CreateCompatibleDC(DC: HDC): HDC;
+function CreateCursor(Instance: THandle; Xhotspot, Yhotspot: Integer;
+  Width, Height: Integer; ANDbitPlane, XORbitPlane: Pointer): HCursor;
+function CreateDC(DriverName, DeviceName, OutPut: PChar;
+  InitData: Pointer): HDC;
+function CreateDialog(Instance: THandle; TemplateName: PChar;
+  WndParent: HWnd; DialogFunc: TFarProc): HWnd;
+function CreateDialogIndirect(Instance: THandle; DialogTemplate: Pointer;
+  WndParent: HWnd; DialogFunc: TFarProc): HWnd;
+function CreateDialogIndirectParam(Instance: THandle;
+  DialogTemplate: Pointer; WndParent: HWnd; DialogFunc: TFarProc;
+  InitParam: LongInt): HWnd;
+function CreateDialogParam(Instance: THandle; TemplateName: PChar;
+  WndParent: HWnd; DialogFunc: TFarProc; InitParam: LongInt): HWnd;
+function CreateDIBitmap(DC: HDC; var InfoHeader: TBitmapInfoHeader;
+  dwUsage: LongInt; InitBits: PChar; var InitInfo: TBitmapInfo;
+  wUsage: Word): HBitmap;
+function CreateDIBPatternBrush(PackedDIB: THandle; Usage: Word): HBrush;
+function CreateDiscardableBitmap(DC: HDC; Width, Height: Integer): HBitmap;
+function CreateEllipticRgn(X1, Y1, X2, Y2: Integer): HRgn;
+function CreateEllipticRgnIndirect(const Rect: TRect): HRgn;
+function CreateFont(Height, Width, Escapement, Orientation,
+  Weight: Integer; Italic, Underline, StrikeOut, CharSet, OutputPrecision, 
+  ClipPrecision, Quality, PitchAndFamily: Byte;	Facename: PChar): HFont;
+function CreateFontIndirect(var LogFont: TLogFont): HFont;
+function CreateHatchBrush(Index: Integer; Color: TColorRef): HBrush;
+function CreateIC(DriverName, DeviceName, Output: PChar;
+  InitData: Pointer): HDC;
+function CreateIcon(Instance: THandle; Width, Height: Integer;
+  Planes, BitsPixel: Byte; ANDbits, XORbits: Pointer): HIcon;
+function CreateMenu: HMenu;
+function CreateMetaFile(Filename: PChar): THandle;
+function CreatePalette(var LogPalette: TLogPalette): HPalette;
+function CreatePatternBrush(Bitmap: HBitmap): HBrush;
+function CreatePen(PenStyle, Width: Integer; Color: TColorRef): HPen;
+function CreatePenIndirect(var LogPen: TLogPen): HPen;
+function CreatePolygonRgn(var Points; Count, PolyFillMode: Integer): HRgn;
+function CreatePolyPolygonRgn(var Points; var PolyCounts; Count,
+  PolyFillMode: Integer): HRgn;
+function CreatePopupMenu: HMenu;
+function CreateRectRgn(X1, Y1, X2, Y2: Integer): HRgn;
+function CreateRectRgnIndirect(const Rect: TRect): HRgn;
+function CreateRoundRectRgn(X1, Y1, X2, Y2, X3, Y3: Integer): HRgn;
+function CreateSolidBrush(Color: TColorRef): HBrush;
+function CreateWindow(ClassName, WindowName: PChar; Style: LongInt;
+  X, Y, Width, Height: Integer; WndParent: HWnd; Menu: HMenu;
+  Instance: THandle; Param: Pointer): HWnd;
+function CreateWindowEx(ExStyle: LongInt; ClassName, WindowName: PChar;
+  Style: LongInt; X, Y, Width, Height: Integer; WndParent: HWnd;
+  Menu: HMenu; Instance: THandle; Param: Pointer): HWnd;
+procedure DebugBreak;
+function DefDlgProc(Dlg: HWnd; Msg, wParam: Word; lParam: LongInt): LongInt;
+function DeferWindowPos(WinPosInfo: THandle; Wnd, WndInsertAfter: HWnd;
+  x, y, cx, cy: Integer; Flags: Word): THandle;
+function DefFrameProc(Wnd, WndMDIClient: HWnd; Msg, wParam: Word; 
+  lParam: LongInt): LongInt;
+function DefHookProc(Code: Integer; wParam: Word; lParam: LongInt;
+  lpfnNextHook: TFarProc): LongInt;
+function DefineHandleTable(Offset: Word): Bool;
+function DefMDIChildProc(Wnd: HWnd; Msg, wParam: Word;
+  lParam: LongInt): LongInt;
+function DefWindowProc(Wnd: HWnd; Msg, wParam: Word; 
+  lParam: LongInt): LongInt;
+function DeleteAtom(AnAtom: TAtom): TAtom;
+function DeleteDC(DC: HDC): Bool;
+function DeleteMenu(Menu: HMenu; Position, Flags: Word): Bool;
+function DeleteMetaFile(MF: THandle): Bool;
+function DeleteObject(Handle: THandle): Bool;
+procedure DestroyCaret;
+function DestroyCursor(Cursor: HCursor): Bool;
+function DestroyIcon(Icon: HIcon): Bool;
+function DestroyMenu(Menu: HMenu): Bool;
+function DestroyWindow(Wnd: HWnd): Bool;
+function DialogBox(Instance: THandle; Templatename: PChar;
+  WndParent: HWnd; DialogFunc: TFarProc): Integer;
+function DialogBoxIndirect(Instance, DialogTemplate: THandle; WndParent: HWnd; 
+  DialogFunc: TFarProc): Integer;
+function DialogBoxIndirectParam(Instance, DialogTemplate: THandle;
+  WndParent: HWnd; DialogFunc: TFarProc; InitParam: LongInt): Integer;
+function DialogBoxParam(Instance: THandle; TemplateName: PChar;
+  WndParent: HWnd; DialogFunc: TFarProc; InitParam: LongInt): Integer;
+function DispatchMessage(var Msg: TMsg): LongInt;
+function DlgDirList(Dlg: HWnd; PathSpec: PChar; IDListBox,
+  IDStaticPath: Integer; Filetype: Word): Integer;
+function DlgDirListComboBox(Dlg: HWnd; PathSpec: PChar; IDComboBox,
+ IDStaticText: Integer; Filetype: Word): Integer;
+function DlgDirSelect(Dlg: HWnd; Str: PChar; IDListBox: Integer): Bool;
+function DlgDirSelectComboBox(Dlg: HWnd; Str: PChar;
+  IDComboBox: Integer): Bool;
+procedure DOS3Call;
+function DPtoLP(DC: HDC; var Points; Count: Integer): Bool;
+procedure DrawFocusRect(DC: HDC; const Rect: TRect);
+function DrawIcon(DC: HDC; X, Y: Integer; Icon: HIcon): Bool;
+procedure DrawMenuBar(Wnd: HWnd);
+function DrawText(DC: HDC; Str: PChar; Count: Integer; const Rect: TRect;
+  Format: Word): Integer;
+function Ellipse(DC: HDC; X1, Y1, X2, Y2: Integer): Bool;
+function EmptyClipboard: Bool;
+function EnableHardwareInput(EnableInput: Bool): Bool;
+function EnableMenuItem(Menu: HMenu; IDEnableItem: Word;
+  Enable: Word): Bool;
+function EnableWindow(Wnd: HWnd; Enable: Bool): Bool;
+procedure EndDialog(Dlg: HWnd; Result: Integer);
+procedure EndPaint(Wnd: HWnd; var Paint: TPaintStruct);
+function EnumChildWindows(WndParent: HWnd; EnumFunc: TFarProc;
+  lParam: LongInt): Bool;
+function EnumClipboardFormats(Format: Word): Word;
+function EnumMetaFile(DC: HDC; MF: THandle; CallbackFunc: TFarProc;
+  ClientData: Pointer): Bool;
+function EnumObjects(DC: HDC; ObjectType: Integer; ObjectFunc: TFarProc;
+  Data: Pointer): Integer;
+function EnumProps(Wnd: HWnd; EnumFunc: TFarProc): Integer;
+function EnumTaskWindows(Task: THandle; EnumFunc: TFarProc;
+  lParam: LongInt): Bool;
+function EnumWindows(EnumFunc: TFarProc; lParam: LongInt): Bool;
+function EqualRect(const Rect1, Rect2: TRect): Bool;
+function EqualRgn(SrcRgn1, SrcRgn2: HRgn): Bool;
+function EscapeCommFunction(Cid: Integer; Func: Integer): LongInt;
+function ExcludeClipRect(DC: HDC; X1, Y1, X2, Y2: Integer): Integer;
+function ExcludeUpdateRgn(DC: HDC; Wnd: HWnd): Integer;
+function ExitWindows(ReturnCode: LongInt; Reserved: Word): Bool;
+function ExtFloodFill(DC: HDC; X, Y: Integer; Color: TColorRef;
+  FillType: Word): Bool;
+function ExtTextOut(DC: HDC; X, Y: Integer; Options: Word;
+  Rect: PRect; Str: PChar; Count: Word; Dx: PInteger): Bool;
+procedure FatalAppExit(Action: Word; MessageText: PChar);
+procedure FatalExit(Code: Integer);
+function FillRect(DC: HDC; const Rect: TRect; Brush: HBrush): Integer;
+function FillRgn(DC: HDC; Rgn: HRgn; Brush: HBrush): Bool;
+function FindAtom(Str: PChar): TAtom;
+function FindResource(Instance: THandle; Name, ResType: PChar): THandle;
+function FindWindow(Classname, WindowName: PChar): HWnd;
+function FlashWindow(Wnd: HWnd; Invert: Bool): Bool;
+function FloodFill(DC: HDC; X, Y: Integer; Color: TColorRef): Bool;
+function FlushComm(Cid, Queue: Integer): Integer;
+procedure FrameRect(DC: HDC; const Rect: TRect; Brush: HBrush);
+function FrameRgn(DC: HDC; Rgn: HRgn; Brush: HBrush; Width,
+  Height: Integer): Bool;
+procedure FreeLibrary(LibModule: THandle);
+function FreeModule(Module: THandle): Bool;
+procedure FreeProcInstance(Proc: TFarProc);
+function FreeResource(ResData: THandle): Bool;
+function FreeSelector(Selector: Word): Word;
+function GetActiveWindow: HWnd;
+function GetAspectRatioFilter(DC: HDC): LongInt;
+function GetAsyncKeyState(Key: Integer): Integer;
+function GetAtomHandle(AnAtom: TAtom): THandle;
+function GetAtomName(AnAtom: TAtom; Buffer: PChar; Size: Integer): Word;
+function GetBitmapBits(Bitmap: HBitmap; Count: LongInt; 
+  Bits: Pointer): LongInt;
+function GetBitmapDimension(Bitmap: HBitmap): LongInt;
+function GetBkColor(DC: HDC): LongInt;
+function GetBkMode(DC: HDC): Integer;
+function GetBrushOrg(DC: HDC): LongInt;
+function GetCapture: HWnd;
+function GetCaretBlinkTime: Word;
+procedure GetCaretPos(var Point: TPoint);
+function GetCharWidth(DC: HDC; FirstChar, LastChar: Word;
+  var Buffer): Bool;
+function GetClassInfo(Instance: THandle; ClassInfo: PChar;
+  var WndClass: TWndClass): Bool;
+function GetClassLong(Wnd: HWnd; Index: Integer): LongInt;
+function GetClassName(Wnd: HWnd; ClassName: PChar; 
+  MaxCount: Integer): Integer;
+function GetClassWord(Wnd: HWnd; Index: Integer): Word;
+procedure GetClientRect(Wnd: HWnd; var Rect: TRect);
+function GetClipboardData(Format: Word): THandle;
+function GetClipboardFormatName(Format: Word; FormatName: PChar; 
+  MaxCount: Integer): Integer;
+function GetClipboardOwner: HWnd;
+function GetClipboardViewer: HWnd;
+function GetClipBox(DC: HDC; var Rect: TRect): Integer;
+function GetCodeHandle(Proc: TFarProc): THandle;
+procedure GetCodeInfo(Proc: TFarProc; SegInfo: Pointer);
+function GetCommError(Cid: Integer; var Stat: TComStat): Integer;
+function GetCommEventMask(Cid, EvtMask: Integer): Word;
+function GetCommState(Cid: Integer; var DCB: TDCB): Integer;
+function GetCurrentPDB: Word;
+function GetCurrentPosition(DC: HDC): LongInt;
+function GetCurrentTask: THandle;
+function GetCurrentTime: LongInt;
+procedure GetCursorPos(var Point: TPoint);
+function GetDC(Wnd: HWnd): HDC;
+function GetDCOrg(DC: HDC): LongInt;
+function GetDesktopHwnd: HWnd;
+function GetDesktopWindow: HWnd;
+function GetDeviceCaps(DC: HDC; Index: Integer): Integer;
+function GetDialogBaseUnits: LongInt;
+function GetDIBits(DC: HDC; Bitmap: HBitmap; StartScan, NumScans: Word; 
+  Bits: Pointer; var BitInfo: TBitmapInfo; Usage: Word): Integer;
+function GetDlgCtrlID(Wnd: HWnd): Integer;
+function GetDlgItem(Dlg: HWnd; IDDlgItem: Integer): HWnd;
+function GetDlgItemInt(Dlg: HWnd; IDDlgItem: Integer;
+  Translate: PBool; Signed: Bool): Word;
+function GetDlgItemText(Dlg: HWnd; IDDlgItem: Integer; Str: PChar;
+  MaxCount: Integer): Integer;
+function GetDOSEnvironment: PChar;
+function GetDoubleClickTime: Word;
+function GetDriveType(Drive: Integer): Word;
+function GetEnvironment(PortName: PChar; Environ: Pointer;
+  MaxCount: Word): Integer;
+function GetFocus: HWnd;
+function GetFreeSpace(Flag: Word): LongInt;
+function GetInputState: Bool;
+function GetKBCodePage: Integer;
+procedure GetKeyboardState(var KeyState: TKeyboardState);
+function GetKeyboardType(TypeFlag: Integer): Integer;
+function GetKeyNameText(lParam: LongInt; Buffer: PChar;
+  Size: Integer): Integer;
+function GetKeyState(VirtKey: Integer): Integer;
+function GetLastActivePopup(Owner: HWnd): HWnd;
+function GetMapMode(DC: HDC): Integer;
+function GetMenu(Wnd: HWnd): HMenu;
+function GetMenuCheckMarkDimensions: LongInt;
+function GetMenuItemID(Menu: HMenu; Pos: Integer): Word;
+function GetMenuState(Menu: HMenu; Id, Flags: Word): Word;
+function GetMenuString(Menu: HMenu; IDItem: Word; Str: PChar; 
+  MaxCount: Integer; Flag: Word): Integer;
+function GetMessage(var Msg: TMsg; Wnd: HWnd; MsgFilterMin,
+  MsgFilterMax: Word): Bool;
+function GetMessagePos: LongInt;
+function GetMessageTime: LongInt;
+function GetMetaFile(Filename: PChar): THandle;
+function GetMetaFileBits(MF: THandle): THandle;
+function GetModuleFileName(Module: THandle; Filename: PChar; Size: Integer): Integer;
+function GetModuleHandle(ModuleName: PChar): THandle;
+function GetModuleUsage(Module: THandle): Integer;
+function GetNearestColor(DC: HDC; Color: TColorRef): TColorRef;
+function GetNearestPaletteIndex(Palette: HPalette; Color: TColorRef): Word;
+function GetNextDlgGroupItem(Dlg, Ctl: HWnd; Previous: Bool): HWnd;
+function GetNextDlgTabItem(Dlg, Ctl: HWnd; Previous: Bool): HWnd;
+function GetNextWindow(Wnd: HWnd; Flag: Word): HWnd;
+function GetNumTasks: Word;
+function GetObject(hObject: THandle; Count: Integer;
+  lpObject: Pointer): Integer;
+function GetPaletteEntries(Palette: HPalette; StartIndex, NumEntries: Word;
+  var PaletteEntries): Word;
+function GetParent(Wnd: HWnd): HWnd;
+function GetPixel(DC: HDC; X, Y: Integer): TColorRef;
+function GetPolyFillMode(DC: HDC): Integer;
+function GetPriorityClipboardFormat(var PriorityList;
+  Count: Integer): Integer;
+function GetPrivateProfileInt(ApplicationName, KeyName: PChar; 
+  Default: Integer; FileName: PChar): Word;
+function GetPrivateProfileString(ApplicationName, KeyName: PChar; 
+  Default: PChar; ReturnedString: PChar; Size: Integer; 
+  FileName: PChar): Integer;
+function GetProcAddress(Module: THandle; ProcName: PChar): TFarProc;
+function GetProfileInt(AppName, KeyName: PChar; 
+  Default: Integer): Word;
+function GetProfileString(AppName, KeyName, Default, ReturnedString: PChar;
+  Size: Integer): Integer;
+function GetProp(Wnd: HWnd; Str: PChar): THandle;
+function GetRgnBox(Rgn: HRgn; var Rect: TRect): Integer;
+function GetROP2(DC: HDC): Integer;
+function GetScrollPos(Wnd: HWnd; Bar: Integer): Integer;
+procedure GetScrollRange(Wnd: HWnd; Bar: Integer; var MinPos,
+  MaxPos: Integer);
+function GetStockObject(Index: Integer): THandle;
+function GetStretchBltMode(DC: HDC): Integer;
+function GetSubMenu(Menu: HMenu; Pos: Integer): HMenu;
+function GetSysColor(Index: Integer): TColorRef;
+function GetSysModalWindow: HWnd;
+function GetSystemDirectory(Buffer: PChar; Size: Word): Word;
+function GetSystemMenu(Wnd: HWnd; bRevert: Bool): HMenu;
+function GetSystemMetrics(Index: Integer): Integer;
+function GetSystemPaletteEntries(DC: HDC; StartIndex, NumEntries: Word;
+  var PaletteEntries): Word;
+function GetSystemPaletteUse(DC: HDC): Word;
+function GetTabbedTextExtent(DC: HDC; Str: PChar; Count: Integer;
+  TabPostions: Integer; var TabStopPostions): LongInt;
+function GetTempDrive(DriveLetter: Char): Char;
+function GetTempFileName(DriveLetter: Char; PrefixString: PChar;
+  Unique: Word; TempFileName: PChar): Integer;
+function GetTextAlign(DC: HDC): Word;
+function GetTextCharacterExtra(DC: HDC): Integer;
+function GetTextColor(DC: HDC): TColorRef;
+function GetTextExtent(DC: HDC; Str: PChar; Count: Integer): LongInt;
+function GetTextFace(DC: HDC; Count: Integer; Facename: PChar): Integer;
+function GetTextMetrics(DC: HDC; var Metrics: TTextMetric): Bool;
+function GetThresholdEvent: PInteger;
+function GetThresholdStatus: Integer;
+function GetTickCount: LongInt;
+function GetTopWindow(Wnd: HWnd): HWnd;
+function GetUpdateRect(Wnd: HWnd; var Rect: TRect; Erase: Bool): Bool;
+function GetUpdateRgn(Wnd: HWnd; Rgn: HRgn; Erase: Bool): Integer;
+function GetVersion: LongInt;
+function GetViewportExt(DC: HDC): LongInt;
+function GetViewportOrg(DC: HDC): LongInt;
+function GetWindow(Wnd: HWnd; Cmd: Word): HWnd;
+function GetWindowDC(Wnd: HWnd): HDC;
+function GetWindowExt(DC: HDC): LongInt;
+function GetWindowLong(Wnd: HWnd; Index: Integer): LongInt;
+function GetWindowOrg(DC: HDC): LongInt;
+procedure GetWindowRect(Wnd: HWnd; var Rect: TRect);
+function GetWindowsDirectory(Buffer: PChar; Size: Word): Word;
+function GetWindowTask(Wnd: HWnd): THandle;
+function GetWindowText(Wnd: HWnd; Str: PChar;
+  MaxCount: Integer): Integer;
+function GetWindowTextLength(Wnd: HWnd): Integer;
+function GetWindowWord(Wnd: HWnd; Index: Integer): Word;
+function GetWinFlags: LongInt;
+function GlobalAddAtom(Str: PChar): TAtom;
+function GlobalAlloc(Flags: Word; Bytes: LongInt): THandle;
+function GlobalCompact(MinFree: LongInt): LongInt;
+function GlobalDeleteAtom(AnAtom: TAtom): TAtom;
+function GlobalDiscard(Mem: THandle): THandle;
+function GlobalDosAlloc(Bytes: LongInt): LongInt;
+function GlobalDosFree(Selector: Word): Word;
+function GlobalFindAtom(Str: PChar): TAtom;
+procedure GlobalFix(Mem: THandle);
+function GlobalFlags(Mem: THandle): Word;
+function GlobalFree(Mem: THandle): THandle;
+function GlobalGetAtomName(AnAtom: TAtom; Buffer: PChar; Size: Integer): Word;
+function GlobalHandle(Mem: Word): LongInt;
+function GlobalLock(Mem: THandle): Pointer;
+function GlobalLRUNewest(Mem: THandle): THandle;
+function GlobalLRUOldest(Mem: THandle): THandle;
+procedure GlobalNotify(NotifyProc: TFarProc);
+function GlobalPageLock(Selector: THandle): Word;
+function GlobalPageUnlock(Selector: THandle): Word;
+function GlobalReAlloc(Mem: THandle; Bytes: LongInt; Flags: Word): THandle;
+function GlobalSize(Mem: THandle): LongInt;
+function GlobalUnlock(Mem: THandle): Bool;
+function GlobalUnWire(Mem: THandle): Bool;
+function GlobalWire(Mem: THandle): Pointer;
+function GrayString(DC: HDC; Brush: HBrush; OutputFunc: TFarProc; 
+  Data: LongInt; Count, X, Y, Width, Height: Integer): Bool;
+procedure HideCaret(Wnd: HWnd);
+function HiliteMenuItem(Wnd: HWnd; Menu: HMenu; IDHilite, 
+  Hilite: Word): Bool;
+procedure InflateRect(var Rect: TRect; X, Y: Integer);
+function InitAtomTable(Size: Integer): Bool;
+function InSendMessage: Bool;
+function InsertMenu(Menu: HMenu; Position, Flags, IDNewItem: Word;
+  NewItem: PChar): Bool;
+function IntersectClipRect(DC: HDC; X1, Y1, X2, Y2: Integer): Integer;
+function IntersectRect(var DestRect: TRect;
+  const Src1Rect, Src2Rect: TRect): Integer;
+procedure InvalidateRect(Wnd: HWnd; Rect: PRect; Erase: Bool);
+procedure InvalidateRgn(Wnd: HWnd; Rgn: HRgn; Erase: Bool);
+procedure InvertRect(DC: HDC; var Rect: TRect);
+function InvertRgn(DC: HDC; Rgn: HRgn): Bool;
+function IsCharAlpha(Chr: Char): Bool;
+function IsCharAlphaNumeric(Chr: Char): Bool;
+function IsCharLower(Chr: Char): Bool;
+function IsCharUpper(Chr: Char): Bool;
+function IsChild(WndParent, Wnd: HWnd): Bool;
+function IsClipboardFormatAvailable(Format: Word): Bool;
+function IsDialogMessage(Dlg: HWnd; var Msg: TMsg): Bool;
+function IsDlgButtonChecked(Wnd: HWnd; IDButton: Integer): Word;
+function IsIconic(Wnd: HWnd): Bool;
+function IsRectEmpty(const Rect: TRect): Bool;
+function IsTwoByteCharPrefix(Chr: Char): Bool;
+function IsWindow(Wnd: HWnd): Bool;
+function IsWindowEnabled(Wnd: HWnd): Bool;
+function IsWindowVisible(Wnd: HWnd): Bool;
+function IsZoomed(Wnd: HWnd): Bool;
+function KillTimer(Wnd: HWnd; IDEvent: Integer): Bool;
+procedure LimitEmsPages(Kbytes: LongInt);
+procedure LineDDA(X1, Y1, X2, Y2: Integer; LineFunc: TFarProc; 
+  Data: Pointer);
+function LineTo(DC: HDC; X, Y: Integer): Bool;
+function LoadAccelerators(Instance: THandle; TableName: PChar): THandle;
+function LoadBitmap(Instance: THandle; BitmapName: PChar): HBitmap;
+function LoadCursor(Instance: THandle; CursorName: PChar): HCursor;
+function LoadIcon(Instance: THandle; IconName: PChar): HIcon;
+function LoadLibrary(LibFileName: PChar): THandle;
+function LoadMenu(Instance: THandle; MenuName: PChar): HMenu;
+function LoadMenuIndirect(MenuTemplate: Pointer): HMenu;
+function LoadModule(ModuleName: PChar; ParameterBlock: Pointer): THandle;
+function LoadResource(Instance: THandle; ResInfo: THandle): THandle;
+function LoadString(Instance: THandle; ID: Word; Buffer: PChar; 
+  BufferMax: Integer): Integer;
+function LocalAlloc(Flags, Bytes: Word): THandle;
+function LocalCompact(MinFree: Word): Word;
+function LocalDiscard(Mem: THandle): THandle; 
+function LocalFlags(Mem: THandle): Word;
+function LocalFree(Mem: THandle): THandle;
+function LocalHandle(Mem: Word): THandle;
+function LocalInit(Segment, Start, EndPos: Word): Bool;
+function LocalLock(Mem: THandle): Pointer;
+function LocalNotify(NotifyProc: TFarProc): TFarProc;
+function LocalReAlloc(Mem: THandle; Bytes, Flags: Word): THandle;
+function LocalShrink(Seg: THandle; Size: Word): Word;
+function LocalSize(Mem: THandle): Word;
+function LocalUnlock(Mem: THandle): Bool;
+function LockData(Dummy: Integer): THandle;
+function LockResource(ResData: THandle): Pointer;
+function LockSegment(Segment: Word): THandle;
+function LPtoDP(DC: HDC; var Points; Count: Integer): Bool;
+function lstrcat(Str1, Str2: PChar): PChar;
+function lstrcmp(Str1, Str2: PChar): Integer;
+function lstrcmpi(Str1, Str2: PChar): Integer;
+function lstrcpy(Str1, Str2: PChar): PChar;
+function lstrlen(Str: PChar): Integer;
+function MakeProcInstance(Proc: TFarProc; Instance: THandle): TFarProc;
+procedure MapDialogRect(Dlg: HWnd; var Rect: TRect);
+function MapVirtualKey(Code, MapType: Word): Word;
+procedure MessageBeep(BeepType: Word);
+function MessageBox(WndParent: HWnd; Txt, Caption: PChar; 
+  TextType: Word): Integer;
+function ModifyMenu(Menu: HMenu; Position, Flags, IDNewItem: Word; 
+  NewItem: PChar): Bool;
+function MoveTo(DC: HDC; X, Y: Integer): LongInt;
+procedure MoveWindow(Wnd: HWnd; X, Y, Width, Height: Integer; Repaint: Bool);
+function MulDiv(Number: Integer; Numerator: Integer;
+  Denominator: Integer): Integer;
+procedure NetBIOSCall;
+function OemKeyScan(OemChar: Word): LongInt;
+function OffsetClipRgn(DC: HDC; X, Y: Integer): Integer;
+procedure OffsetRect(var Rect: TRect; X, Y: Integer);
+function OffsetRgn(Rgn: HRgn; X, Y: Integer): Integer;
+function OffsetViewportOrg(DC: HDC; X, Y: Integer): LongInt;
+function OffsetWindowOrg(DC: HDC; X, Y: Integer): LongInt;
+function OpenClipboard(Wnd: HWnd): Bool;
+function OpenComm(ComName: PChar; InQueue, OutQueue: Word): Integer;
+function OpenFile(FileName: PChar; var ReOpenBuff: TOfStruct;
+  Style: Word): Integer;
+function OpenIcon(Wnd: HWnd): Bool;
+function OpenSound: Integer;
+procedure OutputDebugString(OutputString: PChar);
+function PaintRgn(DC: HDC; Rgn: HRgn): Bool;
+function PatBlt(DC: HDC; X, Y, Width, Height: Integer; Rop: LongInt): Bool;
+function PeekMessage(var Msg: TMsg; Wnd: HWnd; MsgFilterMin,
+  MsgFilterMax: Word; RemoveMsg: Word): Bool;
+function Pie(DC: HDC; X1, Y1, X2, Y2, X3, Y3, X4, Y4: Integer): Bool;
+function PlayMetaFile(DC: HDC; MF: THandle): Bool;
+procedure PlayMetaFileRecord(DC: HDC; var HandleTable: THandleTable;
+  var MetaRecord: TMetaRecord; Handles: Word);
+function Polygon(DC: HDC; var Points; Count: Integer): Bool;
+function Polyline(DC: HDC; var Points; Count: Integer): Bool;
+function PolyPolygon(DC: HDC; var Points; var PolyCounts;
+  Count: Integer): Bool;
+function PostAppMessage(Task: THandle; Msg, wParam: Word; 
+  lParam: LongInt): Bool;
+function PostMessage(Wnd: HWnd; Msg, wParam: Word; lParam: LongInt): Bool;
+procedure PostQuitMessage(ExitCode: Integer);
+function PtInRect(const Rect: TRect; Point: TPoint): Bool;
+function PtInRegion(Rgn: HRgn; X, Y: Integer): Bool;
+function PtVisible(DC: HDC; X, Y: Integer): Bool;
+function ReadComm(Cid: Integer; Buf: PChar; Size: Integer): Integer;
+function RealizePalette(DC: HDC): Word;
+function Rectangle(DC: HDC; X1, Y1, X2, Y2: Integer): Bool;
+function RectInRegion(Rgn: HRgn; const Rect: TRect): Bool;
+function RectVisible(DC: HDC; const Rect: TRect): Bool;
+function RegisterClass(var WndClass: TWndClass): Bool;
+function RegisterClipboardFormat(FormatName: PChar): Word;
+function RegisterWindowMessage(Str: PChar): Word;
+procedure ReleaseCapture;
+function ReleaseDC(Wnd: HWnd; DC: HDC): Integer;
+function RemoveFontResource(Filename: PChar): Bool;
+function RemoveMenu(Menu: HMenu; Position, Flags: Word): Bool;
+function RemoveProp(Wnd: HWnd; Str: PChar): THandle;
+procedure ReplyMessage(Reply: LongInt);
+function ResizePalette(Palette: HPalette; NumEntries: Word): Bool;
+function RestoreDC(DC: HDC; SavedDC: Integer): Bool;
+function RoundRect(DC: HDC; X1, Y1, X2, Y2, X3, Y3: Integer): Bool;
+function SaveDC(DC: HDC): Integer;
+function ScaleViewportExt(DC: HDC; Xnum, Xdenom, Ynum,
+  Ydenom: Integer): LongInt;
+function ScaleWindowExt(DC: HDC; Xnum, Xdenom, Ynum, Ydenom: Integer): LongInt;
+procedure ScreenToClient(Wnd: HWnd; var Point: TPoint);
+function ScrollDC(DC: HDC; dx, dy: Integer; const Scroll, Clip: TRect;
+  UpdateRgn: HRgn; UpdateRect: PRect): Bool;
+procedure ScrollWindow(Wnd: HWnd; XAmount, YAmount: Integer; Rect: PRect;
+  ClipRect: PRect);
+function SelectClipRgn(DC: HDC; Rgn: HRgn): Integer;
+function SelectObject(DC: HDC; hObject: THandle): THandle;
+function SelectPalette(DC: HDC; Palette: HPalette; 
+  ForceBackground: Bool): HPalette;
+function SendDlgItemMessage(Dlg: HWnd; IDDlgItem: Integer; Msg, wParam: Word; 
+  lParam: LongInt): LongInt;
+function SendMessage(Wnd: HWnd; Msg, wParam: Word; lParam: LongInt): LongInt;
+function SetActiveWindow(Wnd: HWnd): HWnd;
+function SetBitmapBits(Bitmap: HBitmap; Count: LongInt; Bits: Pointer): LongInt;
+function SetBitmapDimension(Bitmap: HBitmap; X, Y: Integer): LongInt;
+function SetBkColor(DC: HDC; Color: TColorRef): TColorRef;
+function SetBkMode(DC: HDC; BkMode: Integer): Integer;
+function SetBrushOrg(DC: HDC; X, Y: Integer): LongInt;
+function SetCapture(Wnd: HWnd): HWnd;
+procedure SetCaretBlinkTime(MSeconds: Word);
+procedure SetCaretPos(X, Y: Integer);
+function SetClassLong(Wnd: HWnd; Index: Integer; NewLong: LongInt): LongInt;
+function SetClassWord(Wnd: HWnd; Index: Integer; NewWord: Word): Word;
+function SetClipboardData(Format: Word; Mem: THandle): THandle;
+function SetClipboardViewer(Wnd: HWnd): HWnd;
+function SetCommBreak(Cid: Integer): Integer;
+function SetCommEventMask(Cid: Integer; EvtMask: Word): PWord;
+function SetCommState(var DCB: TDCB): Integer;
+function SetCursor(Cursor: HCursor): HCursor;
+procedure SetCursorPos(X, Y: Integer);
+function SetDIBits(DC: HDC; Bitmap: THandle; StartScan, NumScans: Word;
+  Bits: Pointer; var BitsInfo: TBitmapInfo; Usage: Word): Integer;
+function SetDIBitsToDevice(DC: HDC; DestX, DestY, Width, Height, SrcX, SrcY,
+  nStartScan, NumScans: Word; Bits: Pointer; var BitsInfo: TBitmapInfo;
+  Usage: Word): Integer;
+procedure SetDlgItemInt(Dlg: HWnd; IDDlgItem: Integer; Value: Word;
+  Signed: Bool);
+procedure SetDlgItemText(Dlg: HWnd; IDDlgItem: Integer; Str: PChar);
+procedure SetDoubleClickTime(Count: Word);
+function SetEnvironment(PortName: PChar; Environ: Pointer; 
+  Count: Word): Integer;
+function SetErrorMode(Mode: Word): Word;
+function SetFocus(Wnd: HWnd): HWnd;
+function SetHandleCount(Number: Word): Word;
+procedure SetKeyboardState(var KeyState: TKeyboardState);
+function SetMapMode(DC: HDC; MapMode: Integer): Integer;
+function SetMapperFlags(DC: HDC; Flag: LongInt): LongInt;
+function SetMenu(Wnd: HWnd; Menu: HMenu): Bool;
+function SetMenuItemBitmaps(Menu: HMenu; Position, Flags: Word; 
+  BitmapUnchecked, BitmapChecked: HBitmap): Bool;
+function SetMessageQueue(Msg: Integer): Bool;
+function SetMetaFileBits(Mem: THandle): THandle;
+function SetPaletteEntries(Palette: HPalette; StartIndex, NumEntries: Word;
+  var PaletteEntries): Word;
+function SetParent(WndChild: HWnd; WndNewParent: HWnd): HWnd;
+function SetPixel(DC: HDC; X, Y: Integer; Color: TColorRef): LongInt;
+function SetPolyFillMode(DC: HDC; PolyFillMode: Integer): Integer;
+function SetProp(Wnd: HWnd; Str: PChar; Data: THandle): Bool;
+procedure SetRect(var Rect: TRect; X1, Y1, X2, Y2: Integer);
+procedure SetRectEmpty(var Rect: TRect);
+procedure SetRectRgn(Rgn: HRgn; X1, Y1, X2, Y2: Integer);
+function SetROP2(DC: HDC; DrawMode: Integer): Integer;
+function SetScrollPos(Wnd: HWnd; Bar, Pos: Integer; Redraw: Bool): Integer;
+procedure SetScrollRange(Wnd: HWnd; Bar, MinPos, MaxPos: Integer; 
+  Redraw: Bool);
+function SetSoundNoise(Source, Duration: Integer): Integer;
+function SetStretchBltMode(DC: HDC; StretchMode: Integer): Integer;
+function SetSwapAreaSize(Size: Word): LongInt;
+procedure SetSysColors(Changes: Integer; var SysColor; var ColorValues);
+function SetSysModalWindow(Wnd: HWnd): HWnd;
+function SetSystemPaletteUse(DC: HDC; Usage: Word): Word;
+function SetTextAlign(DC: HDC; Flags: Word): Word;
+function SetTextCharacterExtra(DC: HDC; CharExtra: Integer): Integer;
+function SetTextColor(DC: HDC; Color: TColorRef): TColorRef;
+function SetTextJustification(DC: HDC; BreakExtra, 
+  BreakCount: Integer): Integer;
+function SetTimer(Wnd: HWnd; IDEvent: Integer; Elapse: Word; 
+  TimerFunc: TFarProc): Word;
+function SetViewportExt(DC: HDC; X, Y: Integer): LongInt;
+function SetViewportOrg(DC: HDC; X, Y: Integer): LongInt;
+function SetVoiceAccent(Voice, Tempo, Volume, Mode, Pitch: Integer): Integer;
+function SetVoiceEnvelope(Voice, Shape, RepeatCount: Integer): Integer;
+function SetVoiceNote(Voice, Value, Length, Cdots: Integer): Integer;
+function SetVoiceQueueSize(Voice, Bytes: Integer): Integer;
+function SetVoiceSound(Voice: Integer; Frequency: LongInt; 
+  Duration: Integer): Integer;
+function SetVoiceThreshold(Voice, Notes: Integer): Integer;
+function SetWindowExt(DC: HDC; X, Y: Integer): LongInt;
+function SetWindowLong(Wnd: HWnd; Index: Integer; NewLong: LongInt): LongInt;
+function SetWindowOrg(DC: HDC; X, Y: Integer): LongInt;
+procedure SetWindowPos(Wnd: HWnd; WndInsertAfter: HWnd; X, Y, cx, cy: Integer;
+  Flags: Word);
+function SetWindowsHook(FilterType: Integer; FilterFunc: TFarProc): TFarProc;
+procedure SetWindowText(Wnd: HWnd; Str: PChar);
+function SetWindowWord(Wnd: HWnd; Index: Integer; NewWord: Word): Word;
+procedure ShowCaret(Wnd: HWnd);
+function ShowCursor(Show: Bool): Integer;
+procedure ShowOwnedPopups(Wnd: HWnd; Show: Bool);
+procedure ShowScrollBar(Wnd: HWnd; Bar: Word; Show: Bool);
+function ShowWindow(Wnd: HWnd; CmdShow: Integer): Bool;
+function SizeofResource(Instance, ResInfo: THandle): LongInt;
+function StartSound: Integer;
+function StopSound: Integer;
+function StretchBlt(DestDC: HDC; X, Y, Width, Height: Integer; SrcDC: HDC; 
+  XSrc, YSrc, SrcWidth, SrcHeight: Integer; Rop: LongInt): Bool;
+function StretchDIBits(DC: HDC; DestX, DestY, DestWidth, DestHegiht, SrcX, 
+  SrcY, SrcWidth, SrcHeight: Integer; Bits: Pointer; var BitsInfo: TBitmapInfo;
+  Usage: Word; Rop: LongInt): Integer;
+function SwapMouseButton(Swap: Bool): Bool;
+procedure SwapRecording(Flag: Word);
+procedure SwitchStackBack;
+procedure SwitchStackTo(StackSegment, StackPointer, StackTop: Word);
+function SyncAllVoices: Integer;
+function TabbedTextOut(HC: HDC; X, Y: Integer; Str: PChar; Count: Integer; 
+  TabPositions: Integer; var TabStopPositions; TabOrigin: Integer): LongInt;
+function TextOut(DC: HDC; X, Y: Integer; Str: PChar; Count: Integer): Bool;
+procedure Throw(var CatchBuf: TCatchBuf; ThrowBack: Integer);
+function ToAscii(VirtKey, ScanCode: Word; KeyState: PChar; Char: Pointer; 
+  Flags: Word): integer;
+function TrackPopupMenu(Menu: HMenu; Flags: Word; x, y, Reserved: Integer; 
+  Wnd: HWnd; Reserved: Pointer): Bool;
+function TranslateAccelerator(Wnd: HWnd; AccTable: THandle;
+  var Msg: TMsg): Integer;
+function TranslateMDISysAccel(Wnd: HWnd; var Msg: TMsg): Bool;
+function TranslateMessage(var Msg: TMsg): Bool;
+function TransmitCommChar(Cid: Integer; Chr: Char): Integer;
+function UngetCommChar(Cid: Integer; Chr: Char): Integer;
+function UnhookWindowsHook(Hook: Integer; HookFunc: TFarProc): Bool;
+function UnionRect(var DestRect: TRect;
+  const Src1Rect, Src2Rect: TRect): Integer;
+function UnlockData(Dummy: Integer): THandle;
+function UnlockResource(ResData: THandle): Bool;
+function UnrealizeObject(hObject: HBrush): Bool;
+function UnregisterClass(ClassName: PChar; Instance: THandle): Bool;
+function UpdateColors(DC: HDC): Integer;
+procedure UpdateWindow(Wnd: HWnd);
+procedure ValidateCodeSegments;
+procedure ValidateFreeSpaces;
+procedure ValidateRect(Wnd: HWnd; Rect: PRect);
+procedure ValidateRgn(Wnd: HWnd; Rgn: HRgn);
+function VkKeyScan(Chr: Word): Word;
+procedure WaitMessage;
+function WaitSoundState(State: Integer): Integer;
+function WindowFromPoint(Point: TPoint): HWnd;
+function WinExec(CmdLine: PChar; CmdShow: Word): Word;
+function WinHelp(Wnd: HWnd; HelpFile: PChar; Command: Word; 
+  Data: LongInt): Bool;
+function WriteComm(Cid: Integer; Buf: PChar; Size: Integer): Integer;
+function WritePrivateProfileString(ApplicationName, KeyName, Str,
+  FileName: PChar): Bool;
+function WriteProfileString(ApplicationName, KeyName, Str: PChar): Bool;
+function wvsprintf(DestStr, Format: PChar; var ArgList): Integer;
+function Yield: Bool;
+function _lclose(FileHandle: Integer): Integer;
+function _lcreat(PathName: PChar; Atribute: Integer): Integer;
+function _llseek(FileHandle: Integer; Offset: LongInt;
+  Origin: Integer): LongInt;
+function _lopen(PathName: PChar; ReadWrite: Integer): Integer;
+function _lread(FileHandle: Integer; Buffer: PChar; Bytes: Integer): Word;
+function _lwrite(FileHandle: Integer; Buffer: PChar; Bytes: Integer): Word;
+
+{ Various inline and wrapper routines }
+
+function MakeLong(A, B: Word): LongInt;
+inline(
+  $5A/    { POP DX }
+  $58);   { POP AX }
+
+function LoWord(A: LongInt): Word;
+inline(
+  $58/    { POP AX }
+  $5A);   { POP DX }
+
+function HiWord(A: LongInt): Word;
+inline(
+  $5A/    { POP DX }
+  $58);   { POP AX }
+
+function LoByte(A: Word): Byte;
+inline(
+  $58/       { POP AX    }
+  $32/$E4);  { XOR AH,AH }
+
+function HiByte(A: Word): Byte;
+inline(
+  $58/       { POP AX    }
+  $8A/$C4/   { MOV AL,AH }
+  $32/$E4);  { XOR AH,AH }
+
+function RGB(R: Byte; G: Byte; B: Byte): LongInt;
+inline(
+  $5A/       { POP DX    }
+  $5B/       { POP BX    }
+  $58/       { POP AX    }
+  $8A/$E3/   { MOV AH,BL }
+  $32/$F6);  { XOR DH,DH }
+
+function PaletteRGB(R: Byte; G: Byte; B: Byte): LongInt;
+inline(
+  $5A/       { POP DX    }
+  $5B/       { POP BX    }
+  $58/       { POP AX    }
+  $8A/$E3/   { MOV AH,BL }
+  $B6/$02);  { MOV DH,2  }
+
+function GetRValue(RGB: LongInt): Byte;
+inline(
+  $58/       { POP AX    }
+  $5A/       { POP DX    }
+  $32/$E4);  { XOR AH,AH }
+
+function GetGValue(RGB: LongInt): Byte;
+inline(
+  $58/       { POP AX    }
+  $5A/       { POP DX    }
+  $8A/$C4/   { MOV AL,AH }
+  $32/$E4);  { XOR AH,AH }
+
+function GetBValue(RGB: LongInt): Byte;
+inline(
+  $5A/       { POP DX    }
+  $58/       { POP AX    }
+  $32/$E4);  { XOR AH,AH }
+
+function PaletteIndex(PaletteIndex: Integer): TColorRef;
+inline(
+  $58/	        { POP AX      }
+  $BA/$00/$01); { MOV DX,$100 }
+
+implementation

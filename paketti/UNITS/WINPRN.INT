@@ -1,0 +1,57 @@
+
+{*******************************************************}
+{                                                       }
+{       Delphi Runtime Library                          }
+{       Windows Simplified Printer Interface Unit       }
+{                                                       }
+{       Copyright (c) 1991,94 Borland International     }
+{                                                       }
+{*******************************************************}
+
+unit WinPrn;
+
+{$S-}
+
+interface
+
+uses WinTypes;
+
+{ AbortPrn will cause all unprinted portions of the writes to the  }
+{ file to be thrown away. Note: the file still must be closed.     }
+
+procedure AbortPrn(var F: Text);
+
+{ AssignPrn assigns a file to a printer.  The Device, Driver, and  }
+{ Port can be retrieved from the WIN.INI file's [device] section   }
+{ or from the [windows] sections 'device' string. If Device is nil }
+{ the default printer is used.                                     }
+
+procedure AssignPrn(var F: Text; Device, Driver, Port: PChar);
+
+{ AssignDefPrn calls AssignPrn with Device equal to nil.           }
+
+procedure AssignDefPrn(var F: Text);
+
+{ SetPrnFont will cause the file to begin printing using the given }
+{ font.  The old font is returned.                                 }
+
+function SetPrnFont(var F: Text; Font: HFont): HFont;
+
+{ TitlePrn will give a title to the file being printed which is    }
+{ displayed by Window's Print Manager.  For this routine to have   }
+{ effect it needs to be called before ReWrite.                     }
+
+procedure TitlePrn(var F: Text; Title: PChar);
+
+{ ProcessPrnMessage is called whenever a message is received by    }
+{ WinPrn's abort procedure.  If the function returns false, the    }
+{ message is translated and dispatched, otherwise it is ignored.   }
+{ Use this variable if you wish modeless dialogs to continue to    }
+{ operate while printing.  (Note: Since ObjectWindow automatically }
+{ initializes this variable for KBHandler's, no special action is  }
+{ necessary when using ObjectWindows).                             }
+
+var
+  ProcessPrnMessage: function (var Msg: TMsg): Boolean;
+
+implementation

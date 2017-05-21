@@ -1,0 +1,58 @@
+
+{*******************************************************}
+{                                                       }
+{       Delphi Runtime Library                          }
+{       Windows CRT Interface Unit                      }
+{                                                       }
+{       Copyright (c) 1991,95 Borland International     }
+{                                                       }
+{*******************************************************}
+
+unit WinCrt;
+
+{$S-}
+
+interface
+
+uses SysUtils, WinTypes, WinProcs, Messages;
+
+const
+  WindowOrg: TPoint =                       { CRT window origin }
+    (X: cw_UseDefault; Y: cw_UseDefault);
+  WindowSize: TPoint =                      { CRT window size }
+    (X: cw_UseDefault; Y: cw_UseDefault);
+  ScreenSize: TPoint = (X: 80; Y: 25);      { Screen buffer dimensions }
+  Cursor: TPoint = (X: 0; Y: 0);            { Cursor location }
+  Origin: TPoint = (X: 0; Y: 0);            { Client area origin }
+  InactiveTitle: PChar = '(Inactive %s)';   { Inactive window title }
+  AutoTracking: Boolean = True;             { Track cursor on Write? }
+  CheckEOF: Boolean = False;                { Allow Ctrl-Z for EOF? }
+  CheckBreak: Boolean = True;               { Allow Ctrl-C for break? }
+  CrtWindow: HWnd = 0;                      { CRT window handle }
+
+var
+  WindowTitle: array[0..79] of Char;        { CRT window title }
+
+procedure InitWinCrt;
+procedure DoneWinCrt;
+
+procedure WriteBuf(Buffer: PChar; Count: Word);
+procedure WriteChar(Ch: Char);
+
+function KeyPressed: Boolean;
+function ReadKey: Char;
+function ReadBuf(Buffer: PChar; Count: Word): Word;
+
+procedure GotoXY(X, Y: Integer);
+function WhereX: Integer;
+function WhereY: Integer;
+procedure ClrScr;
+procedure ClrEol;
+
+procedure CursorTo(X, Y: Integer);
+procedure ScrollTo(X, Y: Integer);
+procedure TrackCursor;
+
+procedure AssignCrt(var F: Text);
+
+implementation

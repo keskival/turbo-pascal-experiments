@@ -1,0 +1,16 @@
+3D-ohjelmoinnin perusopas v2.2 (c) Ica/Hubris
+1996, 1997. Sis„lt„„ daattaa mm. n„ist„ aiheista:
+vektorit, matriisit, 2D->3D, 3D-py”ritykset
+matriiseilla, vapaa liikkuminen, kamera,
+hierarkiset objektit, flat-polyt, gouraud,
+texturemappaus (my”s perspektiivikorjattu),
+z-sort, z-buffer, bsp-puu, s-buffer, flat shade,
+env-mappaus, phong illumination, aito phong,
+texture+shade, valojen vapaa liikkuminen,
+spotlitet, portalit, himmeneminen, backface
+culling, view cone, frameskip, asm-optimointi,
+paletinkvantisointi ja convex-polyt. Mukana
+my”s 3d-sanastoa, FAQ ja DJGPP-esimerkkej„.
+CareWarea -- maksa jos jaksat.
+IMUTA HETI TAI ITKET JA IMUTAT HETI!!
+HUOM! Pura "pkunzip -d":ll„.

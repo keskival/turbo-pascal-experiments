@@ -11,3 +11,5 @@ I guess it is ok to share it here. I bought this with my lawnmowing money, 800 F
 We also used this in our high school in Kurikan Yläaste, but the version they had was an older one. I am really grateful for Borland
 for releasing such a quality SDK for a price that even a kid could afford.
 
+VERKKO4.EXE: A kind of a finite difference method, showing how heat propagates into a network of elements. The center pixel is rotated at
+a constant speed, and spring equations are used to propagate acceleration to neighbors.
